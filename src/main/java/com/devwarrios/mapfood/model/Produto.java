@@ -5,39 +5,39 @@ import javax.persistence.Entity;
 @Entity
 public class Produto {
 	
-	private String itemDescription;
+	private String descricaoItem;
 	
 	private Long itemId;
 	
-	private Long restaurantId;
+	private Long restauranteId;
 	
-	private String restaurant;
+	private String restaurante;
 	
-	private String classification;
+	private String classificacao;
 	
-	private Double unitPrice;
+	private Double precoUnitario;
 	
-	private String addressCity;
+	private String cidade;
 	
 	public Produto () {}
 
 	public Produto(String itemDescription, Long itemId, Long restaurantId, String restaurant, String classification,
 			Double unitPrice, String addressCity) {
-		this.itemDescription = itemDescription;
+		this.descricaoItem = itemDescription;
 		this.itemId = itemId;
-		this.restaurantId = restaurantId;
-		this.restaurant = restaurant;
-		this.classification = classification;
-		this.unitPrice = unitPrice;
-		this.addressCity = addressCity;
+		this.restauranteId = restaurantId;
+		this.restaurante = restaurant;
+		this.classificacao = classification;
+		this.precoUnitario = unitPrice;
+		this.cidade = addressCity;
 	}
 
 	public String getItemDescription() {
-		return itemDescription;
+		return descricaoItem;
 	}
 
 	public void setItemDescription(String itemDescription) {
-		this.itemDescription = itemDescription;
+		this.descricaoItem = itemDescription;
 	}
 
 	public Long getItemId() {
@@ -49,42 +49,42 @@ public class Produto {
 	}
 
 	public Long getRestaurantId() {
-		return restaurantId;
+		return restauranteId;
 	}
 
 	public void setRestaurantId(Long restaurantId) {
-		this.restaurantId = restaurantId;
+		this.restauranteId = restaurantId;
 	}
 
 	public String getRestaurant() {
-		return restaurant;
+		return restaurante;
 	}
 
 	public void setRestaurant(String restaurant) {
-		this.restaurant = restaurant;
+		this.restaurante = restaurant;
 	}
 
 	public String getClassification() {
-		return classification;
+		return classificacao;
 	}
 
 	public void setClassification(String classification) {
-		this.classification = classification;
+		this.classificacao = classification;
 	}
 
 	public Double getUnitPrice() {
-		return unitPrice;
+		return precoUnitario;
 	}
 
 	public void setUnitPrice(Double unitPrice) {
-		this.unitPrice = unitPrice;
+		this.precoUnitario = unitPrice;
 	}
 
 	public String getAddressCity() {
-		return addressCity;
+		return cidade;
 	}
 
 	public void setAddressCity(String addressCity) {
-		this.addressCity = addressCity;
+		this.cidade = addressCity;
 	}
 }

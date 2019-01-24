@@ -12,15 +12,15 @@ public class Estabelecimento {
 	@Id
 	private Long id;
 	
-	private String restaurant;
+	private String restaurante;
 	
-	private String addressCity;
+	private String cidade;
 	
 	private Double longitude;
 	
 	private Double latitude;
 	
-	private String dishDescription;
+	private String descricaoPrato;
 	
 	// Verificar se está correta essa anotação - @OneToMany(mappedBy = "id.estabelecimento")
 	private List<Produto> produtos;
@@ -30,11 +30,11 @@ public class Estabelecimento {
 	public Estabelecimento(Long id, String restaurant, String addressCity, 
 			Double longitude, Double latitude, String dishDescription) {
 		this.id = id;
-		this.restaurant = restaurant;
-		this.addressCity = addressCity;
+		this.restaurante = restaurant;
+		this.cidade = addressCity;
 		this.longitude = longitude;
 		this.latitude = latitude;
-		this.dishDescription = dishDescription;
+		this.descricaoPrato = dishDescription;
 	}
 
 	public Long getId() {
@@ -46,19 +46,19 @@ public class Estabelecimento {
 	}
 	
 	public String getRestaurant() {
-		return restaurant;
+		return restaurante;
 	}
 
 	public void setRestaurant(String restaurant) {
-		this.restaurant = restaurant;
+		this.restaurante = restaurant;
 	}
 
 	public String getAddressCity() {
-		return addressCity;
+		return cidade;
 	}
 
 	public void setAddressCity(String addressCity) {
-		this.addressCity = addressCity;
+		this.cidade = addressCity;
 	}
 
 	public Double getLongitude() {
@@ -78,11 +78,11 @@ public class Estabelecimento {
 	}
 
 	public String getDishDescription() {
-		return dishDescription;
+		return descricaoPrato;
 	}
 
 	public void setDishDescription(String dishDescription) {
-		this.dishDescription = dishDescription;
+		this.descricaoPrato = dishDescription;
 	}
 	
 	public List<Produto> getProdutos() {

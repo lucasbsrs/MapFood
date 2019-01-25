@@ -1,4 +1,4 @@
-# Banco de daods
+# Banco de dados PostgreSQL
 
 ![Esquema do banco de dados](postgres-codenation.png)
 

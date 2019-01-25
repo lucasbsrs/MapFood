@@ -11,7 +11,7 @@ banco de dados já populado com os dados disponibilizados no desafio.
 Essa imagem Docker está disponível de forma privada no repositório
 [kmyokoyama/postgres-codenation](https://cloud.docker.com/repository/registry-1.docker.io/kmyokoyama/postgres-codenation).
 
-## Antes de tudo
+## Instalando Docker e Docker Compose
 
 Primeiramente, [instale o Docker](https://docs.docker.com/install/)
 e o [Docker Compose](https://docs.docker.com/compose/install/). Também é sugerido

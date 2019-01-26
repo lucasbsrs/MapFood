@@ -4,22 +4,21 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Estabelecimento {
 
 	@Id
 	private Long id;
-	
 	private String restaurante;
-	
 	private String cidade;
-	
 	private Double longitude;
-	
 	private Double latitude;
-	
 	private String descricaoPrato;
 	
 	// Verificar se está correta essa anotação - @OneToMany(mappedBy = "id.estabelecimento")
@@ -27,69 +26,13 @@ public class Estabelecimento {
 	
 	public Estabelecimento() {}
 	
-	public Estabelecimento(Long id, String restaurant, String addressCity, 
-			Double longitude, Double latitude, String dishDescription) {
+	public Estabelecimento(Long id, String restaurante, String cidade,
+			Double longitude, Double latitude, String descricaoPrato) {
 		this.id = id;
-		this.restaurante = restaurant;
-		this.cidade = addressCity;
+		this.restaurante = restaurante;
+		this.cidade = cidade;
 		this.longitude = longitude;
 		this.latitude = latitude;
-		this.descricaoPrato = dishDescription;
-	}
-
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public String getRestaurant() {
-		return restaurante;
-	}
-
-	public void setRestaurant(String restaurant) {
-		this.restaurante = restaurant;
-	}
-
-	public String getAddressCity() {
-		return cidade;
-	}
-
-	public void setAddressCity(String addressCity) {
-		this.cidade = addressCity;
-	}
-
-	public Double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
-
-	public Double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getDishDescription() {
-		return descricaoPrato;
-	}
-
-	public void setDishDescription(String dishDescription) {
-		this.descricaoPrato = dishDescription;
-	}
-	
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
-	
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+		this.descricaoPrato = descricaoPrato;
 	}
 }

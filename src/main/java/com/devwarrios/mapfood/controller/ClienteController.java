@@ -1,13 +1,13 @@
 package com.devwarrios.mapfood.controller;
 
-import com.devwarrios.mapfood.model.Cliente;
-import org.springframework.http.MediaType;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.devwarrios.mapfood.model.Cliente;
 
 @RestController
 public class ClienteController {
@@ -22,5 +22,4 @@ public class ClienteController {
 
         return clientes;
     }
-
 }

@@ -1,40 +1,24 @@
 package com.devwarrios.mapfood.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Estabelecimento {
 
 	@Id
-	@Getter
-	@Setter
 	private Long id;
-
-	@Getter
-	@Setter
 	private String restaurante;
-
-	@Getter
-	@Setter
 	private String cidade;
-
-	@Getter
-	@Setter
 	private Double longitude;
-
-	@Getter
-	@Setter
 	private Double latitude;
-
-	@Getter
-	@Setter
 	private String descricaoPrato;
 	
 	// Verificar se está correta essa anotação - @OneToMany(mappedBy = "id.estabelecimento")

@@ -1,25 +1,19 @@
 package com.devwarrios.mapfood.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 public class Cliente {
 	
 	@Id
-	@Getter
-	@Setter
 	private Integer id;
-
-	@Getter
-	@Setter
 	private Double longitude;
-
-	@Getter
-	@Setter
 	private Double latitude;
 	
 	public Cliente() {}

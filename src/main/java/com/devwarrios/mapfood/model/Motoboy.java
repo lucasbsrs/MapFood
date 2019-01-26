@@ -1,10 +1,10 @@
 package com.devwarrios.mapfood.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class Motoboy {
@@ -29,5 +29,4 @@ public class Motoboy {
 		this.longitude = longitude;
 		this.latitude = latitude;
 	}
-
 }

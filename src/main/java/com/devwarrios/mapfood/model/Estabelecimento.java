@@ -1,14 +1,15 @@
 package com.devwarrios.mapfood.model;
 
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.List;
+
 @Entity
+@Table(name = "estabelecimento")
 @Getter
 @Setter
 public class Estabelecimento {

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "pedido")
 public class Pedido {
 
     @Id
@@ -17,7 +18,6 @@ public class Pedido {
 
     private List<ItemPedido> itens;
 
-    @Temporal(TemporalType.DATE)
     private LocalDate data;
 
     @Enumerated(EnumType.STRING)

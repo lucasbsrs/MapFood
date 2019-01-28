@@ -20,11 +20,11 @@ public class Produto {
 	private Double precoUnitario;
 	private String cidade;
 
-    public Produto () {}
+	public Produto() {}
 
 	public Produto(String descricaoItem, Long itemId,
-			Long restauranteId, String restaurante,
-			String classificacao, Double precoUnitario, String cidade) {
+	               Long restauranteId, String restaurante,
+	               String classificacao, Double precoUnitario, String cidade) {
 		this.descricaoItem = descricaoItem;
 		this.itemId = itemId;
 		this.restauranteId = restauranteId;

@@ -1,7 +1,7 @@
 package com.devwarrios.mapfood.model;
 
 public enum PedidoStatus {
-    EM_PREPARO,
-    EM_TRANSITO,
-    ENTREGUE
+	EM_PREPARO,
+	EM_TRANSITO,
+	ENTREGUE
 }

@@ -13,18 +13,18 @@ import javax.persistence.Table;
 @Getter
 @Setter
 public class Entregador {
-	
+
 	@Id
 	private Integer id;
 
-    @Column(name = "lon")
+	@Column(name = "lon")
 	private Double longitude;
 
-    @Column(name = "lat")
+	@Column(name = "lat")
 	private Double latitude;
-	
+
 	public Entregador() {}
-	
+
 	public Entregador(Integer id, Double longitude, Double latitude) {
 		this.id = id;
 		this.longitude = longitude;

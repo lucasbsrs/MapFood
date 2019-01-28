@@ -21,14 +21,14 @@ public class Estabelecimento {
 	private Double longitude;
 	private Double latitude;
 	private String descricaoPrato;
-	
+
 	// Verificar se está correta essa anotação - @OneToMany(mappedBy = "id.estabelecimento")
 	private List<Produto> produtos;
-	
+
 	public Estabelecimento() {}
-	
+
 	public Estabelecimento(Long id, String restaurante, String cidade,
-			Double longitude, Double latitude, String descricaoPrato) {
+	                       Double longitude, Double latitude, String descricaoPrato) {
 		this.id = id;
 		this.restaurante = restaurante;
 		this.cidade = cidade;

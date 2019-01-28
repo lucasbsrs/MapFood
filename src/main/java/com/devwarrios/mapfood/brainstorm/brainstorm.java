@@ -1,7 +1,5 @@
 package com.devwarrios.mapfood.brainstorm;
 
-import com.devwarrios.mapfood.model.Estabelecimento;
-
 public interface brainstorm {
 
     /**
@@ -11,7 +9,7 @@ public interface brainstorm {
      */
 
     //public Pedido criaPedido(Consumidor consumidor, List itens, Estabelecimento estabelecimento);
-    //public Motoboy selecionaMotoboy(Pedido pedido);
+    //public Entregador selecionaMotoboy(Pedido pedido);
 
 
     /**

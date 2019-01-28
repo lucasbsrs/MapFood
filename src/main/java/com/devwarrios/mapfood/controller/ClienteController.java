@@ -1,18 +1,16 @@
 package com.devwarrios.mapfood.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import com.devwarrios.mapfood.model.Cliente;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devwarrios.mapfood.model.Cliente;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class ClienteController {
 
-    @RequestMapping(value = "/clientes", method = RequestMethod.GET)
+    @GetMapping("/clientes")
     public List<Cliente> getClientes(){
 
         //simula dados obtidos do ClienteRepository

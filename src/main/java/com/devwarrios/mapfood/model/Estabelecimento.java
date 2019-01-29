@@ -3,10 +3,7 @@ package com.devwarrios.mapfood.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "estabelecimento")
@@ -18,12 +15,18 @@ public class Estabelecimento {
 	private Long id;
 	private String restaurante;
 	private String cidade;
+
+	@Column(name = "lon")
 	private Double longitude;
+
+	@Column(name = "lat")
 	private Double latitude;
+
+	@Transient
 	private String descricaoPrato;
 
-	// Verificar se está correta essa anotação - @OneToMany(mappedBy = "id.estabelecimento")
-	private List<Produto> produtos;
+	//@OneToMany(mappedBy = "estabelecimento")
+	//private List<Produto> produtos;
 
 	public Estabelecimento() {}
 

@@ -1,25 +1,35 @@
 package com.devwarrios.mapfood.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import com.devwarrios.mapfood.model.Cliente;
+import com.devwarrios.mapfood.service.ClienteService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devwarrios.mapfood.model.Cliente;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ClienteController {
 
-    @RequestMapping(value = "/clientes", method = RequestMethod.GET)
-    public List<Cliente> getClientes(){
+    @Autowired
+    private ClienteService clienteService;
 
-        //simula dados obtidos do ClienteRepository
-        List<Cliente> clientes = new ArrayList<>();
-        clientes.add(new Cliente(1, 50.0, 60.0));
-        clientes.add(new Cliente(2, 50.0, 60.0));
+	@GetMapping("/clientes")
+	public ResponseEntity<List<Cliente>> getClientes() {
+	    return ResponseEntity.ok((clienteService.getClientes()));
+	}
 
-        return clientes;
-    }
+	@GetMapping("/clientes/{clienteId}")
+	public ResponseEntity<Cliente> getClienteById(@PathVariable("clienteId") Long id) {
+
+		Optional<Cliente> cliente = clienteService.getClienteById(id);
+
+		if (!cliente.isPresent())
+			return ResponseEntity.noContent().build();
+
+		return ResponseEntity.ok(cliente.get());
+	}
 }

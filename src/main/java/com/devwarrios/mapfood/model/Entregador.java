@@ -9,13 +9,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "entregador")
 @Getter
 @Setter
-public class Cliente {
+public class Entregador {
 
 	@Id
-	private Long id;
+	private Integer id;
 
 	@Column(name = "lon")
 	private Double longitude;
@@ -23,9 +23,9 @@ public class Cliente {
 	@Column(name = "lat")
 	private Double latitude;
 
-	public Cliente() {}
+	public Entregador() {}
 
-	public Cliente(Long id, Double longitude, Double latitude) {
+	public Entregador(Integer id, Double longitude, Double latitude) {
 		this.id = id;
 		this.longitude = longitude;
 		this.latitude = latitude;

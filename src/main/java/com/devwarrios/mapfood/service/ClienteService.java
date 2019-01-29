@@ -21,4 +21,8 @@ public class ClienteService {
 	public Optional<Cliente> getClienteById(Long id) {
     	return clienteRepository.findById(id);
 	}
+
+	public Cliente criaCliente(Cliente cliente) {
+    	return clienteRepository.save(cliente);
+	}
 }

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Cliente {
 
 	@Id
-	private Integer id;
+	private Long id;
 
 	@Column(name = "lon")
 	private Double longitude;
@@ -25,7 +25,7 @@ public class Cliente {
 
 	public Cliente() {}
 
-	public Cliente(Integer id, Double longitude, Double latitude) {
+	public Cliente(Long id, Double longitude, Double latitude) {
 		this.id = id;
 		this.longitude = longitude;
 		this.latitude = latitude;

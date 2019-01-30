@@ -2,6 +2,7 @@ package com.devwarrios.mapfood.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,6 +19,7 @@ public class Estabelecimento {
 	private Long id;
 
 	@Column(unique = true)
+	@Type(type = "uuid-char")
 	private UUID estabelecimento_id;
 
 	private String restaurante;

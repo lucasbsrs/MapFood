@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "estabelecimento")
@@ -12,8 +14,14 @@ import javax.persistence.*;
 public class Estabelecimento {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(unique = true)
+	private UUID estabelecimento_id;
+
 	private String restaurante;
+
 	private String cidade;
 
 	@Column(name = "lon")
@@ -25,8 +33,8 @@ public class Estabelecimento {
 	@Transient
 	private String descricaoPrato;
 
-	//@OneToMany(mappedBy = "estabelecimento")
-	//private List<Produto> produtos;
+	@OneToMany(mappedBy = "estabelecimento")
+	private List<Produto> produtos;
 
 	public Estabelecimento() {}
 

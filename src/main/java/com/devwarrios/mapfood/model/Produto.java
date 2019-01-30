@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
 @Entity
 @Table(name = "produto")
@@ -19,12 +18,9 @@ public class Produto {
     @Column(name = "item")
 	private String descricao;
 
-    @Column(name = "item_id")
-	private UUID itemId;
-
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "restaurante_id")
+	@NotNull
+    @ManyToOne
+    @JoinColumn(name = "estabelecimento_id", referencedColumnName = "estabelecimento_id")
     private Estabelecimento estabelecimento;
 
 	private String restaurante;
@@ -38,12 +34,11 @@ public class Produto {
 
 	public Produto() {}
 
-	public Produto(String descricaoItem, UUID itemId,
-                   String restaurante,
-                   String classificacao, Double precoUnitario, String cidade) {
+	public Produto(String descricaoItem,
+	               String restaurante,
+	               String classificacao, Double precoUnitario, String cidade) {
 		this.descricao = descricaoItem;
-		this.itemId = itemId;
-        this.restaurante = restaurante;
+		this.restaurante = restaurante;
 		this.classificacao = classificacao;
 		this.precoUnitario = precoUnitario;
 		this.cidade = cidade;

@@ -1,12 +1,12 @@
 package com.devwarrios.mapfood.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "entregador")
@@ -23,7 +23,8 @@ public class Entregador {
 	@Column(name = "lat")
 	private Double latitude;
 
-	public Entregador() {}
+	public Entregador() {
+	}
 
 	public Entregador(Integer id, Double longitude, Double latitude) {
 		this.id = id;

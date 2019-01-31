@@ -1,9 +1,20 @@
 package com.devwarrios.mapfood.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "pedido")
@@ -14,13 +25,13 @@ public class Pedido {
 	private Long id;
 
 	@NotNull
-    @OneToOne
-    @JoinColumn(name = "cliente_id")
+	@OneToOne
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
 	@NotNull
-    @OneToOne
-    @JoinColumn(name = "estabelecimento_id")
+	@OneToOne
+	@JoinColumn(name = "estabelecimento_id")
 	private Estabelecimento estabelecimento;
 
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -31,9 +42,11 @@ public class Pedido {
 	@Enumerated(EnumType.STRING)
 	private PedidoStatus status;
 
-	public Pedido() {}
+	public Pedido() {
+	}
 
-	public Pedido(Cliente cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate data, PedidoStatus status) {
+	public Pedido(Cliente cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate data,
+			PedidoStatus status) {
 		this.cliente = cliente;
 		this.estabelecimento = estabelecimento;
 		this.itens = itens;

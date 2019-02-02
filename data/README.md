@@ -39,7 +39,7 @@ O banco de dados PostgreSQL deve estar rodando na porta 5432 do host. Tente aces
 com:
 
 ```shell
-$ psql --user devwarrior -d codenation -p 5432
+$ psql --host localhost --user devwarrior -d codenation -p 5432
 ```
 
 ## Executando sem o Docker Compose
@@ -47,7 +47,7 @@ $ psql --user devwarrior -d codenation -p 5432
 Para levantar o banco e executá-lo diretamente pelo Docker sem o Docker Compose, execute:
 
 ```shell
-$ docker run --rm -ti -p 5432:5432 -v postgres-data:/var/lib/postgres/data --name postgres-codenation kmyokoyama/postgres-codenation:latest
+$ docker run -ti -p 5432:5432 -v postgres-data:/var/lib/postgres/data --name postgres-codenation kmyokoyama/postgres-codenation:latest
 ```
 
 Novamente, o banco estará disponível no host na porta 5432.

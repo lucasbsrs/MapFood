@@ -1,24 +1,19 @@
 package com.devwarrios.mapfood.model;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.persistence.*;
-
 
 @Document(collection = "item_pedido")
 public class ItemPedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private ObjectId id;
 
-    @OneToOne
-    @JoinColumn(name = "produto_id")
 	private Produto produto;
 
 	private String observacao;
 
-	@ManyToOne
 	private Pedido pedido;
 
 	private int quantidade;

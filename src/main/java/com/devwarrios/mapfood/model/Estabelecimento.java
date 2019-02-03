@@ -2,46 +2,43 @@ package com.devwarrios.mapfood.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
 @Document(collection = "estabelecimentos")
 @Getter
 @Setter
 public class Estabelecimento {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    private ObjectId id;
 
-	@Column(unique = true)
-	@Type(type = "uuid-char")
-	private UUID estabelecimento_id;
+    @Field("restaurant_id")
+	private String estabelecimento_id;
 
+	@Field("restaurant")
 	private String restaurante;
 
+	@Field("address_city")
 	private String cidade;
 
-	@Column(name = "lon")
 	private Double longitude;
 
-	@Column(name = "lat")
 	private Double latitude;
 
-	@Transient
+	@Field("dish_description")
 	private String descricaoPrato;
 
-	@OneToMany(mappedBy = "estabelecimento")
 	private List<Produto> produtos;
 
 	public Estabelecimento() {}
 
-	public Estabelecimento(Long id, String restaurante, String cidade,
-	                       Double longitude, Double latitude, String descricaoPrato) {
+	public Estabelecimento(ObjectId id, String restaurante, String cidade,
+                           Double longitude, Double latitude, String descricaoPrato) {
 		this.id = id;
 		this.restaurante = restaurante;
 		this.cidade = cidade;

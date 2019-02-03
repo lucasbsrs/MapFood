@@ -1,9 +1,11 @@
 package com.devwarrios.mapfood.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.*;
 
-@Entity
-@Table(name = "item_pedido")
+
+@Document(collection = "item_pedido")
 public class ItemPedido {
 
     @Id

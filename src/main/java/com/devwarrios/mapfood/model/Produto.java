@@ -2,12 +2,15 @@ package com.devwarrios.mapfood.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "produto")
+@Document(collection = "produtos")
 @Getter
 @Setter
 public class Produto {

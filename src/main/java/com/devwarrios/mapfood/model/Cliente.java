@@ -2,28 +2,31 @@ package com.devwarrios.mapfood.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "cliente")
+@Document(collection = "clientes")
 @Getter
 @Setter
 public class Cliente {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private ObjectId id;
 
-	@Column(name = "lon")
+	//@Field("ID Cliente")
+	//private Long clienteId;
+
+	@Field("Longitude")
 	private Double longitude;
 
-	@Column(name = "lat")
+	@Field("Latitude")
 	private Double latitude;
 
 	public Cliente() {}
 
-	public Cliente(Long id, Double longitude, Double latitude) {
+	public Cliente(ObjectId id, Double longitude, Double latitude) {
 		this.id = id;
 		this.longitude = longitude;
 		this.latitude = latitude;

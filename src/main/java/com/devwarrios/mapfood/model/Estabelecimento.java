@@ -3,13 +3,13 @@ package com.devwarrios.mapfood.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
-@Table(name = "estabelecimento")
+@Document(collection = "estabelecimentos")
 @Getter
 @Setter
 public class Estabelecimento {

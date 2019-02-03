@@ -1,12 +1,13 @@
 package com.devwarrios.mapfood.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@Table(name = "pedido")
+@Document(collection = "pedido")
 public class Pedido {
 
 	@Id

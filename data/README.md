@@ -30,21 +30,20 @@ $ docker run hello-world # Testa instalação do Docker.
 $ docker-compose version # Testa instalação do Docker Compose.
 ```
 
-## Executando a partir do Docker Compose
+## Fazendo login no Docker Hub e baixando a imagem
 
-Antes de levantar a imagem do banco, lembre-se de logar no Docker Hub com `$ docker login`.
+Antes de levantar a imagem do banco, lembre-se de logar no Docker Hub:
+
+```shell
+$ docker login # Forneca suas credenciais do Docker Hub.
+```
+
+## Executando a partir do Docker Compose
 
 Para levantar a imagem do banco, simplesmente execute:
 
 ```shell
 $ docker-compose up
-```
-
-O banco de dados MongoDB deve estar rodando na porta 27017 do host. Tente acessar
-com:
-
-```shell
-$ mongo -p 27017
 ```
 
 ## Executando sem o Docker Compose
@@ -56,6 +55,32 @@ $ docker run -ti -p 27017:27017 -v mongo-data:/data/db --name mongo-codenation k
 ```
 
 Novamente, o banco estará disponível no host na porta 27017.
+
+## Testando o banco de dados
+
+Primeiramente instale o mongo shell, que é um cliente com CLI para acessar o banco de dados.
+Para isso, acesse o [MongoDB Download Center](https://www.mongodb.com/download-center/community?jmp=docs),
+escolha seu sistema operacional e em _Package_ escolha _shell_.
+
+Faça a instalação do pacote baixado e verifique se o comando `mongo` está disponível.
+
+O banco de dados MongoDB deve estar rodando na porta 27017 do host. Tente acessar
+com:
+
+```shell
+$ mongo -p 27017
+```
+
+Teste se os dados encontram-se nas coleções (dentro da CLI do MongoDB):
+
+```
+> show dbs
+> use codenation
+> db.getCollection("clientes").find({})
+> db.getCollection("estabelecimentos").find({})
+> db.getCollection("entregadores").find({})
+> db.getCollection("produtos").find({})
+```
 
 ## Criando a imagem a partir do Dockerfile
 

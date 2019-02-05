@@ -92,9 +92,19 @@ Teste se os dados encontram-se nas coleções (dentro da CLI do MongoDB):
 
 Para descobrir todos entregadores em um raio de 2km do estabelecimento _Suprem_:
 
+A partir da linha de comando do Mongo Shell:
+
 ```
 > db.entregadores.createIndex({localizacao: "2dsphere"}) // Cria index no campo localizacao para Geo Queries.
 > db.entregadores.find({localizacao: {$nearSphere: {$geometry: {type: "Point", coordinates: [-51.214377, -30.032458]}, $maxDistance: 2000}}})
+```
+
+Ou a partir da linha de comando do Linux:
+
+```shell
+mongo codenation --authenticationDatabase admin --username devwarrior --password mongodb \
+	--host localhost --port 27017 \
+	-eval 'db.entregadores.find({localizacao: {$nearSphere: {$geometry: {type: "Point", coordinates: [-51.214377, -30.032458]}, $maxDistance: 2000}}})'
 ```
 
 ## Criando a imagem a partir do Dockerfile

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.devwarrios.mapfood.model.Produto;
 
-@Repository
 public interface ProdutoRepository extends MongoRepository<Produto, Long> {
 	public List<Produto> findByProdutoId(String produtoId);
 }

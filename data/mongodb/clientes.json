@@ -1,0 +1,10 @@
+{
+  "cliente_id": 1,
+  "localizacao": {
+    "type": "Point",
+    "coordinates": [
+      -51.228496,
+      -30.03742831
+    ]
+  }
+}

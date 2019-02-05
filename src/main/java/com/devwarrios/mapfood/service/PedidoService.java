@@ -36,18 +36,37 @@ public class PedidoService {
 		String clienteId = pedidoRequestDto.getClienteId();
 		String estabelecimentoId = pedidoRequestDto.getEstabelecimentoId();
 
-		Cliente cliente = clienteRepository.findByClienteId(clienteId).get(0);
-		Estabelecimento estabelecimento = estabelecimentoRepository.findByEstabelecimentoId(estabelecimentoId)
-				.get(0);
+		Cliente cliente = null;
+		Estabelecimento estabelecimento = null;
+		List<ItemPedido> itens = null;
 
-		List<ItemPedidoDto> itensDto = pedidoRequestDto.getItens();
-		List<ItemPedido> itens = new ArrayList<>();
-		for (ItemPedidoDto ipd : itensDto) {
-			Produto produto = produtoRepository.findByProdutoId(ipd.getProdutoId()).get(0);
-
-			itens.add(new ItemPedido(produto, ipd.getQuantidade(), ipd.getObservacao()));
+		try {
+			System.out.println(clienteId);
+			cliente = clienteRepository.findByClienteId(clienteId).get(0);
 		}
-
+		catch (Exception e) {
+			System.out.println("Cliente");
+			e.printStackTrace();
+		}
+		
+		try {
+			estabelecimento = estabelecimentoRepository.findByEstabelecimentoId(estabelecimentoId)
+					.get(0);
+	
+			List<ItemPedidoDto> itensDto = pedidoRequestDto.getItens();
+			itens = new ArrayList<>();
+			for (ItemPedidoDto ipd : itensDto) {
+				Produto produto = produtoRepository.findByProdutoId(ipd.getProdutoId()).get(0);
+	
+				itens.add(new ItemPedido(produto, ipd.getQuantidade(), ipd.getObservacao()));
+			}
+			
+			
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
 		Pedido pedido = PedidoFactory.criaNovoPedido(cliente, estabelecimento, itens);
 
 		return new PedidoResponseDto("1", "entregador", 10, 30, LocalDate.now());

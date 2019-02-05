@@ -3,43 +3,36 @@ package com.devwarrios.mapfood.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "pedido")
+import org.springframework.data.annotation.Id;
+
+//@Entity
+//@Table(name = "pedido")
 public class Pedido {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String id;
+	
+	//private String pedidoId;
 
 	@NotNull
-	@OneToOne
-	@JoinColumn(name = "cliente_id")
+	//@OneToOne
+	//@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
 	@NotNull
-	@OneToOne
-	@JoinColumn(name = "estabelecimento_id")
+	//@OneToOne
+	//@JoinColumn(name = "estabelecimento_id")
 	private Estabelecimento estabelecimento;
 
-	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+	//@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ItemPedido> itens;
 
 	private LocalDate data;
 
-	@Enumerated(EnumType.STRING)
+	//@Enumerated(EnumType.STRING)
 	private PedidoStatus status;
 
 	public Pedido() {
@@ -51,6 +44,54 @@ public class Pedido {
 		this.estabelecimento = estabelecimento;
 		this.itens = itens;
 		this.data = data;
+		this.status = status;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Estabelecimento getEstabelecimento() {
+		return estabelecimento;
+	}
+
+	public void setEstabelecimento(Estabelecimento estabelecimento) {
+		this.estabelecimento = estabelecimento;
+	}
+
+	public List<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<ItemPedido> itens) {
+		this.itens = itens;
+	}
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+	public PedidoStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(PedidoStatus status) {
 		this.status = status;
 	}
 }

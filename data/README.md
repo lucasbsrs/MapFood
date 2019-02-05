@@ -16,6 +16,9 @@ banco de dados já populado com os dados disponibilizados no desafio.
 Essa imagem Docker está disponível de forma privada no repositório
 [kmyokoyama/mongo-codenation](https://cloud.docker.com/repository/registry-1.docker.io/kmyokoyama/mongo-codenation).
 
+O usuário padrão é `devwarrior` e a senha é `mongodb`. Se estiver tendo problemas,
+consulte a seção _Removendo o volume compartilhado_.
+
 ## Instalando Docker e Docker Compose
 
 Primeiramente, [instale o Docker](https://docs.docker.com/install/)
@@ -51,7 +54,10 @@ $ docker-compose up
 Para levantar o banco e executá-lo diretamente pelo Docker sem o Docker Compose, execute:
 
 ```shell
-$ docker run -ti -p 27017:27017 -v mongo-data:/data/db --name mongo-codenation kmyokoyama/mongo-codenation:latest
+$ docker run -ti -p 27017:27017 -v mongo-data:/data/db \
+	-e MONGO_INITDB_ROOT_USERNAME=devwarrior \
+	-e MONGO_INITDB_ROOT_PASSWORD=mongodb \
+	--name mongo-codenation kmyokoyama/mongo-codenation:latest
 ```
 
 Novamente, o banco estará disponível no host na porta 27017.
@@ -68,7 +74,7 @@ O banco de dados MongoDB deve estar rodando na porta 27017 do host. Tente acessa
 com:
 
 ```shell
-$ mongo -p 27017
+$ mongo --username devwarrior --password mongodb --host localhost --port 27017
 ```
 
 Teste se os dados encontram-se nas coleções (dentro da CLI do MongoDB):

@@ -3,6 +3,8 @@
 import csv
 import json
 
+from collections import defaultdict
+
 
 CLIENTES_CSV = "clientes.csv"
 ESTABELECIMENTOS_CSV = "estabelecimentos.csv"
@@ -27,7 +29,7 @@ def cliente_dict(fields):
     )
 
 
-def estabelecimento_dict(fields):
+def estabelecimento_dict(fields, produtos):
     return (
         {
             "estabelecimento_id": fields[0],
@@ -37,7 +39,8 @@ def estabelecimento_dict(fields):
                 "type": "Point",
                 "coordinates": [float(fields[3]), float(fields[4])]
             },
-            "culinaria": fields[5]
+            "culinaria": fields[5],
+            "produtos": produtos
         }
     )
 
@@ -85,11 +88,48 @@ def cria_json(arquivo_csv, arquivo_json, modelo):
         f.write(json.dumps(itens, indent=4))
 
 
+def cria_estabelecimentos_json(arquivo_csv, arquivo_json, modelo, estabelecimentos_produtos):
+    itens = []
+
+    with open(arquivo_csv, "r", newline='') as f:
+        reader = csv.reader(f)
+
+        next(reader, None)
+
+        for fields in reader:
+            estabelecimento_id = fields[0]
+            item = modelo(fields, estabelecimentos_produtos.get(estabelecimento_id, []))
+
+            itens.append(item)
+
+    with open(arquivo_json, "w", encoding="utf-8") as f:
+        f.write(json.dumps(itens, indent=4, ensure_ascii=False))
+
+
+def cria_dict_estabelecimento_produto(produtos_csv, modelo_produtos):
+    estabelecimentos_produtos = defaultdict()
+
+    with open(produtos_csv, "r", newline='', encoding="utf-8") as f:
+        reader = csv.reader(f)
+
+        next(reader, None)
+
+        for fields in reader:
+            item = modelo_produtos(fields)
+            estabelecimento_id = item["estabelecimento_id"]
+
+            produtos = estabelecimentos_produtos.get(estabelecimento_id, [])
+            produtos.append(item)
+            estabelecimentos_produtos[estabelecimento_id] = produtos
+
+    return estabelecimentos_produtos
+
+
 def main():
     cria_json(CLIENTES_CSV, CLIENTES_JSON, cliente_dict)
-    cria_json(ESTABELECIMENTOS_CSV, ESTABELECIMENTOS_JSON, estabelecimento_dict)
     cria_json(ENTREGADORES_CSV, ENTREGADORES_JSON, entregador_dict)
-    cria_json(PRODUTOS_CSV, PRODUTOS_JSON, produto_dict)
+    estabelecimentos_produtos = cria_dict_estabelecimento_produto(PRODUTOS_CSV, produto_dict)
+    cria_estabelecimentos_json(ESTABELECIMENTOS_CSV, ESTABELECIMENTOS_JSON, estabelecimento_dict, estabelecimentos_produtos)
 
 
 if __name__ == "__main__":

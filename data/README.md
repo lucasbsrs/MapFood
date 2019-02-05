@@ -88,6 +88,15 @@ Teste se os dados encontram-se nas coleções (dentro da CLI do MongoDB):
 > db.getCollection("produtos").find({})
 ```
 
+## Testando a geolocalização
+
+Para descobrir todos entregadores em um raio de 2km do estabelecimento _Suprem_:
+
+```
+> db.entregadores.createIndex({localizacao: "2dsphere"}) // Cria index no campo localizacao para Geo Queries.
+> db.entregadores.find({localizacao: {$nearSphere: {$geometry: {type: "Point", coordinates: [-51.214377, -30.032458]}, $maxDistance: 2000}}})
+```
+
 ## Criando a imagem a partir do Dockerfile
 
 Para criar a imagem localmente, removendo a necessidade de acessar o Docker Hub:

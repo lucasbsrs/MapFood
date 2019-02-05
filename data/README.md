@@ -102,7 +102,7 @@ A partir da linha de comando do Mongo Shell:
 Ou a partir da linha de comando do Linux:
 
 ```shell
-mongo codenation --authenticationDatabase admin --username devwarrior --password mongodb \
+$ mongo codenation --authenticationDatabase admin --username devwarrior --password mongodb \
 	--host localhost --port 27017 \
 	-eval 'db.entregadores.find({localizacao: {$nearSphere: {$geometry: {type: "Point", coordinates: [-51.214377, -30.032458]}, $maxDistance: 2000}}})'
 ```

@@ -21,9 +21,6 @@ public class Produto {
 	@Field("descricao")
 	private String descricao;
 	
-	@Field("estabelecimento")
-	private Estabelecimento estabelecimento;
-	
 	@Field("classificao")
 	private String classificacao;
 	
@@ -36,10 +33,9 @@ public class Produto {
 	public Produto() {
 	}
 
-	public Produto(String descricaoItem, Estabelecimento estabelecimento, String classificacao, Double precoUnitario,
+	public Produto(String descricaoItem, String classificacao, Double precoUnitario,
 			String cidade) {
 		this.descricao = descricaoItem;
-		this.estabelecimento = estabelecimento;
 		this.classificacao = classificacao;
 		this.precoUnitario = precoUnitario;
 		this.cidade = cidade;

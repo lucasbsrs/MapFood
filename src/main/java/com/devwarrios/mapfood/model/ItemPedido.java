@@ -2,21 +2,17 @@ package com.devwarrios.mapfood.model;
 
 import org.springframework.data.annotation.Id;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ItemPedido {
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	//@OneToOne
-	//@JoinColumn(name = "produto_id")
 	private Produto produto;
-
 	private String observacao;
-
-	//@ManyToOne
-	private Pedido pedido;
-
 	private int quantidade;
 
 	public ItemPedido() {

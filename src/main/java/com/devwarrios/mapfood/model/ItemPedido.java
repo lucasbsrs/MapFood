@@ -2,8 +2,6 @@ package com.devwarrios.mapfood.model;
 
 import org.springframework.data.annotation.Id;
 
-//@Entity
-//@Table(name = "item_pedido")
 public class ItemPedido {
 
 	@Id

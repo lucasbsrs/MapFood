@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.devwarrios.mapfood.model.Cliente;
 
-public interface ClienteRepository extends MongoRepository<Cliente, Long> {
+public interface ClienteRepository extends MongoRepository<Cliente, String> {
 	public List<Cliente> findByClienteId(String clienteId);
 }

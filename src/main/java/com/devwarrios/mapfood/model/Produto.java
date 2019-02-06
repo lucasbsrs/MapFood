@@ -1,14 +1,13 @@
 package com.devwarrios.mapfood.model;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import lombok.Getter;
 import lombok.Setter;
 
-//@Entity
-//@Table(name = "produto")
+@Document(collection = "produtos")
 @Getter
 @Setter
 public class Produto {
@@ -16,23 +15,22 @@ public class Produto {
 	@Id
 	private String id;
 	
+	@Field("produto_id")
 	private String produtoId;
-
-	//@Column(name = "item")
+	
+	@Field("descricao")
 	private String descricao;
-
-	@NotNull
-	//@ManyToOne
-	//@JoinColumn(name = "estabelecimento_id", referencedColumnName = "estabelecimento_id")
+	
+	@Field("estabelecimento")
 	private Estabelecimento estabelecimento;
-
-	private String restaurante;
-
+	
+	@Field("classificao")
 	private String classificacao;
-
-	//@Column(name = "preco")
+	
+	@Field("preco_unitario")
 	private Double precoUnitario;
-
+	
+	@Field("cidade")
 	private String cidade;
 
 	public Produto() {

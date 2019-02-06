@@ -3,36 +3,37 @@ package com.devwarrios.mapfood.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-//@Entity
-//@Table(name = "pedido")
+import lombok.Getter;
+import lombok.Setter;
+
+@Document(collection = "pedidos")
+@Getter
+@Setter
 public class Pedido {
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	
-	//private String pedidoId;
-
-	@NotNull
-	//@OneToOne
-	//@JoinColumn(name = "cliente_id")
+	@Field("pedido_id")
+	private String pedidoId;
+	
+	@Field("cliente")
 	private Cliente cliente;
-
-	@NotNull
-	//@OneToOne
-	//@JoinColumn(name = "estabelecimento_id")
+	
+	@Field("estabelecimento")
 	private Estabelecimento estabelecimento;
-
-	//@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+	
+	@Field("itens")
 	private List<ItemPedido> itens;
-
+	
+	@Field("data")
 	private LocalDate data;
-
-	//@Enumerated(EnumType.STRING)
+	
+	@Field("status")
 	private PedidoStatus status;
 
 	public Pedido() {
@@ -44,54 +45,6 @@ public class Pedido {
 		this.estabelecimento = estabelecimento;
 		this.itens = itens;
 		this.data = data;
-		this.status = status;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public Estabelecimento getEstabelecimento() {
-		return estabelecimento;
-	}
-
-	public void setEstabelecimento(Estabelecimento estabelecimento) {
-		this.estabelecimento = estabelecimento;
-	}
-
-	public List<ItemPedido> getItens() {
-		return itens;
-	}
-
-	public void setItens(List<ItemPedido> itens) {
-		this.itens = itens;
-	}
-
-	public LocalDate getData() {
-		return data;
-	}
-
-	public void setData(LocalDate data) {
-		this.data = data;
-	}
-
-	public PedidoStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(PedidoStatus status) {
 		this.status = status;
 	}
 }

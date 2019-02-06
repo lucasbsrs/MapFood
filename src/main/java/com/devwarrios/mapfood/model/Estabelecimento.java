@@ -1,52 +1,52 @@
 package com.devwarrios.mapfood.model;
 
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.mongodb.client.model.geojson.Point;
+
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
-import java.util.List;
-import java.util.UUID;
-
-@Entity
-@Table(name = "estabelecimento")
+@Document(collection = "estabelecimentos")
 @Getter
 @Setter
 public class Estabelecimento {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String id;
 
-	@Column(unique = true)
-	@Type(type = "uuid-char")
-	private UUID estabelecimento_id;
+	@Field("estabelecimento_id")
+	private String estabelecimentoId;
 
-	private String restaurante;
+	@Field("estabelecimento")
+	private String estabelecimento;
 
+	@Field("cidade")
 	private String cidade;
 
-	@Column(name = "lon")
-	private Double longitude;
-
-	@Column(name = "lat")
-	private Double latitude;
-
-	@Transient
+	@Field("descricacao")
 	private String descricaoPrato;
+	
+	@GeoSpatialIndexed(name = "2dsphere")
+	private Point localizacao;
 
-	@OneToMany(mappedBy = "estabelecimento")
+	@Field("produtos")
 	private List<Produto> produtos;
 
-	public Estabelecimento() {}
+	public Estabelecimento() {
+	}
 
-	public Estabelecimento(Long id, String restaurante, String cidade,
-	                       Double longitude, Double latitude, String descricaoPrato) {
-		this.id = id;
-		this.restaurante = restaurante;
+	public Estabelecimento(String estabelecimentoId, String estabelecimento, String cidade, Point localizacao,
+			String descricaoPrato) {
+		this.estabelecimentoId = estabelecimentoId;
+		this.estabelecimento = estabelecimento;
 		this.cidade = cidade;
-		this.longitude = longitude;
-		this.latitude = latitude;
+		this.localizacao = localizacao;
 		this.descricaoPrato = descricaoPrato;
 	}
 }

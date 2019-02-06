@@ -1,31 +1,34 @@
 package com.devwarrios.mapfood.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.mongodb.client.model.geojson.Point;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "cliente")
+@Document(collection = "clientes")
 @Getter
 @Setter
 public class Cliente {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String id;
+	
+	@Field("cliente_id")
+	private String clienteId;
 
-	@Column(name = "lon")
-	private Double longitude;
+	@GeoSpatialIndexed(name = "2dsphere")
+	private Point localizacao;
 
-	@Column(name = "lat")
-	private Double latitude;
+	public Cliente() {
+	}
 
-	public Cliente() {}
-
-	public Cliente(Long id, Double longitude, Double latitude) {
-		this.id = id;
-		this.longitude = longitude;
-		this.latitude = latitude;
+	public Cliente(String clienteId, Point localizacao) {
+		this.clienteId = clienteId;
+		this.localizacao = localizacao;
 	}
 }

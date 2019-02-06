@@ -1,44 +1,45 @@
 package com.devwarrios.mapfood.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-@Entity
-@Table(name = "produto")
+@Document(collection = "produtos")
 @Getter
 @Setter
 public class Produto {
 
-    @Id
-    private Long id;
-
-    @Column(name = "item")
+	@Id
+	private String id;
+	
+	@Field("produto_id")
+	private String produtoId;
+	
+	@Field("descricao")
 	private String descricao;
-
-	@NotNull
-    @ManyToOne
-    @JoinColumn(name = "estabelecimento_id", referencedColumnName = "estabelecimento_id")
-    private Estabelecimento estabelecimento;
-
-	private String restaurante;
-
+	
+	@Field("estabelecimento")
+	private Estabelecimento estabelecimento;
+	
+	@Field("classificao")
 	private String classificacao;
-
-	@Column(name = "preco")
+	
+	@Field("preco_unitario")
 	private Double precoUnitario;
-
+	
+	@Field("cidade")
 	private String cidade;
 
-	public Produto() {}
+	public Produto() {
+	}
 
-	public Produto(String descricaoItem,
-	               String restaurante,
-	               String classificacao, Double precoUnitario, String cidade) {
+	public Produto(String descricaoItem, Estabelecimento estabelecimento, String classificacao, Double precoUnitario,
+			String cidade) {
 		this.descricao = descricaoItem;
-		this.restaurante = restaurante;
+		this.estabelecimento = estabelecimento;
 		this.classificacao = classificacao;
 		this.precoUnitario = precoUnitario;
 		this.cidade = cidade;

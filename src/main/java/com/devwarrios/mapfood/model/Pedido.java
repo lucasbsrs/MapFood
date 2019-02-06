@@ -1,39 +1,46 @@
 package com.devwarrios.mapfood.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@Table(name = "pedido")
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Document(collection = "pedidos")
+@Getter
+@Setter
 public class Pedido {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	@NotNull
-    @OneToOne
-    @JoinColumn(name = "cliente_id")
+	private String id;
+	
+	@Field("pedido_id")
+	private String pedidoId;
+	
+	@Field("cliente")
 	private Cliente cliente;
-
-	@NotNull
-    @OneToOne
-    @JoinColumn(name = "estabelecimento_id")
+	
+	@Field("estabelecimento")
 	private Estabelecimento estabelecimento;
-
-	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+	
+	@Field("itens")
 	private List<ItemPedido> itens;
-
+	
+	@Field("data")
 	private LocalDate data;
-
-	@Enumerated(EnumType.STRING)
+	
+	@Field("status")
 	private PedidoStatus status;
 
-	public Pedido() {}
+	public Pedido() {
+	}
 
-	public Pedido(Cliente cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate data, PedidoStatus status) {
+	public Pedido(Cliente cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate data,
+			PedidoStatus status) {
 		this.cliente = cliente;
 		this.estabelecimento = estabelecimento;
 		this.itens = itens;

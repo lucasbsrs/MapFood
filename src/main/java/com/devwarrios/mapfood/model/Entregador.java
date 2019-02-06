@@ -1,33 +1,34 @@
 package com.devwarrios.mapfood.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.mongodb.client.model.geojson.Point;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "entregador")
+@Document(collection = "entregadores")
 @Getter
 @Setter
 public class Entregador {
 
 	@Id
-	private Integer id;
+	private String id;
 
-	@Column(name = "lon")
-	private Double longitude;
+	@Field("entregador_id")
+	private String entregadorId;
 
-	@Column(name = "lat")
-	private Double latitude;
+	@GeoSpatialIndexed(name = "2dpshere")
+	private Point localizacao;
 
-	public Entregador() {}
+	public Entregador() {
+	}
 
-	public Entregador(Integer id, Double longitude, Double latitude) {
-		this.id = id;
-		this.longitude = longitude;
-		this.latitude = latitude;
+	public Entregador(String entregadorId, Point localizacao) {
+		this.entregadorId = entregadorId;
+		this.localizacao = localizacao;
 	}
 }

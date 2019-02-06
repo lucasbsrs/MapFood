@@ -3,6 +3,7 @@ package com.devwarrios.mapfood.model;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -31,8 +32,8 @@ public class Estabelecimento {
 
 	@Field("descricacao")
 	private String descricaoPrato;
-	
-	@GeoSpatialIndexed(name = "2dsphere")
+
+	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private Point localizacao;
 
 	@Field("produtos")

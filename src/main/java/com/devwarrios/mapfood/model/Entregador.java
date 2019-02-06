@@ -1,6 +1,7 @@
 package com.devwarrios.mapfood.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -21,7 +22,7 @@ public class Entregador {
 	@Field("entregador_id")
 	private String entregadorId;
 
-	@GeoSpatialIndexed(name = "2dpshere")
+	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private Point localizacao;
 
 	public Entregador() {

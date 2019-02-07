@@ -17,32 +17,32 @@ public class Pedido {
 
 	@Id
 	private String id;
-	
+
 	@Field("pedido_id")
 	private String pedidoId;
-	
-	@Field("cliente")
-	private Cliente cliente;
-	
-	@Field("estabelecimento")
-	private Estabelecimento estabelecimento;
-	
+
+	@Field("clienteId")
+	private String clienteId;
+
+	@Field("estabelecimentoId")
+	private String estabelecimentoId;
+
 	@Field("itens")
 	private List<ItemPedido> itens;
-	
+
 	@Field("data")
 	private LocalDate data;
-	
+
 	@Field("status")
 	private PedidoStatus status;
 
 	public Pedido() {
 	}
 
-	public Pedido(Cliente cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate data,
+	public Pedido(String clienteId, String estabelecimentoId, List<ItemPedido> itens, LocalDate data,
 			PedidoStatus status) {
-		this.cliente = cliente;
-		this.estabelecimento = estabelecimento;
+		this.clienteId = clienteId;
+		this.estabelecimentoId = estabelecimentoId;
 		this.itens = itens;
 		this.data = data;
 		this.status = status;

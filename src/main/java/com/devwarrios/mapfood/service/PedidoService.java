@@ -3,6 +3,9 @@ package com.devwarrios.mapfood.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,19 +21,24 @@ import com.devwarrios.mapfood.model.Pedido;
 import com.devwarrios.mapfood.model.Produto;
 import com.devwarrios.mapfood.repository.ClienteRepository;
 import com.devwarrios.mapfood.repository.EstabelecimentoRepository;
+import com.devwarrios.mapfood.repository.PedidoRepository;
 import com.devwarrios.mapfood.repository.ProdutoRepository;
+import com.devwarrios.mapfood.utils.GerenciadorEstabelecimento;
 
 @Service
 public class PedidoService {
-	
+
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
+
 	@Autowired
 	private EstabelecimentoRepository estabelecimentoRepository;
-	
+
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
 
 	public PedidoResponseDto criaPedido(PedidoRequestDto pedidoRequestDto) {
 		String clienteId = pedidoRequestDto.getClienteId();
@@ -42,33 +50,47 @@ public class PedidoService {
 
 		try {
 			System.out.println(clienteId);
-			cliente = clienteRepository.findByClienteId(clienteId).get(0);
+			cliente = clienteRepository.findByClienteId(clienteId);
 		}
 		catch (Exception e) {
 			System.out.println("Cliente");
 			e.printStackTrace();
 		}
-		
+
 		try {
 			estabelecimento = estabelecimentoRepository.findByEstabelecimentoId(estabelecimentoId)
 					.get(0);
-	
+
+			GerenciadorEstabelecimento gerenciadorEstabelecimento = new GerenciadorEstabelecimento(estabelecimento);
+
 			List<ItemPedidoDto> itensDto = pedidoRequestDto.getItens();
+
+			/*
+			List<String> itensIds = itensDto.stream().map(ipd -> ipd.getProdutoId()).collect(Collectors.toList());
+			
+			Stream<Produto> produtos = gerenciadorEstabelecimento.buscarProdutosPorId(itensIds);
+			
+			produtos.map(p -> )
+			*/
+			System.out.println("itensDto: " + itensDto);
 			itens = new ArrayList<>();
 			for (ItemPedidoDto ipd : itensDto) {
-				Produto produto = produtoRepository.findByProdutoId(ipd.getProdutoId()).get(0);
-	
+				Produto produto = gerenciadorEstabelecimento.buscaProdutoPorId(ipd.getProdutoId());
+				System.out.println(produto);
+
 				itens.add(new ItemPedido(produto, ipd.getQuantidade(), ipd.getObservacao()));
 			}
-			
-			
 		}
 		catch (Exception e) {
+			System.out.println("pedido");
 			System.out.println(e);
+			e.printStackTrace();
 		}
-		
-		Pedido pedido = PedidoFactory.criaNovoPedido(cliente, estabelecimento, itens);
 
-		return new PedidoResponseDto("1", "entregador", 10, 30, LocalDate.now());
+		Pedido pedido = PedidoFactory.criaNovoPedido(clienteId, estabelecimentoId, itens);
+		
+		pedidoRepository.insert(pedido);
+
+		return new PedidoResponseDto("1", "entregador", 10, 30, 100.00, LocalDate.now());
 	}
 }

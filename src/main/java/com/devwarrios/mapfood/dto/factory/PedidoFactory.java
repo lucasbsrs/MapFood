@@ -11,7 +11,7 @@ import com.devwarrios.mapfood.model.PedidoStatus;
 
 public class PedidoFactory {
 
-	public static Pedido criaNovoPedido(Cliente cliente, Estabelecimento estabelecimento, List<ItemPedido> itens) {
+	public static Pedido criaNovoPedido(String cliente, String estabelecimento, List<ItemPedido> itens) {
 		Pedido pedido = new Pedido(cliente, estabelecimento, itens, LocalDate.now(), PedidoStatus.EM_PREPARO);
 
 		return pedido;

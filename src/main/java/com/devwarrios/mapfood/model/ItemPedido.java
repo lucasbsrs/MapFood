@@ -10,7 +10,7 @@ import lombok.Setter;
 public class ItemPedido {
 
 	@Id
-	private Long id;
+	private String id;
 	private Produto produto;
 	private String observacao;
 	private int quantidade;

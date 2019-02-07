@@ -5,10 +5,12 @@ import com.devwarrios.mapfood.model.Estabelecimento;
 import com.devwarrios.mapfood.repository.ClienteRepository;
 import com.devwarrios.mapfood.repository.EstabelecimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metrics;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EstabelecimentoService {
@@ -18,23 +20,40 @@ public class EstabelecimentoService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    private List<Estabelecimento> estabelecimentos;
+
     public List<Estabelecimento> getEstabelecimentos() {
         return estabelecimentoRepository.findAll();
     }
 
-    public List<Estabelecimento> getEstabelecimentosPorLocalizacao(Integer clienteId, Integer raioEmKm) {
+    public List<Estabelecimento> getEstabelecimentosPorLocalizacao(Integer clienteId, Double raioEmKm) {
+
         Cliente cliente =  null;
+
         try {
             System.out.println(clienteId);
             cliente = clienteRepository.findByClienteId(clienteId);
 
+            Distance distance = new Distance(5, Metrics.KILOMETERS);
+            GeoJsonPoint point = new GeoJsonPoint(-51.228496,-30.03742831);
+
+            estabelecimentos= estabelecimentoRepository
+                    .findAllByLocationNear(point, distance);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(cliente.getLocalizacao());
-        return estabelecimentoRepository.findAll();
+        //System.out.println(cliente.getLocalizacao().getCoordinates().get(0));
+        //return estabelecimentoRepository.findAll();
 
-        //return null;
+//        repository.findBySubjectAndLocationNear(subjects,
+//                new Point(Double.valueOf(longitude), Double.valueOf(latitude)),
+//                new Distance(distance, Metrics.KILOMETERS));
+
+
+
+        return estabelecimentos;
     }
 
 

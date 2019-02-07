@@ -30,8 +30,4 @@ public class Cliente {
 		this.clienteId = clienteId;
 		this.localizacao = localizacao;
 	}
-
-	public GeoJsonPoint getLocalizacao() {
-		return localizacao;
-	}
 }

@@ -2,6 +2,7 @@ package com.devwarrios.mapfood.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
@@ -27,6 +28,7 @@ public class Estabelecimento {
 
     @Field("cidade")
     private String cidade;
+
 
     @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
     private GeoJsonPoint localizacao;

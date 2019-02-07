@@ -20,7 +20,6 @@ public class Cliente {
 	@Field("cliente_id")
 	private Integer clienteId;
 
-
 	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private GeoJsonPoint localizacao;
 
@@ -30,5 +29,9 @@ public class Cliente {
 		this.id = id;
 		this.clienteId = clienteId;
 		this.localizacao = localizacao;
+	}
+
+	public GeoJsonPoint getLocalizacao() {
+		return localizacao;
 	}
 }

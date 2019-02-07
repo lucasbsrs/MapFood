@@ -23,9 +23,7 @@ public class EstabelecimentoService {
     }
 
     public List<Estabelecimento> getEstabelecimentosPorLocalizacao(Integer clienteId, Integer raioEmKm) {
-
-        Optional<Cliente>cliente = null;
-
+        Cliente cliente =  null;
         try {
             System.out.println(clienteId);
             cliente = clienteRepository.findByClienteId(clienteId);
@@ -33,7 +31,7 @@ public class EstabelecimentoService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        System.out.println(cliente.getLocalizacao());
         return estabelecimentoRepository.findAll();
 
         //return null;

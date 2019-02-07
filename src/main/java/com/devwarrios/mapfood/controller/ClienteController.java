@@ -40,7 +40,7 @@ public class ClienteController {
 	@GetMapping("/clientes/{clienteId}")
 	public ResponseEntity<Cliente> getClienteById(@PathVariable("clienteId") Integer id) {
 
-		Optional<Cliente> cliente = clienteService.getClienteById(id);
+		Optional<Cliente> cliente = Optional.ofNullable(clienteService.getClienteById(id));
 
 		if (!cliente.isPresent())
 			return ResponseEntity.noContent().build();

@@ -37,7 +37,7 @@ public class PedidoService {
 		Integer clienteId = pedidoRequestDto.getClienteId();
 		String estabelecimentoId = pedidoRequestDto.getEstabelecimentoId();
 
-		Optional<Cliente> cliente = null;
+		Cliente cliente = null;
 		Estabelecimento estabelecimento = null;
 		List<ItemPedido> itens = null;
 
@@ -68,7 +68,7 @@ public class PedidoService {
 			System.out.println(e);
 		}
 		
-		Pedido pedido = PedidoFactory.criaNovoPedido(cliente, estabelecimento, itens);
+		Pedido pedido = (Pedido) PedidoFactory.criaNovoPedido(Optional.ofNullable(cliente), estabelecimento, itens);
 
 		return new PedidoResponseDto("1", "entregador", 10, 30, LocalDate.now());
 	}

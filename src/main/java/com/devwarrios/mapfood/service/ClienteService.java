@@ -15,13 +15,9 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 
-	public List<Cliente> getClientes() {
-		return clienteRepository.findAll();
-	}
+	public List<Cliente> getClientes() { return clienteRepository.findAll();	}
 
-	public Optional<Cliente> getClienteById(Integer id) {
-		return clienteRepository.findByClienteId(id);
-	}
+	public Cliente getClienteById(Integer id) { return clienteRepository.findByClienteId(id);	}
 
 	public Cliente criaCliente(Cliente cliente) {
 		return clienteRepository.save(cliente);

@@ -2,6 +2,7 @@ package com.devwarrios.mapfood.model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -36,7 +37,7 @@ public class Pedido {
 	@Field("status")
 	private PedidoStatus status;
 
-	public Pedido() {
+	public Pedido(Optional<Cliente> cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate now, PedidoStatus emPreparo) {
 	}
 
 	public Pedido(Cliente cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate data,

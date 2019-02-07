@@ -3,6 +3,7 @@ package com.devwarrios.mapfood.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,16 +34,16 @@ public class PedidoService {
 	private ProdutoRepository produtoRepository;
 
 	public PedidoResponseDto criaPedido(PedidoRequestDto pedidoRequestDto) {
-		String clienteId = pedidoRequestDto.getClienteId();
+		Integer clienteId = pedidoRequestDto.getClienteId();
 		String estabelecimentoId = pedidoRequestDto.getEstabelecimentoId();
 
-		Cliente cliente = null;
+		Optional<Cliente> cliente = null;
 		Estabelecimento estabelecimento = null;
 		List<ItemPedido> itens = null;
 
 		try {
 			System.out.println(clienteId);
-			cliente = clienteRepository.findByClienteId(clienteId).get(0);
+			cliente = clienteRepository.findByClienteId(clienteId);
 		}
 		catch (Exception e) {
 			System.out.println("Cliente");

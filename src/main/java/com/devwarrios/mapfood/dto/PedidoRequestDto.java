@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class PedidoRequestDto implements PedidoDto {
 
-	private String clienteId;
+	private Integer clienteId;
 	private String estabelecimentoId;
 	private List<ItemPedidoDto> itens;
 }

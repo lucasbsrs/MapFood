@@ -19,8 +19,8 @@ public class ClienteService {
 		return clienteRepository.findAll();
 	}
 
-	public Optional<Cliente> getClienteById(String id) {
-		return clienteRepository.findById(id);
+	public Optional<Cliente> getClienteById(Integer id) {
+		return clienteRepository.findByClienteId(id);
 	}
 
 	public Cliente criaCliente(Cliente cliente) {

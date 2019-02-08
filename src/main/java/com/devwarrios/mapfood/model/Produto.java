@@ -1,90 +1,43 @@
 package com.devwarrios.mapfood.model;
 
-import javax.persistence.Entity;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Entity
+import lombok.Getter;
+import lombok.Setter;
+
+@Document(collection = "produtos")
+@Getter
+@Setter
 public class Produto {
+
+	@Id
+	private String id;
 	
-	private String descricaoItem;
+	@Field("produto_id")
+	private String produtoId;
 	
-	private Long itemId;
+	@Field("descricao")
+	private String descricao;
 	
-	private Long restauranteId;
-	
-	private String restaurante;
-	
+	@Field("classificao")
 	private String classificacao;
 	
+	@Field("preco_unitario")
 	private Double precoUnitario;
 	
+	@Field("cidade")
 	private String cidade;
-	
-	public Produto () {}
 
-	public Produto(String itemDescription, Long itemId, Long restaurantId, String restaurant, String classification,
-			Double unitPrice, String addressCity) {
-		this.descricaoItem = itemDescription;
-		this.itemId = itemId;
-		this.restauranteId = restaurantId;
-		this.restaurante = restaurant;
-		this.classificacao = classification;
-		this.precoUnitario = unitPrice;
-		this.cidade = addressCity;
+	public Produto() {
 	}
 
-	public String getItemDescription() {
-		return descricaoItem;
-	}
-
-	public void setItemDescription(String itemDescription) {
-		this.descricaoItem = itemDescription;
-	}
-
-	public Long getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(Long itemId) {
-		this.itemId = itemId;
-	}
-
-	public Long getRestaurantId() {
-		return restauranteId;
-	}
-
-	public void setRestaurantId(Long restaurantId) {
-		this.restauranteId = restaurantId;
-	}
-
-	public String getRestaurant() {
-		return restaurante;
-	}
-
-	public void setRestaurant(String restaurant) {
-		this.restaurante = restaurant;
-	}
-
-	public String getClassification() {
-		return classificacao;
-	}
-
-	public void setClassification(String classification) {
-		this.classificacao = classification;
-	}
-
-	public Double getUnitPrice() {
-		return precoUnitario;
-	}
-
-	public void setUnitPrice(Double unitPrice) {
-		this.precoUnitario = unitPrice;
-	}
-
-	public String getAddressCity() {
-		return cidade;
-	}
-
-	public void setAddressCity(String addressCity) {
-		this.cidade = addressCity;
+	public Produto(String descricaoItem, String classificacao, Double precoUnitario,
+			String cidade) {
+		this.descricao = descricaoItem;
+		this.classificacao = classificacao;
+		this.precoUnitario = precoUnitario;
+		this.cidade = cidade;
 	}
 }

@@ -10,25 +10,25 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import lombok.Getter;
 import lombok.Setter;
 
-@Document(collection = "clientes")
+@Document(collection = "entregadores")
 @Getter
 @Setter
-public class Cliente {
+public class Entregador {
 
 	@Id
 	private String id;
-	
-	@Field("cliente_id")
-	private String clienteId;
+
+	@Field("entregador_id")
+	private String entregadorId;
 
 	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private GeoJsonPoint localizacao;
 
-	public Cliente() {
+	public Entregador() {
 	}
 
-	public Cliente(String clienteId, GeoJsonPoint localizacao) {
-		this.clienteId = clienteId;
+	public Entregador(String entregadorId, GeoJsonPoint localizacao) {
+		this.entregadorId = entregadorId;
 		this.localizacao = localizacao;
 	}
 }

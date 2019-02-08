@@ -1,0 +1,14 @@
+version: "3"
+services:
+  mongo-codenation:
+    image: kmyokoyama/mongo-codenation:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=devwarrior
+      - MONGO_INITDB_ROOT_PASSWORD=mongodb
+
+volumes:
+  mongo-data:

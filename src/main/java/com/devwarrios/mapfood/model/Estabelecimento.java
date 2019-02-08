@@ -2,94 +2,51 @@ package com.devwarrios.mapfood.model;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Entity
+import lombok.Getter;
+import lombok.Setter;
+
+@Document(collection = "estabelecimentos")
+@Getter
+@Setter
 public class Estabelecimento {
 
 	@Id
-	private Long id;
-	
-	private String restaurante;
-	
+	private String id;
+
+	@Field("estabelecimento_id")
+	private String estabelecimentoId;
+
+	@Field("estabelecimento")
+	private String estabelecimento;
+
+	@Field("cidade")
 	private String cidade;
-	
-	private Double longitude;
-	
-	private Double latitude;
-	
+
+	@Field("descricacao")
 	private String descricaoPrato;
-	
-	// Verificar se está correta essa anotação - @OneToMany(mappedBy = "id.estabelecimento")
+
+	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
+	private GeoJsonPoint localizacao;
+
+	@Field("produtos")
 	private List<Produto> produtos;
-	
-	public Estabelecimento() {}
-	
-	public Estabelecimento(Long id, String restaurant, String addressCity, 
-			Double longitude, Double latitude, String dishDescription) {
-		this.id = id;
-		this.restaurante = restaurant;
-		this.cidade = addressCity;
-		this.longitude = longitude;
-		this.latitude = latitude;
-		this.descricaoPrato = dishDescription;
+
+	public Estabelecimento() {
 	}
 
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public String getRestaurant() {
-		return restaurante;
-	}
-
-	public void setRestaurant(String restaurant) {
-		this.restaurante = restaurant;
-	}
-
-	public String getAddressCity() {
-		return cidade;
-	}
-
-	public void setAddressCity(String addressCity) {
-		this.cidade = addressCity;
-	}
-
-	public Double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
-
-	public Double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getDishDescription() {
-		return descricaoPrato;
-	}
-
-	public void setDishDescription(String dishDescription) {
-		this.descricaoPrato = dishDescription;
-	}
-	
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
-	
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+	public Estabelecimento(String estabelecimentoId, String estabelecimento, String cidade, GeoJsonPoint localizacao,
+			String descricaoPrato) {
+		this.estabelecimentoId = estabelecimentoId;
+		this.estabelecimento = estabelecimento;
+		this.cidade = cidade;
+		this.localizacao = localizacao;
+		this.descricaoPrato = descricaoPrato;
 	}
 }

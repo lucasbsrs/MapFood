@@ -1,14 +1,13 @@
 package com.devwarrios.mapfood.model;
 
-import java.time.LocalDate;
-import java.util.List;
-
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.time.LocalDate;
+import java.util.List;
 
 @Document(collection = "pedidos")
 @Getter
@@ -35,6 +34,9 @@ public class Pedido {
 	
 	@Field("status")
 	private PedidoStatus status;
+
+	@Field("entrega")
+	private Entrega entrega;
 
 	public Pedido() {
 	}

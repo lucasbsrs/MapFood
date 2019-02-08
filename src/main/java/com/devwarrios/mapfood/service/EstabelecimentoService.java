@@ -1,7 +1,6 @@
 package com.devwarrios.mapfood.service;
 
 import com.devwarrios.mapfood.model.Relatorio;
-import com.devwarrios.mapfood.repository.EstabelecimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +9,11 @@ import java.time.LocalDate;
 @Service
 public class EstabelecimentoService {
 
-    @Autowired
-    private EstabelecimentoRepository estabelecimentoRepository;
+	@Autowired
+	private RelatorioService relatorioService;
 
+	public Relatorio geraRelatorio(String id, LocalDate dataInicial, LocalDate dataFinal) {
+		return relatorioService.geraRelatorio(id, dataInicial, dataFinal);
+	}
 
-    public Relatorio geraRelatorio(String id, LocalDate dataInicial, LocalDate dataFinal) {
-        return new Relatorio();
-    }
 }

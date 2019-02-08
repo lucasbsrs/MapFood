@@ -12,15 +12,13 @@ public class Relatorio {
     private Long totalEntregas;
     private Double totalQuilometragem;
     private Duration totalTempo;
-    private Produto produtoMaisVendido;
 
     public Relatorio() {
     }
 
-    public Relatorio(Long totalEntregas, Double totalQuilometragem, Duration totalTempo, Produto produtoMaisVendido) {
+    public Relatorio(Long totalEntregas, Double totalQuilometragem, Duration totalTempo) {
         this.totalEntregas = totalEntregas;
         this.totalQuilometragem = totalQuilometragem;
         this.totalTempo = totalTempo;
-        this.produtoMaisVendido = produtoMaisVendido;
     }
 }

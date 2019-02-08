@@ -20,6 +20,7 @@ public class RelatorioService {
 		Long totalEntregaEfetivada = getTotalEntregaEfetivada(id, dataInicial, dataFinal);
 
 
+
 		Relatorio relatorio = new Relatorio();
 		relatorio.setTotalEntregas(totalEntregaEfetivada);
 		relatorio.setTotalQuilometragem(900.0);

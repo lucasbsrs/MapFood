@@ -1,5 +1,6 @@
 package com.devwarrios.mapfood.controller;
 
+import com.devwarrios.mapfood.model.Estabelecimento;
 import com.devwarrios.mapfood.model.Relatorio;
 import com.devwarrios.mapfood.service.EstabelecimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,14 @@ public class EstabelecimentoController {
     private EstabelecimentoService estabelecimentoService;
 
     @GetMapping("estabelecimentos/{id}/relatorio")
-    public ResponseEntity<Relatorio> geraRelatorio(@PathVariable("id") String id,
+    public ResponseEntity<?> geraRelatorio(@PathVariable("id") String id,
             @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicial,
             @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFinal) {
 
-        Relatorio relatorio = estabelecimentoService.geraRelatorio(id, dataInicial, dataFinal);
+            Estabelecimento estabelecimento = estabelecimentoService.buscaEstabelecimentoPorId(id);
+            Relatorio relatorio = estabelecimentoService.geraRelatorio(id, dataInicial, dataFinal);
 
-        return ResponseEntity.ok(relatorio);
+            return ResponseEntity.ok(relatorio);
+
     }
 }

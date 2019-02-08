@@ -10,6 +10,4 @@ public interface PedidoRepository extends MongoRepository<Pedido, String> {
 
 	Long countByEstabelecimentoIdAndDataBetweenAndStatus(String estabelecimentoId, LocalDate dataInicial, LocalDate dataFinal, PedidoStatus status);
 
-
-
 }

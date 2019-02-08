@@ -1,10 +1,11 @@
 package com.devwarrios.mapfood.repository;
 
-import com.devwarrios.mapfood.model.Cliente;
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface ClienteRepository extends MongoRepository<Cliente, Long> {
+import com.devwarrios.mapfood.model.Cliente;
 
+public interface ClienteRepository extends MongoRepository<Cliente, String> {
+	public List<Cliente> findByClienteId(String clienteId);
 }

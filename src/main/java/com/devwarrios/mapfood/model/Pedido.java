@@ -1,34 +1,46 @@
 package com.devwarrios.mapfood.model;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-@Document(collection = "pedido")
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Document(collection = "pedidos")
+@Getter
+@Setter
 public class Pedido {
 
 	@Id
-	private ObjectId id;
-
-	@NotNull
+	private String id;
+	
+	@Field("pedido_id")
+	private String pedidoId;
+	
+	@Field("cliente")
 	private Cliente cliente;
-
-	@NotNull
+	
+	@Field("estabelecimento")
 	private Estabelecimento estabelecimento;
-
+	
+	@Field("itens")
 	private List<ItemPedido> itens;
-
+	
+	@Field("data")
 	private LocalDate data;
-
+	
+	@Field("status")
 	private PedidoStatus status;
 
-	public Pedido() {}
+	public Pedido() {
+	}
 
-	public Pedido(Cliente cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate data, PedidoStatus status) {
+	public Pedido(Cliente cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate data,
+			PedidoStatus status) {
 		this.cliente = cliente;
 		this.estabelecimento = estabelecimento;
 		this.itens = itens;

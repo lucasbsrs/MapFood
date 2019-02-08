@@ -1,5 +1,12 @@
 package com.devwarrios.mapfood.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.types.ObjectId;
@@ -13,22 +20,19 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Cliente {
 
 	@Id
-	private ObjectId id;
+	private String id;
+	
+	@Field("cliente_id")
+	private String clienteId;
 
-	//@Field("ID Cliente")
-	//private Long clienteId;
+	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
+	private GeoJsonPoint localizacao;
 
-	@Field("Longitude")
-	private Double longitude;
+	public Cliente() {
+	}
 
-	@Field("Latitude")
-	private Double latitude;
-
-	public Cliente() {}
-
-	public Cliente(ObjectId id, Double longitude, Double latitude) {
-		this.id = id;
-		this.longitude = longitude;
-		this.latitude = latitude;
+	public Cliente(String clienteId, GeoJsonPoint localizacao) {
+		this.clienteId = clienteId;
+		this.localizacao = localizacao;
 	}
 }

@@ -1,5 +1,12 @@
 package com.devwarrios.mapfood.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.types.ObjectId;
@@ -7,28 +14,25 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document(collection = "motoboys")
+@Document(collection = "entregadores")
 @Getter
 @Setter
 public class Entregador {
 
 	@Id
-    private ObjectId id;
+	private String id;
 
-	@Field("ID Motoboy")
-	private Long entregadorId;
+	@Field("entregador_id")
+	private String entregadorId;
 
-	@Field("Longitude")
-	private Double longitude;
+	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
+	private GeoJsonPoint localizacao;
 
-	@Field("Latitude")
-	private Double latitude;
+	public Entregador() {
+	}
 
-	public Entregador() {}
-
-	public Entregador(Long id, Double longitude, Double latitude) {
-		this.entregadorId = id;
-		this.longitude = longitude;
-		this.latitude = latitude;
+	public Entregador(String entregadorId, GeoJsonPoint localizacao) {
+		this.entregadorId = entregadorId;
+		this.localizacao = localizacao;
 	}
 }

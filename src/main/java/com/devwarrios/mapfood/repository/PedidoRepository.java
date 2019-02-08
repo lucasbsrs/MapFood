@@ -1,7 +1,8 @@
 package com.devwarrios.mapfood.repository;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-@Repository
-public class PedidoRepository {
+import com.devwarrios.mapfood.model.Pedido;
+
+public interface PedidoRepository extends MongoRepository<Pedido, String> {
 }

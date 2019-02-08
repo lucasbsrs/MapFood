@@ -1,49 +1,52 @@
 package com.devwarrios.mapfood.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.bson.types.ObjectId;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 @Document(collection = "estabelecimentos")
 @Getter
 @Setter
 public class Estabelecimento {
 
-    @Id
-    private ObjectId id;
+	@Id
+	private String id;
 
-    @Field("restaurant_id")
-	private String estabelecimento_id;
+	@Field("estabelecimento_id")
+	private String estabelecimentoId;
 
-	@Field("restaurant")
-	private String restaurante;
+	@Field("estabelecimento")
+	private String estabelecimento;
 
-	@Field("address_city")
+	@Field("cidade")
 	private String cidade;
 
-	private Double longitude;
-
-	private Double latitude;
-
-	@Field("dish_description")
+	@Field("descricacao")
 	private String descricaoPrato;
 
+	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
+	private GeoJsonPoint localizacao;
+
+	@Field("produtos")
 	private List<Produto> produtos;
 
-	public Estabelecimento() {}
+	public Estabelecimento() {
+	}
 
-	public Estabelecimento(ObjectId id, String restaurante, String cidade,
-                           Double longitude, Double latitude, String descricaoPrato) {
-		this.id = id;
-		this.restaurante = restaurante;
+	public Estabelecimento(String estabelecimentoId, String estabelecimento, String cidade, GeoJsonPoint localizacao,
+			String descricaoPrato) {
+		this.estabelecimentoId = estabelecimentoId;
+		this.estabelecimento = estabelecimento;
 		this.cidade = cidade;
-		this.longitude = longitude;
-		this.latitude = latitude;
+		this.localizacao = localizacao;
 		this.descricaoPrato = descricaoPrato;
 	}
 }

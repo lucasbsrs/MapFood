@@ -2,9 +2,11 @@ language: java
 
 services:
   - mongodb
+  - docker
 
 before_script:
   - mongo mydb_test --eval 'db.createUser({user:"devwarrior",pwd:"mongodb",roles:["readWrite"]});'
+  - docker-compose up
 
 branches:
   only:
@@ -19,6 +21,7 @@ addons:
       secure: 5qhmJz1skfSnHTnp5ia6dQ # encrypted value of your token
 before_install:
   - chmod +x mvnw
+  - chmod +x docker-compose
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   #- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar

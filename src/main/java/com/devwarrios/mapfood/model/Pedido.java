@@ -30,28 +30,36 @@ public class Pedido {
 	@Field("itens")
 	private List<ItemPedido> itens;
 
-	@Field("data")
-	private LocalDate data;
-
 	@Field("status")
 	private PedidoStatus status;
+
+	@Field("entrega")
+	private Entrega entrega;
+
+	@Field("criado_em")
+	private LocalDate criadoEm;
+
+	@Field("atualizado_em")
+	private LocalDate atualizadoEm;
 
 	public Pedido() {
 	}
 
-	public Pedido(String pedidoId, String clienteId, String estabelecimentoId, List<ItemPedido> itens, LocalDate data,
-			PedidoStatus status) {
+	public Pedido(String pedidoId, String clienteId, String estabelecimentoId, List<ItemPedido> itens,
+			LocalDate criadoEm, LocalDate atualizadoEm, PedidoStatus status) {
 		this.pedidoId = pedidoId;
 		this.clienteId = clienteId;
 		this.estabelecimentoId = estabelecimentoId;
 		this.itens = itens;
-		this.data = data;
 		this.status = status;
+		this.criadoEm = criadoEm;
+		this.atualizadoEm = atualizadoEm;
 	}
 
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", pedidoId=" + pedidoId + ", clienteId=" + clienteId + ", estabelecimentoId="
-				+ estabelecimentoId + ", itens=" + itens + ", data=" + data + ", status=" + status + "]";
+				+ estabelecimentoId + ", itens=" + itens + ", status=" + status + ", entrega=" + entrega + ", criadoEm="
+				+ criadoEm + ", atualizadoEm=" + atualizadoEm + "]";
 	}
 }

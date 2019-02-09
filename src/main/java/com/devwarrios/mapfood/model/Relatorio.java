@@ -3,22 +3,20 @@ package com.devwarrios.mapfood.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.Duration;
-
 @Getter
 @Setter
 public class Relatorio {
 
-    private Long totalEntregas;
-    private Double totalQuilometragem;
-    private Duration totalTempo;
+    private Long quantidadeDeEntregas;
+    private Double totalQuilometragemPercorrida;
+    private Double totalTempoDecorrido;
 
     public Relatorio() {
     }
 
-    public Relatorio(Long totalEntregas, Double totalQuilometragem, Duration totalTempo) {
-        this.totalEntregas = totalEntregas;
-        this.totalQuilometragem = totalQuilometragem;
-        this.totalTempo = totalTempo;
+    public Relatorio(Long quantidadeDeEntregas, Double totalQuilometragemPercorrida, Double totalTempoDecorrido) {
+        this.quantidadeDeEntregas = quantidadeDeEntregas;
+        this.totalQuilometragemPercorrida = totalQuilometragemPercorrida;
+        this.totalTempoDecorrido = totalTempoDecorrido;
     }
 }

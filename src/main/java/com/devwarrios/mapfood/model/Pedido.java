@@ -26,6 +26,9 @@ public class Pedido {
 
 	@Field("estabelecimentoId")
 	private String estabelecimentoId;
+	
+	@Field("entregadorId")
+	private String entregadorId;
 
 	@Field("itens")
 	private List<ItemPedido> itens;
@@ -41,6 +44,12 @@ public class Pedido {
 
 	@Field("atualizado_em")
 	private LocalDateTime atualizadoEm;
+	
+	@Field("saiu_para_entrega_em")
+	private LocalDateTime saiuParaEntregaEm;
+	
+	@Field("finalizado_em")
+	private LocalDateTime finalizadoEm;
 
 	public Pedido() {
 	}
@@ -54,13 +63,16 @@ public class Pedido {
 		this.status = status;
 		this.criadoEm = criadoEm;
 		this.atualizadoEm = atualizadoEm;
+		this.saiuParaEntregaEm = null;
+		this.finalizadoEm = null;
 	}
 
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", pedidoId=" + pedidoId + ", clienteId=" + clienteId + ", estabelecimentoId="
 				+ estabelecimentoId + ", itens=" + itens + ", status=" + status + ", entrega=" + entrega + ", criadoEm="
-				+ criadoEm + ", atualizadoEm=" + atualizadoEm + "]";
+				+ criadoEm + ", atualizadoEm=" + atualizadoEm + ", saiuParaEntregaEm=" + saiuParaEntregaEm
+				+ ", finalizadoEm=" + finalizadoEm + "]";
 	}
 
 	public double getValorTotal() {

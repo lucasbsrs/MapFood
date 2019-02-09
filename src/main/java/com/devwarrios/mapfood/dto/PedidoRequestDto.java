@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class PedidoRequestDto implements PedidoDto {
+public class PedidoRequestDto {
 
 	private String clienteId;
 	private String estabelecimentoId;

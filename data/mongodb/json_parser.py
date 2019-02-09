@@ -18,10 +18,13 @@ ENTREGADORES_JSON = "entregadores.json"
 PRODUTOS_JSON = "produtos.json"
 
 
+random.seed(42)
+
+
 def cliente_dict(fields):
     return (
         {
-            "cliente_id": int(fields[0]),
+            "cliente_id": fields[0],
             "localizacao": {
                 "type": "Point",
                 "coordinates": [float(fields[1]), float(fields[2])]

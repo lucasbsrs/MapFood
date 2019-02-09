@@ -23,7 +23,7 @@ public class GerenciadorEstabelecimento {
 	}
 	
 	public Produto buscaProdutoPorId(String id) {
-		return this.buscarStreamProdutos().filter(p -> p.getProdutoId().equals(id)).findFirst().orElse(null);
+		return this.buscarStreamProdutos().filter(p -> p.getProdutoId().equals(id)).findFirst().orElseThrow();
 	}
 
 	public Stream<Produto> buscarProdutosPorId(List<String> itensIds) {

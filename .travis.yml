@@ -16,7 +16,7 @@ addons:
   sonarcloud:
     organization: "lucasbsrs-github"
     token:
-      secure: 5qhmJz1skfSnHTnp5ia6dQ # encrypted value of your token
+      secure: e07dd6bad16dcb4c8a73696efaa06e1680182f36 # encrypted value of your token
 before_install:
   - chmod +x mvnw
 script:

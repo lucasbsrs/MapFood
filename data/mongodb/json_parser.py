@@ -2,6 +2,7 @@
 
 import csv
 import json
+import random
 
 from collections import defaultdict
 
@@ -52,7 +53,8 @@ def entregador_dict(fields):
             "localizacao": {
                 "type": "Point",
                 "coordinates": [float(fields[1]), float(fields[2])]
-            }
+            },
+            "capacidade_disponivel": random.randint(3, 5)
         }
     )
 

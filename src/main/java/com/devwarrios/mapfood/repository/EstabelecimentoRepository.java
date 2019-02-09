@@ -13,7 +13,7 @@ import java.util.List;
 public interface EstabelecimentoRepository extends MongoRepository<Estabelecimento, String> {
 	public List<Estabelecimento> findByEstabelecimentoId(String estabelecimentoId);
 
+    //db.clientes.find({ localizacao: { $nearSphere: { $geometry: { type: "Point", coordinates: [ -51.136677,-30.078246 ] }, $maxDistance: 5 * 1500 } } })
     List<Estabelecimento> findAllByLocalizacaoNear(GeoJsonPoint point, Distance distance);
 
-    //db.clientes.find({ localizacao: { $nearSphere: { $geometry: { type: "Point", coordinates: [ -51.136677,-30.078246 ] }, $maxDistance: 5 * 1500 } } })
 }

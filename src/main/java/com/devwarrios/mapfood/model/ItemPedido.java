@@ -1,6 +1,7 @@
 package com.devwarrios.mapfood.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,8 +12,14 @@ public class ItemPedido {
 
 	@Id
 	private String id;
+
+	@Field("produto")
 	private Produto produto;
+
+	@Field("observacao")
 	private String observacao;
+
+	@Field("quantidade")
 	private int quantidade;
 
 	public ItemPedido() {
@@ -22,5 +29,11 @@ public class ItemPedido {
 		this.produto = produto;
 		this.quantidade = quantidade;
 		this.observacao = observacao;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemPedido [id=" + id + ", produto=" + produto + ", observacao=" + observacao + ", quantidade="
+				+ quantidade + "]";
 	}
 }

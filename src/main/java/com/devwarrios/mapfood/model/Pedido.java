@@ -39,12 +39,19 @@ public class Pedido {
 	public Pedido() {
 	}
 
-	public Pedido(String clienteId, String estabelecimentoId, List<ItemPedido> itens, LocalDate data,
+	public Pedido(String pedidoId, String clienteId, String estabelecimentoId, List<ItemPedido> itens, LocalDate data,
 			PedidoStatus status) {
+		this.pedidoId = pedidoId;
 		this.clienteId = clienteId;
 		this.estabelecimentoId = estabelecimentoId;
 		this.itens = itens;
 		this.data = data;
 		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", pedidoId=" + pedidoId + ", clienteId=" + clienteId + ", estabelecimentoId="
+				+ estabelecimentoId + ", itens=" + itens + ", data=" + data + ", status=" + status + "]";
 	}
 }

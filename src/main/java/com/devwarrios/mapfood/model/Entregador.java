@@ -21,6 +21,7 @@ public class Entregador {
 	@Field("entregador_id")
 	private String entregadorId;
 
+	@Field("localizacao")
 	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private GeoJsonPoint localizacao;
 

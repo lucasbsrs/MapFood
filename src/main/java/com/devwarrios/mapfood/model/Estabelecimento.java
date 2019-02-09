@@ -29,9 +29,10 @@ public class Estabelecimento {
 	@Field("cidade")
 	private String cidade;
 
-	@Field("descricacao")
+	@Field("descricao")
 	private String descricaoPrato;
 
+	@Field("localizacao")
 	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private GeoJsonPoint localizacao;
 

@@ -21,6 +21,7 @@ public class Cliente {
 	@Field("cliente_id")
 	private String clienteId;
 
+	@Field("localizacao")
 	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private GeoJsonPoint localizacao;
 

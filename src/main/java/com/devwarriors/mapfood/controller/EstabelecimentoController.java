@@ -21,7 +21,7 @@ public class EstabelecimentoController {
     private EstabelecimentoService estabelecimentoService;
 
     @GetMapping("estabelecimentos/{id}/relatorio")
-    public ResponseEntity<?> geraRelatorio(@PathVariable("id") String id,
+    public ResponseEntity<Relatorio> geraRelatorio(@PathVariable("id") String id,
             @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicial,
             @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFinal) {
 

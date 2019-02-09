@@ -1,6 +1,5 @@
 package com.devwarrios.mapfood.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,11 +18,14 @@ public class Entrega {
 	public Entrega() {
 	}
 
-    public Double getDuracaoEmHoras() {
-
+	public Double getDuracaoEmHoras() {
+    	double duracaoEmHoras = 0.0;
+    	
 	    if (horaInicial == null || horaFinal == null)
-	        return new Double(0);
+	        return duracaoEmHoras;
 
-	    return new Double(Duration.between(horaInicial, horaFinal).getSeconds() / 3600);
+	    duracaoEmHoras = (Duration.between(horaInicial, horaFinal).getSeconds()) / 3600;
+	    
+	    return duracaoEmHoras;
     }
 }

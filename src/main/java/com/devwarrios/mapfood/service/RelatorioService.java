@@ -27,7 +27,11 @@ public class RelatorioService {
 	}
 
     private Double buscaTotalDuracaoEntrega(String id, LocalDate dataInicial, LocalDate dataFinal) {
-	    return 0.0;
+        List<Pedido> pedidos = pedidoRepository.findAllByEstabelecimentoIdAndDataBetween(id, dataInicial, dataFinal);
+
+        return pedidos.stream()
+                .mapToDouble(p -> p.getEntrega().getDuracaoEmHoras())
+                .sum();
     }
 
     private Double buscaTotalQuilometragemPercorrida(String id, LocalDate dataInicial, LocalDate dataFinal) {

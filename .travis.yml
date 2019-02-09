@@ -22,4 +22,4 @@ script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 install:
   - mvn -N io.takari:maven:wrapper
-  - ./mvn install -DskipTests=true
+  - ./mvnw install -DskipTests=true

@@ -25,11 +25,15 @@ public class Entregador {
 	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private GeoJsonPoint localizacao;
 
+	@Field("capacidade_disponivel")
+	private Integer capacidadeDisponivel;
+
 	public Entregador() {
 	}
 
-	public Entregador(String entregadorId, GeoJsonPoint localizacao) {
+	public Entregador(String entregadorId, GeoJsonPoint localizacao, int capacidadeDisponivel) {
 		this.entregadorId = entregadorId;
 		this.localizacao = localizacao;
+		this.capacidadeDisponivel = capacidadeDisponivel;
 	}
 }

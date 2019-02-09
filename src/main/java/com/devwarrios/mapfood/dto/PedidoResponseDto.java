@@ -1,6 +1,6 @@
 package com.devwarrios.mapfood.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,5 +18,5 @@ public class PedidoResponseDto {
 	private double distancia;
 	private double eta;
 	private double valorTotal;
-	private LocalDate timestamp;
+	private LocalDateTime atualizadoEm;
 }

@@ -1,6 +1,6 @@
 package com.devwarrios.mapfood.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -37,16 +37,16 @@ public class Pedido {
 	private Entrega entrega;
 
 	@Field("criado_em")
-	private LocalDate criadoEm;
+	private LocalDateTime criadoEm;
 
 	@Field("atualizado_em")
-	private LocalDate atualizadoEm;
+	private LocalDateTime atualizadoEm;
 
 	public Pedido() {
 	}
 
 	public Pedido(String pedidoId, String clienteId, String estabelecimentoId, List<ItemPedido> itens,
-			LocalDate criadoEm, LocalDate atualizadoEm, PedidoStatus status) {
+			LocalDateTime criadoEm, LocalDateTime atualizadoEm, PedidoStatus status) {
 		this.pedidoId = pedidoId;
 		this.clienteId = clienteId;
 		this.estabelecimentoId = estabelecimentoId;
@@ -61,5 +61,11 @@ public class Pedido {
 		return "Pedido [id=" + id + ", pedidoId=" + pedidoId + ", clienteId=" + clienteId + ", estabelecimentoId="
 				+ estabelecimentoId + ", itens=" + itens + ", status=" + status + ", entrega=" + entrega + ", criadoEm="
 				+ criadoEm + ", atualizadoEm=" + atualizadoEm + "]";
+	}
+
+	public double getValorTotal() {
+		return this.itens.stream()
+				.map(item -> item.getQuantidade() * item.getProduto().getPrecoUnitario())
+				.reduce(0.0, (acc, valores) -> acc + valores);
 	}
 }

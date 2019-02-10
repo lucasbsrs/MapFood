@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class PedidoRecebidoResponseDto extends PedidoResponseDto {
 
-	public PedidoRecebidoResponseDto(String pedidoId, double valorTotal, LocalDateTime atualizadoEm) {
-		super(pedidoId, valorTotal, atualizadoEm);
+	public PedidoRecebidoResponseDto(String pedidoId, String pedidoStatus, double valorTotal, LocalDateTime atualizadoEm) {
+		super(pedidoId, pedidoStatus, valorTotal, atualizadoEm);
 	}
 }

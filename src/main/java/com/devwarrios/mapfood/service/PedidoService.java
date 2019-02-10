@@ -1,6 +1,5 @@
 package com.devwarrios.mapfood.service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,7 +14,7 @@ import com.devwarrios.mapfood.dto.PedidoRecebidoResponseDto;
 import com.devwarrios.mapfood.dto.PedidoRequestDto;
 import com.devwarrios.mapfood.dto.PedidoResponseDto;
 import com.devwarrios.mapfood.dto.PedidoUpdateRequestDto;
-import com.devwarrios.mapfood.dto.factory.PedidoFactory;
+import com.devwarrios.mapfood.dto.factory.PedidoDtoFactory;
 import com.devwarrios.mapfood.model.Entrega;
 import com.devwarrios.mapfood.model.Entregador;
 import com.devwarrios.mapfood.model.Estabelecimento;
@@ -24,12 +23,13 @@ import com.devwarrios.mapfood.model.Pedido;
 import com.devwarrios.mapfood.model.PedidoStatus;
 import com.devwarrios.mapfood.model.Produto;
 import com.devwarrios.mapfood.model.factory.EntregaFactory;
+import com.devwarrios.mapfood.model.factory.PedidoFactory;
 import com.devwarrios.mapfood.repository.ClienteRepository;
-import com.devwarrios.mapfood.repository.EntregadorRepository;
 import com.devwarrios.mapfood.repository.EstabelecimentoRepository;
 import com.devwarrios.mapfood.repository.PedidoRepository;
 import com.devwarrios.mapfood.utils.GerenciadorEstabelecimento;
 import com.devwarrios.mapfood.utils.GerenciadorPedido;
+import com.devwarrios.mapfood.utils.GerenciadorTempo;
 
 @Service
 public class PedidoService {
@@ -43,8 +43,10 @@ public class PedidoService {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
+	/*
 	@Autowired
 	private EntregadorRepository entregadorRepository;
+	*/
 
 	@Autowired
 	private EntregadorService entregadorService;
@@ -93,7 +95,8 @@ public class PedidoService {
 
 		pedidoRepository.insert(pedido);
 
-		return new PedidoRecebidoResponseDto(pedido.getPedidoId(), valorTotal, pedido.getAtualizadoEm());
+		return new PedidoRecebidoResponseDto(pedido.getPedidoId(), pedido.getStatus().toString(), valorTotal,
+				pedido.getAtualizadoEm());
 	}
 
 	public PedidoAtualizadoResponseDto atualizaPedido(PedidoUpdateRequestDto pedidoUpdateDto)
@@ -160,7 +163,7 @@ public class PedidoService {
 			break;
 		case ENTREGUE:
 			pedido.getEntrega().setEta(0.0);
-			pedido.setFinalizadoEm(this.agora());
+			pedido.setFinalizadoEm(GerenciadorTempo.agora());
 
 			break;
 		default:
@@ -168,7 +171,7 @@ public class PedidoService {
 		}
 
 		pedido.setStatus(status);
-		pedido.setAtualizadoEm(this.agora());
+		pedido.setAtualizadoEm(GerenciadorTempo.agora());
 
 		pedidoRepository.save(pedido);
 
@@ -176,7 +179,13 @@ public class PedidoService {
 				pedido.getAtualizadoEm());
 	}
 
-	private LocalDateTime agora() {
-		return LocalDateTime.now();
+	public PedidoResponseDto buscaPedido(String pedidoId) throws ErroResponseException {
+		if (!pedidoRepository.existsByPedidoId(pedidoId)) {
+			throw new PedidoInexistenteException(pedidoId);
+		}
+		
+		Pedido pedido = pedidoRepository.findByPedidoId(pedidoId);
+		
+		return PedidoDtoFactory.criaPedidoStatusResponseDto(pedido);
 	}
 }

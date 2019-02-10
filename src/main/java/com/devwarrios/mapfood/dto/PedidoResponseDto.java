@@ -13,6 +13,7 @@ public class PedidoResponseDto {
 
 	protected final String STATUS = "ok";
 	protected String pedidoId;
+	protected String pedidoStatus;
 	protected double valorTotal;
 	protected LocalDateTime atualizadoEm;
 }

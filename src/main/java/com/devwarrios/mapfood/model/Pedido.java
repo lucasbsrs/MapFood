@@ -2,6 +2,7 @@ package com.devwarrios.mapfood.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -70,5 +71,9 @@ public class Pedido {
 	public double getValorTotal() {
 		return this.itens.stream().map(item -> item.getQuantidade() * item.getProduto().getPrecoUnitario()).reduce(0.0,
 				(acc, valores) -> acc + valores);
+	}
+	
+	public Optional<Entrega> getEntregaOptional() {
+		return Optional.ofNullable(this.entrega);
 	}
 }

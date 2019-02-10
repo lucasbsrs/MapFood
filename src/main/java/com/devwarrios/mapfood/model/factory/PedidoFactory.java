@@ -1,4 +1,4 @@
-package com.devwarrios.mapfood.dto.factory;
+package com.devwarrios.mapfood.model.factory;
 
 import java.time.LocalDateTime;
 import java.util.List;

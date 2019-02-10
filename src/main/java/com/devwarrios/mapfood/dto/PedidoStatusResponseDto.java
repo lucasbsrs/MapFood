@@ -13,9 +13,9 @@ public class PedidoStatusResponseDto extends PedidoResponseDto {
 	protected double distancia;
 	protected double eta;
 
-	public PedidoStatusResponseDto(String pedidoId, double valorTotal, LocalDateTime atualizadoEm, String entregadorId,
+	public PedidoStatusResponseDto(String pedidoId, String pedidoStatus, double valorTotal, LocalDateTime atualizadoEm, String entregadorId,
 			double distancia, double eta) {
-		super(pedidoId, valorTotal, atualizadoEm);
+		super(pedidoId, pedidoStatus, valorTotal, atualizadoEm);
 
 		this.entregadorId = entregadorId;
 		this.distancia = distancia;

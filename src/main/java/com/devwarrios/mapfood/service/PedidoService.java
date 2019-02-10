@@ -1,5 +1,6 @@
 package com.devwarrios.mapfood.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -75,7 +76,6 @@ public class PedidoService {
 
 		itens = new ArrayList<>();
 		Produto produto;
-		// int quantidadeTotal = 0;
 
 		for (ItemPedidoDto ipd : itensDto) {
 			try {
@@ -85,17 +85,11 @@ public class PedidoService {
 			}
 
 			itens.add(new ItemPedido(produto, ipd.getQuantidade(), ipd.getObservacao()));
-
-			// quantidadeTotal += ipd.getQuantidade();
 		}
 
 		Pedido pedido = PedidoFactory.criaNovoPedido(clienteId, estabelecimentoId, itens);
 
 		double valorTotal = pedido.getValorTotal();
-
-		// Entregador entregador =
-		// entregadorService.buscaEntregadorDisponivelMaisProximo(estabelecimento.getLocalizacao(),
-		// quantidadeTotal);
 
 		pedidoRepository.insert(pedido);
 
@@ -126,8 +120,6 @@ public class PedidoService {
 		if (!gerenciadorPedido.transicaoValida(pedido.getStatus(), status)) {
 			throw new TransicaoStatusPedidoInvalidaException();
 		}
-
-		pedido.setStatus(status);
 
 		switch (status) {
 		case EM_PREPARO:
@@ -165,14 +157,26 @@ public class PedidoService {
 
 			pedido.setEntrega(entrega);
 
-			pedidoRepository.save(pedido);
+			break;
+		case ENTREGUE:
+			pedido.getEntrega().setEta(0.0);
+			pedido.setFinalizadoEm(this.agora());
 
 			break;
 		default:
 			throw new StatusPedidoInvalidoException(novoStatus);
 		}
 
+		pedido.setStatus(status);
+		pedido.setAtualizadoEm(this.agora());
+
+		pedidoRepository.save(pedido);
+
 		return new PedidoAtualizadoResponseDto(pedido.getPedidoId(), pedido.getStatus().toString(),
 				pedido.getAtualizadoEm());
+	}
+
+	private LocalDateTime agora() {
+		return LocalDateTime.now();
 	}
 }

@@ -16,4 +16,5 @@ public class PedidoResponseDto {
 	private double distancia;
 	private double eta;
 	private LocalDate timestamp;
+
 }

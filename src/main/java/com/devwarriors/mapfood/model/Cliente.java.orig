@@ -9,11 +9,6 @@ import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import com.mongodb.client.model.geojson.Point;
-
-import lombok.Getter;
-import lombok.Setter;
-
 @Document(collection = "clientes")
 @Getter
 @Setter
@@ -23,19 +18,24 @@ public class Cliente {
 	private String id;
 	
 	@Field("cliente_id")
-	private String clienteId;
+	private Integer clienteId;
 
 	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private GeoJsonPoint localizacao;
 
-	public Cliente() {
-	}
+	public Cliente() {}
 
+<<<<<<< HEAD:src/main/java/com/devwarriors/mapfood/model/Cliente.java
+	public Cliente(String id, Integer clienteId, GeoJsonPoint localizacao) {
+		this.id = id;
+=======
 	public Cliente(String clienteId, GeoJsonPoint localizacao) {
+>>>>>>> origin:src/main/java/com/devwarriors/mapfood/model/Cliente.java
 		this.clienteId = clienteId;
 		this.localizacao = localizacao;
 	}
+
 	public GeoJsonPoint getLocalizacao() {
 		return localizacao;
-	}        
+	}
 }

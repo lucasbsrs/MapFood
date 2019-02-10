@@ -1,4 +1,11 @@
 package com.devwarriors.mapfood.model;
+<<<<<<< HEAD:src/main/java/com/devwarriors/mapfood/model/Pedido.java
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+=======
+>>>>>>> origin:src/main/java/com/devwarriors/mapfood/model/Pedido.java
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,10 +42,14 @@ public class Pedido {
 	@Field("status")
 	private PedidoStatus status;
 
+<<<<<<< HEAD:src/main/java/com/devwarriors/mapfood/model/Pedido.java
+	public Pedido(Optional<Cliente> cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate now, PedidoStatus emPreparo) {
+=======
 	@Field("entrega")
 	private Entrega entrega;
 
 	public Pedido() {
+>>>>>>> origin:src/main/java/com/devwarriors/mapfood/model/Pedido.java
 	}
 
 	public Pedido(Cliente cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate data,

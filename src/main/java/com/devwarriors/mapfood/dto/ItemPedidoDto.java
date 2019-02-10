@@ -12,4 +12,7 @@ public class ItemPedidoDto {
 	private String produtoId;
 	private Integer quantidade;
 	private String observacao;
+
+	
+	
 }

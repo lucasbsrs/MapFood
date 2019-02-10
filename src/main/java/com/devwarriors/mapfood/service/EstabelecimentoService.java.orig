@@ -1,5 +1,6 @@
 package com.devwarriors.mapfood.service;
 
+<<<<<<< HEAD
 import com.devwarriors.mapfood.model.Cliente;
 import com.devwarriors.mapfood.model.Estabelecimento;
 import com.devwarriors.mapfood.repository.ClienteRepository;
@@ -10,6 +11,12 @@ import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.devwarriors.mapfood.exception.EstabelecimentoException;
 import com.devwarriors.mapfood.model.Estabelecimento;
 import com.devwarriors.mapfood.model.Relatorio;
@@ -17,37 +24,19 @@ import com.devwarriors.mapfood.repository.EstabelecimentoRepository;
 
 import java.time.LocalDate;
 import java.util.Optional;
-import java.util.Collections;
-import java.util.List;
+>>>>>>> origin
 
 @Service
 public class EstabelecimentoService {
 
-	@Autowired
-	private EstabelecimentoRepository estabelecimentoRepository;
-
-	@Autowired
-	private RelatorioService relatorioService;
-
-	@Autowired
+<<<<<<< HEAD
+    @Autowired
+    private EstabelecimentoRepository estabelecimentoRepository;
+    @Autowired
     private ClienteRepository clienteRepository;
 
-	public Estabelecimento buscaEstabelecimentoPorId(String id) throws EstabelecimentoException {
 
-		Optional<Estabelecimento> estabelecimento = estabelecimentoRepository.findById(id);
-
-		if (!estabelecimento.isPresent())
-			throw new EstabelecimentoException("Estabelecimento não encontrado.");
-
-		return estabelecimento.get();
-
-	}
-
-	public Relatorio geraRelatorio(String id, LocalDate dataInicial, LocalDate dataFinal) {
-		return relatorioService.geraRelatorio(id, dataInicial, dataFinal);
-	}
-
-	public List<Estabelecimento> getEstabelecimentos() {
+    public List<Estabelecimento> getEstabelecimentos() {
         return estabelecimentoRepository.findAll();
     }
 
@@ -68,5 +57,28 @@ public class EstabelecimentoService {
 
         return Collections.emptyList();
     }
+=======
+	@Autowired
+	private EstabelecimentoRepository estabelecimentoRepository;
 
+	@Autowired
+	private RelatorioService relatorioService;
+
+
+	public Estabelecimento buscaEstabelecimentoPorId(String id) throws EstabelecimentoException {
+
+		Optional<Estabelecimento> estabelecimento = estabelecimentoRepository.findById(id);
+
+		if (!estabelecimento.isPresent())
+			throw new EstabelecimentoException("Estabelecimento não encontrado.");
+
+		return estabelecimento.get();
+
+	}
+
+	public Relatorio geraRelatorio(String id, LocalDate dataInicial, LocalDate dataFinal) {
+		return relatorioService.geraRelatorio(id, dataInicial, dataFinal);
+	}
+
+>>>>>>> origin
 }

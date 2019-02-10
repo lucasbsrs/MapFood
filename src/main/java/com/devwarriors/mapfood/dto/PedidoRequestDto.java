@@ -14,4 +14,5 @@ public class PedidoRequestDto implements PedidoDto {
 	private Integer clienteId;
 	private String estabelecimentoId;
 	private List<ItemPedidoDto> itens;
+
 }

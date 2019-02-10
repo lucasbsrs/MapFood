@@ -2,10 +2,14 @@ package com.devwarriors.mapfood.repository;
 
 import java.util.List;
 
+import com.devwarriors.mapfood.model.Produto;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+<<<<<<< HEAD:src/main/java/com/devwarriors/mapfood/repository/ProdutoRepository.java
+=======
 import com.devwarriors.mapfood.model.Produto;
 
+>>>>>>> origin:src/main/java/com/devwarriors/mapfood/repository/ProdutoRepository.java
 public interface ProdutoRepository extends MongoRepository<Produto, String> {
 	public List<Produto> findByProdutoId(String produtoId);
 }

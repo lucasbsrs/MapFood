@@ -1,0 +1,27 @@
+language: java
+
+services:
+  - mongodb
+
+before_script:
+  - mongo mydb_test --eval 'db.createUser({user:"devwarrior",pwd:"mongodb",roles:["readWrite"]});'
+
+branches:
+  only:
+  - desenvolvimento
+
+sudo: false
+dist: trusty
+addons:
+  sonarcloud:
+    organization: "lucasbsrs-github"
+    token:
+      secure: e07dd6bad16dcb4c8a73696efaa06e1680182f36 # encrypted value of your token
+before_install:
+  - chmod +x mvnw
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+#install:
+ # - mvn -N io.takari:maven:wrapper
+ # - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V

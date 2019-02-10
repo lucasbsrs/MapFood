@@ -9,6 +9,11 @@ import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.mongodb.client.model.geojson.Point;
+
+import lombok.Getter;
+import lombok.Setter;
+
 @Document(collection = "clientes")
 @Getter
 @Setter
@@ -30,4 +35,9 @@ public class Cliente {
 		this.clienteId = clienteId;
 		this.localizacao = localizacao;
 	}
+	public GeoJsonPoint getLocalizacao() {
+		return localizacao;
+	}
+
+
 }

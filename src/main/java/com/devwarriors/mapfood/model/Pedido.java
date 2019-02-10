@@ -49,4 +49,36 @@ public class Pedido {
 		this.data = data;
 		this.status = status;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getPedidoId() {
+		return pedidoId;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public Estabelecimento getEstabelecimento() {
+		return estabelecimento;
+	}
+
+	public List<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public PedidoStatus getStatus() {
+		return status;
+	}
+
+	public Entrega getEntrega() {
+		return entrega;
+	}
 }

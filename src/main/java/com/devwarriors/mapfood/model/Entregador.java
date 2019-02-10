@@ -28,8 +28,7 @@ public class Entregador {
 	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private GeoJsonPoint localizacao;
 
-	public Entregador() {
-	}
+	public Entregador() {}
 
 	public Entregador(String entregadorId, GeoJsonPoint localizacao) {
 		this.entregadorId = entregadorId;

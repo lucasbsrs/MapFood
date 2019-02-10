@@ -13,6 +13,7 @@ import com.devwarriors.mapfood.model.Relatorio;
 import com.devwarriors.mapfood.service.EstabelecimentoService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 public class EstabelecimentoController {
@@ -30,5 +31,16 @@ public class EstabelecimentoController {
 
             return ResponseEntity.ok(relatorio);
 
+    }
+@GetMapping("/estabelecimentos")
+    public ResponseEntity<List<Estabelecimento>>getEstabelecimentos(){
+        return ResponseEntity.ok((estabelecimentoService.getEstabelecimentos()));
+    }
+
+    //Postman: localhost:8080/estabelecimentos/proximidade/por-cliente/1?raio=5000
+    @GetMapping("/estabelecimentos/proximidade/por-cliente/{clienteId}")
+    public ResponseEntity<List<Estabelecimento>>getEstabelecimentosPorLocalizacao
+            (@PathVariable String clienteId, @RequestParam Double raio){
+        return ResponseEntity.ok((estabelecimentoService.getEstabelecimentosPorLocalizacao(clienteId, raio)));
     }
 }

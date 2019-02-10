@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devwarrios.mapfood.dto.PedidoAtualizadoResponseDto;
-import com.devwarrios.mapfood.dto.PedidoRequestDto;
-import com.devwarrios.mapfood.dto.PedidoResponseDto;
-import com.devwarrios.mapfood.dto.PedidoUpdateRequestDto;
-import com.devwarrios.mapfood.dto.RequisicaoInvalidaResponseDto;
+import com.devwarrios.mapfood.dto.request.PedidoRequestDto;
+import com.devwarrios.mapfood.dto.request.PedidoUpdateRequestDto;
+import com.devwarrios.mapfood.dto.response.PedidoAtualizadoResponseDto;
+import com.devwarrios.mapfood.dto.response.PedidoResponseDto;
+import com.devwarrios.mapfood.dto.response.RequisicaoInvalidaResponseDto;
 import com.devwarrios.mapfood.service.ErroResponseException;
 import com.devwarrios.mapfood.service.PedidoService;
 

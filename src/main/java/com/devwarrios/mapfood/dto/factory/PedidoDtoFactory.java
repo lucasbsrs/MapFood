@@ -2,8 +2,8 @@ package com.devwarrios.mapfood.dto.factory;
 
 import java.util.Optional;
 
-import com.devwarrios.mapfood.dto.PedidoResponseDto;
-import com.devwarrios.mapfood.dto.PedidoStatusResponseDto;
+import com.devwarrios.mapfood.dto.response.PedidoResponseDto;
+import com.devwarrios.mapfood.dto.response.PedidoStatusResponseDto;
 import com.devwarrios.mapfood.model.Entrega;
 import com.devwarrios.mapfood.model.Pedido;
 import com.devwarrios.mapfood.utils.GerenciadorTempo;

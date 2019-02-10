@@ -1,4 +1,4 @@
-package com.devwarrios.mapfood.dto;
+package com.devwarrios.mapfood.dto.request;
 
 import java.util.List;
 

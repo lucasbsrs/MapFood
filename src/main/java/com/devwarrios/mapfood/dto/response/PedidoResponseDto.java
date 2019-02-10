@@ -1,4 +1,4 @@
-package com.devwarrios.mapfood.dto;
+package com.devwarrios.mapfood.dto.response;
 
 import java.time.LocalDateTime;
 

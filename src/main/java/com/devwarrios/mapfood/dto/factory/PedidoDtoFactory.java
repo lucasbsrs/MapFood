@@ -28,4 +28,12 @@ public class PedidoDtoFactory {
 			return new PedidoResponseDto(pedidoId, pedidoStatus, valorTotal, GerenciadorTempo.agora());
 		}
 	}
+
+	public static PedidoResponseDto criaPedidoCanceladoResponseDto(Pedido pedido) {
+		String pedidoId = pedido.getPedidoId();
+		String pedidoStatus = pedido.getStatus().toString();
+		Double valorTotal = pedido.getValorTotal();
+		
+		return new PedidoResponseDto(pedidoId, pedidoStatus, valorTotal, GerenciadorTempo.agora());
+	}
 }

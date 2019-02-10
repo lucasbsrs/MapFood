@@ -1,5 +1,6 @@
 package com.devwarrios.mapfood.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -186,5 +187,22 @@ public class PedidoService {
 		Pedido pedido = pedidoRepository.findByPedidoId(pedidoId);
 
 		return PedidoDtoFactory.criaPedidoStatusResponseDto(pedido);
+	}
+
+	public PedidoResponseDto cancelaPedido(String pedidoId) throws ErroResponseException {
+		if (!pedidoRepository.existsByPedidoId(pedidoId)) {
+			throw new PedidoInexistenteException(pedidoId);
+		}
+
+		Pedido pedido = pedidoRepository.findByPedidoId(pedidoId);
+		
+		LocalDateTime agora = GerenciadorTempo.agora();
+		
+		pedido.setStatus(PedidoStatus.CANCELADO);
+		pedido.setValorTotal(0.0);
+		pedido.setAtualizadoEm(agora);
+		pedido.setFinalizadoEm(agora);
+		
+		return PedidoDtoFactory.criaPedidoCanceladoResponseDto(pedido);
 	}
 }

@@ -37,6 +37,9 @@ public class Pedido {
 	@Field("entrega")
 	private Entrega entrega;
 
+	@Field("valorTotal")
+	private Double valorTotal;
+
 	@Field("criado_em")
 	private LocalDateTime criadoEm;
 
@@ -59,6 +62,8 @@ public class Pedido {
 		this.criadoEm = criadoEm;
 		this.atualizadoEm = atualizadoEm;
 		this.finalizadoEm = null;
+		this.valorTotal = this.itens.stream().map(item -> item.getQuantidade() * item.getProduto().getPrecoUnitario())
+				.reduce(0.0, (acc, valores) -> acc + valores);
 	}
 
 	@Override
@@ -66,11 +71,6 @@ public class Pedido {
 		return "Pedido [id=" + id + ", pedidoId=" + pedidoId + ", clienteId=" + clienteId + ", estabelecimentoId="
 				+ estabelecimentoId + ", itens=" + itens + ", status=" + status + ", entrega=" + entrega + ", criadoEm="
 				+ criadoEm + ", atualizadoEm=" + atualizadoEm + ", finalizadoEm=" + finalizadoEm + "]";
-	}
-
-	public double getValorTotal() {
-		return this.itens.stream().map(item -> item.getQuantidade() * item.getProduto().getPrecoUnitario()).reduce(0.0,
-				(acc, valores) -> acc + valores);
 	}
 
 	public Optional<Entrega> getEntregaOptional() {

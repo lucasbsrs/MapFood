@@ -19,21 +19,21 @@ public class EntregadorService {
 	{
 		this.distanciaMaxima = new Distance(5000);
 	}
-	
+
 	public void decrementaCapacidadeDisponivel(String entregadorId, int decremento)
 			throws CapacidadeDoEntregadorInvalidaException {
 		Entregador entregador = this.entregadorRepository.findByEntregadorId(entregadorId);
-		
+
 		int capacidadeAtual = entregador.getCapacidadeDisponivel();
 		if (capacidadeAtual < decremento) {
 			throw new CapacidadeDoEntregadorInvalidaException();
 		}
-		
+
 		entregador.setCapacidadeDisponivel(entregador.getCapacidadeDisponivel() - decremento);
-		
+
 		this.entregadorRepository.save(entregador);
 	}
-	
+
 	public Entregador buscaEntregadorDisponivelMaisProximo(GeoJsonPoint p, int capacidadeNecessaria) {
 		return this.buscaEntregadorDisponivelMaisProximoComDistanciaMaxima(p, this.distanciaMaxima,
 				capacidadeNecessaria);
@@ -41,7 +41,8 @@ public class EntregadorService {
 
 	public Entregador buscaEntregadorDisponivelMaisProximoComDistanciaMaxima(GeoJsonPoint p, Distance distanciaMaxima,
 			int capacidadeNecessaria) {
-		return entregadorRepository.findByLocalizacaoNearAndCapacidadeDisponivelGreaterThanEqual(p, distanciaMaxima,
-				capacidadeNecessaria).get(0);
+		return entregadorRepository
+				.findByLocalizacaoNearAndCapacidadeDisponivelGreaterThanEqual(p, distanciaMaxima, capacidadeNecessaria)
+				.get(0);
 	}
 }

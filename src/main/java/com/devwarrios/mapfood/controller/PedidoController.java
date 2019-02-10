@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devwarrios.mapfood.dto.PedidoInvalidoResponseDto;
+import com.devwarrios.mapfood.dto.RequisicaoInvalidaResponseDto;
+import com.devwarrios.mapfood.dto.PedidoAtualizadoResponseDto;
 import com.devwarrios.mapfood.dto.PedidoRequestDto;
 import com.devwarrios.mapfood.dto.PedidoResponseDto;
-import com.devwarrios.mapfood.service.EntidadeInexistenteException;
+import com.devwarrios.mapfood.dto.PedidoUpdateRequestDto;
+import com.devwarrios.mapfood.service.ErroResponseException;
 import com.devwarrios.mapfood.service.PedidoService;
+import com.devwarrios.mapfood.service.StatusPedidoInvalidoException;
+import com.devwarrios.mapfood.service.TransicaoStatusPedidoInvalidaException;
 
 @RestController
 @RequestMapping
@@ -23,29 +27,30 @@ public class PedidoController {
 	@Autowired
 	PedidoService pedidoService;
 
-	@PostMapping("/app/pedido")
+	@PostMapping("/marketplace/pedido")
 	@ResponseBody
 	public ResponseEntity<?> criaPedido(@RequestBody PedidoRequestDto pedidoRequestDto) {
 		try {
 			PedidoResponseDto pedidoResponseDto = pedidoService.criaPedido(pedidoRequestDto);
-			
+
 			return ResponseEntity.ok(pedidoResponseDto);
-		}
-		catch (EntidadeInexistenteException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new PedidoInvalidoResponseDto(e.getMensagem()));
+		} catch (ErroResponseException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new RequisicaoInvalidaResponseDto(e.getMensagem()));
 		}
 	}
-	
-	@PutMapping("/admin/pedido")
+
+	@PutMapping("/management/pedido")
 	@ResponseBody
-	public ResponseEntity<?> atualizaPedido(@RequestBody PedidoUpdateDto pedidoUpdateDto) {
+	public ResponseEntity<?> atualizaPedido(@RequestBody PedidoUpdateRequestDto pedidoUpdateRequestDto) {
 		try {
-			PedidoResponseDto pedidoResponseDto = pedidoService.criaPedido(pedidoRequestDto);
-			
-			return ResponseEntity.ok(pedidoResponseDto);
-		}
-		catch (EntidadeInexistenteException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new PedidoInvalidoResponseDto(e.getMensagem()));
+			PedidoAtualizadoResponseDto pedidoAtualizadoResponseDto;
+			pedidoAtualizadoResponseDto = pedidoService.atualizaPedido(pedidoUpdateRequestDto);
+
+			return ResponseEntity.ok(pedidoAtualizadoResponseDto);
+		} catch (ErroResponseException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new RequisicaoInvalidaResponseDto(e.getMensagem()));
 		}
 	}
 }

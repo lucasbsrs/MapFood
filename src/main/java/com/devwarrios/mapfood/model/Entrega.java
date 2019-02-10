@@ -5,35 +5,40 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+@AllArgsConstructor
 @Getter
 @Setter
 public class Entrega {
 
-	@Field("entregador")
-	private Entregador entregador;
+	@Field("entregador_id")
+	private String entregadorId;
+
+	@Field("distancia_destino")
+	private Double distancia_destino;
 
 	@Field("distancia_percorrida")
 	private Double distancia_percorrida;
 
-	@Field("hora_inicial")
-	private LocalDateTime horaInicial;
-
-	@Field("hora_final")
-	private LocalDateTime horaFinal;
-
-	@Field("atualizado_em")
-	private LocalDateTime atualizadoEm;
+	@Field("eta")
+	private Double eta;
 
 	@Field("criado_em")
 	private LocalDateTime criadoEm;
 
+	@Field("finalizado_em")
+	private LocalDateTime finalizadoEm;
+
+	@Field("atualizado_em")
+	private LocalDateTime atualizadoEm;
+
 	public Double getDuracaoEmHoras() {
-		if (horaInicial == null || horaFinal == null)
+		if (criadoEm == null || finalizadoEm == null)
 			return 0.0;
 
-		return (double) (Duration.between(horaInicial, horaFinal).getSeconds() / 3600);
+		return (double) (Duration.between(criadoEm, finalizadoEm).getSeconds() / 3600);
 	}
 }

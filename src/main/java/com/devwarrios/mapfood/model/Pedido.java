@@ -26,9 +26,6 @@ public class Pedido {
 
 	@Field("estabelecimentoId")
 	private String estabelecimentoId;
-	
-	@Field("entregadorId")
-	private String entregadorId;
 
 	@Field("itens")
 	private List<ItemPedido> itens;
@@ -44,10 +41,7 @@ public class Pedido {
 
 	@Field("atualizado_em")
 	private LocalDateTime atualizadoEm;
-	
-	@Field("saiu_para_entrega_em")
-	private LocalDateTime saiuParaEntregaEm;
-	
+
 	@Field("finalizado_em")
 	private LocalDateTime finalizadoEm;
 
@@ -63,7 +57,6 @@ public class Pedido {
 		this.status = status;
 		this.criadoEm = criadoEm;
 		this.atualizadoEm = atualizadoEm;
-		this.saiuParaEntregaEm = null;
 		this.finalizadoEm = null;
 	}
 
@@ -71,13 +64,11 @@ public class Pedido {
 	public String toString() {
 		return "Pedido [id=" + id + ", pedidoId=" + pedidoId + ", clienteId=" + clienteId + ", estabelecimentoId="
 				+ estabelecimentoId + ", itens=" + itens + ", status=" + status + ", entrega=" + entrega + ", criadoEm="
-				+ criadoEm + ", atualizadoEm=" + atualizadoEm + ", saiuParaEntregaEm=" + saiuParaEntregaEm
-				+ ", finalizadoEm=" + finalizadoEm + "]";
+				+ criadoEm + ", atualizadoEm=" + atualizadoEm + ", finalizadoEm=" + finalizadoEm + "]";
 	}
 
 	public double getValorTotal() {
-		return this.itens.stream()
-				.map(item -> item.getQuantidade() * item.getProduto().getPrecoUnitario())
-				.reduce(0.0, (acc, valores) -> acc + valores);
+		return this.itens.stream().map(item -> item.getQuantidade() * item.getProduto().getPrecoUnitario()).reduce(0.0,
+				(acc, valores) -> acc + valores);
 	}
 }

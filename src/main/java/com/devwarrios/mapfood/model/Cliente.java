@@ -17,7 +17,7 @@ public class Cliente {
 
 	@Id
 	private String id;
-	
+
 	@Field("cliente_id")
 	private String clienteId;
 

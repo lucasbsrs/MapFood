@@ -17,11 +17,11 @@ import lombok.NoArgsConstructor;
 public class GerenciadorEstabelecimento {
 
 	private Estabelecimento estabelecimento;
-	
+
 	public Stream<Produto> buscarStreamProdutos() {
 		return this.estabelecimento.getProdutos().stream();
 	}
-	
+
 	public Produto buscaProdutoPorId(String id) {
 		return this.buscarStreamProdutos().filter(p -> p.getProdutoId().equals(id)).findFirst().orElseThrow();
 	}

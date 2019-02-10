@@ -5,12 +5,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PedidoInvalidoResponseDto {
+public class RequisicaoInvalidaResponseDto {
 
-	protected final String STATUS = "erro"; 
+	protected final String STATUS = "erro";
 	protected String mensagem;
 
-	public PedidoInvalidoResponseDto(String mensagem) {
+	public RequisicaoInvalidaResponseDto(String mensagem) {
 		this.mensagem = mensagem;
 	}
 }

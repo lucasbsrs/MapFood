@@ -2,17 +2,16 @@ package com.devwarrios.mapfood.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Getter
-public class ClienteInexistenteException extends ErroResponseException {
+public class PedidoInexistenteException extends ErroResponseException {
 
 	private static final long serialVersionUID = 1L;
 
-	private String clienteId;
+	private String pedidoId;
 
 	public String getMensagem() {
-		return "Cliente com id '" + this.clienteId + "' inexistente";
+		return "Pedido com id '" + this.pedidoId + "' inexistente";
 	}
 }

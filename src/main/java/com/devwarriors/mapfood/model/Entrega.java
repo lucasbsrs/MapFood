@@ -28,4 +28,20 @@ public class Entrega {
 	    
 	    return duracaoEmHoras;
     }
+
+	public Entregador getEntregador() {
+		return entregador;
+	}
+
+	public Double getDistanciaPercorrida() {
+		return distanciaPercorrida;
+	}
+
+	public LocalDateTime getHoraInicial() {
+		return horaInicial;
+	}
+
+	public LocalDateTime getHoraFinal() {
+		return horaFinal;
+	}
 }

@@ -11,9 +11,7 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.stereotype.Service;
 
 import com.devwarriors.mapfood.exception.EstabelecimentoException;
-import com.devwarriors.mapfood.model.Estabelecimento;
 import com.devwarriors.mapfood.model.Relatorio;
-import com.devwarriors.mapfood.repository.EstabelecimentoRepository;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -51,10 +49,10 @@ public class EstabelecimentoService {
         return estabelecimentoRepository.findAll();
     }
 
-    public List<Estabelecimento> getEstabelecimentosPorLocalizacao(Integer clienteId, Double raio) {
+    public List<Estabelecimento> getEstabelecimentosPorLocalizacao(String clienteId, Double raio) {
 
         try {
-            Cliente cliente = clienteRepository.findByClienteId(clienteId);
+            Cliente cliente = clienteRepository.findByClienteId(Integer.valueOf(clienteId));
             Distance distance = new Distance(raio * 1000);
             GeoJsonPoint point = new GeoJsonPoint(
                     new Point(

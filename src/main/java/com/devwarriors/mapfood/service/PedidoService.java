@@ -42,7 +42,7 @@ public class PedidoService {
 
 		try {
 			System.out.println(clienteId);
-			cliente = clienteRepository.findByClienteId(clienteId).get(0);
+			cliente = clienteRepository.findByClienteId(Integer.valueOf(clienteId));
 		}
 		catch (Exception e) {
 			System.out.println("Cliente");

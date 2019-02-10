@@ -40,7 +40,7 @@ public class EstabelecimentoController {
     //Postman: localhost:8080/estabelecimentos/proximidade/por-cliente/1?raio=5000
     @GetMapping("/estabelecimentos/proximidade/por-cliente/{clienteId}")
     public ResponseEntity<List<Estabelecimento>>getEstabelecimentosPorLocalizacao
-            (@PathVariable Integer clienteId, @RequestParam Double raio){
+            (@PathVariable String clienteId, @RequestParam Double raio){
         return ResponseEntity.ok((estabelecimentoService.getEstabelecimentosPorLocalizacao(clienteId, raio)));
     }
 }

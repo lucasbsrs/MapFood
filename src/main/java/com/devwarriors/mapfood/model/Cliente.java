@@ -37,5 +37,7 @@ public class Cliente {
 	}
 	public GeoJsonPoint getLocalizacao() {
 		return localizacao;
-	}        
+	}
+
+
 }

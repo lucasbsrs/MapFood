@@ -72,7 +72,7 @@ public class Pedido {
 		return this.itens.stream().map(item -> item.getQuantidade() * item.getProduto().getPrecoUnitario()).reduce(0.0,
 				(acc, valores) -> acc + valores);
 	}
-	
+
 	public Optional<Entrega> getEntregaOptional() {
 		return Optional.ofNullable(this.entrega);
 	}

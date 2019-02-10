@@ -44,9 +44,8 @@ public class PedidoService {
 	private PedidoRepository pedidoRepository;
 
 	/*
-	@Autowired
-	private EntregadorRepository entregadorRepository;
-	*/
+	 * @Autowired private EntregadorRepository entregadorRepository;
+	 */
 
 	@Autowired
 	private EntregadorService entregadorService;
@@ -183,9 +182,9 @@ public class PedidoService {
 		if (!pedidoRepository.existsByPedidoId(pedidoId)) {
 			throw new PedidoInexistenteException(pedidoId);
 		}
-		
+
 		Pedido pedido = pedidoRepository.findByPedidoId(pedidoId);
-		
+
 		return PedidoDtoFactory.criaPedidoStatusResponseDto(pedido);
 	}
 }

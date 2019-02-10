@@ -2,7 +2,6 @@ package com.devwarrios.mapfood.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Getter

@@ -14,17 +14,17 @@ public class PedidoDtoFactory {
 		String pedidoId = pedido.getPedidoId();
 		String pedidoStatus = pedido.getStatus().toString();
 		Double valorTotal = pedido.getValorTotal();
-		
+
 		Optional<Entrega> entrega = pedido.getEntregaOptional();
-		
+
 		if (entrega.isPresent()) {
 			String entregadorId = entrega.get().getEntregadorId();
 			Double distancia = entrega.get().getDistancia_destino();
 			Double eta = entrega.get().getEta();
-			
-			return new PedidoStatusResponseDto(pedidoId, pedidoStatus, valorTotal, GerenciadorTempo.agora(), entregadorId, distancia, eta);
-		}
-		else {
+
+			return new PedidoStatusResponseDto(pedidoId, pedidoStatus, valorTotal, GerenciadorTempo.agora(),
+					entregadorId, distancia, eta);
+		} else {
 			return new PedidoResponseDto(pedidoId, pedidoStatus, valorTotal, GerenciadorTempo.agora());
 		}
 	}

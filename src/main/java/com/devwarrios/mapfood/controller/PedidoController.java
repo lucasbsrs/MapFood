@@ -12,16 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devwarrios.mapfood.dto.RequisicaoInvalidaResponseDto;
 import com.devwarrios.mapfood.dto.PedidoAtualizadoResponseDto;
 import com.devwarrios.mapfood.dto.PedidoRequestDto;
 import com.devwarrios.mapfood.dto.PedidoResponseDto;
-import com.devwarrios.mapfood.dto.PedidoStatusResponseDto;
 import com.devwarrios.mapfood.dto.PedidoUpdateRequestDto;
+import com.devwarrios.mapfood.dto.RequisicaoInvalidaResponseDto;
 import com.devwarrios.mapfood.service.ErroResponseException;
 import com.devwarrios.mapfood.service.PedidoService;
-import com.devwarrios.mapfood.service.StatusPedidoInvalidoException;
-import com.devwarrios.mapfood.service.TransicaoStatusPedidoInvalidaException;
 
 @RestController
 @RequestMapping
@@ -42,7 +39,7 @@ public class PedidoController {
 					.body(new RequisicaoInvalidaResponseDto(e.getMensagem()));
 		}
 	}
-	
+
 	@GetMapping("/marketplace/pedido/{id}")
 	@ResponseBody
 	public ResponseEntity<?> criaPedido(@PathVariable("id") String id) {

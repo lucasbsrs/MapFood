@@ -24,7 +24,7 @@ import static org.powermock.api.mockito.PowerMockito.when;
 public class EstabelecimentoControllerTest {
 
     private static final String CLIENTE_ID = "2";
-    private static final String RESPONSE_LIST_ESPERADO = "<200 OK OK,[com.devwarriors.mapfood.model.Estabelecimento#0 bean],[]>";
+    private static final String RESPONSE_LISTA_ESPERADO = "<200 OK OK,[com.devwarriors.mapfood.model.Estabelecimento#0 bean],[]>";
     private static final String RESPONSE_RELATORIO_ESPERADO = "<200 OK OK,com.devwarriors.mapfood.model.Relatorio#0 bean,[]>";
     private static final Double RAIO = 0.3;
     private static final String ESTABELECIMENTO_ID = "5640f4538237d9c4aaf3b751c4d11769b3fc1e3165ed3b912c508768f7fc15fd";
@@ -47,21 +47,21 @@ public class EstabelecimentoControllerTest {
     }
 
     @Test
-    public void geraRelatorio() {
+    public void teste_do_metodo_geraRelatorio_deve_retornar_instancia_de_relatorio_em_response() {
         when(service.buscaEstabelecimentoPorId(ESTABELECIMENTO_ID)).thenReturn(estabelecimento);
         when(service.geraRelatorio(ESTABELECIMENTO_ID, DATA_INICIAL, DATA_FINAL)).thenReturn(relatorio);
         assertEquals(RESPONSE_RELATORIO_ESPERADO, controller.geraRelatorio(ESTABELECIMENTO_ID, DATA_INICIAL, DATA_FINAL).toString());
     }
 
     @Test
-    public void metodo_getEstabelecimentos_deve_retornar_reponse_com_uma_lista_de_estabelecimentos() {
+    public void teste_do_metodo_getEstabelecimentos_deve_retornar_response_com_uma_lista_de_estabelecimentos() {
         when(service.getEstabelecimentos()).thenReturn(estabelecimentos);
-        assertEquals(RESPONSE_LIST_ESPERADO, controller.getEstabelecimentos().toString());
+        assertEquals(RESPONSE_LISTA_ESPERADO, controller.getEstabelecimentos().toString());
     }
 
     @Test
-    public void metodo_getEstabelecimentosPorLocalizacaodeve_retornar_reponse_com_uma_lista_de_estabelecimentos() {
+    public void teste_do_metodo_getEstabelecimentosPorLocalizacao_deve_retornar_reponse_com_uma_lista_de_estabelecimentos_por_proximidade() {
         when(service.getEstabelecimentosPorLocalizacao(CLIENTE_ID, RAIO)).thenReturn(estabelecimentos);
-        assertEquals(RESPONSE_LIST_ESPERADO, controller.getEstabelecimentosPorLocalizacao(CLIENTE_ID, RAIO).toString());
+        assertEquals(RESPONSE_LISTA_ESPERADO, controller.getEstabelecimentosPorLocalizacao(CLIENTE_ID, RAIO).toString());
     }
 }

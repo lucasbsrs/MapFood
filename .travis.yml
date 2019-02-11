@@ -20,11 +20,11 @@ addons:
       secure: e07dd6bad16dcb4c8a73696efaa06e1680182f36 # encrypted value of your token
 before_install:
   - chmod +x mvnw
-  #- docker login -u "$DOCKER_LOGIN" --password-stdin < "$TRAVIS_BUILD_DIR/data/mongodb/password.txt"
+  - docker login -u "$DOCKER_LOGIN" --password-stdin < "$TRAVIS_BUILD_DIR/data/mongodb/password.txt"
   #- docker ps
   #- docker volume ls
   #- docker kill $(docker ps -q)
-  #- docker run -ti -p 27018:27018 -v mongo-data:"$TRAVIS_BUILD_DIR/data/mongodb" -e MONGO_INITDB_ROOT_USERNAME=devwarrior -e MONGO_INITDB_ROOT_PASSWORD=mongodb --name mongo-codenation kmyokoyama/mongo-codenation:latest
+  - docker run -ti -p 27018:27018 -v mongo-data:"$TRAVIS_BUILD_DIR/data/mongodb" -e MONGO_INITDB_ROOT_USERNAME=devwarrior -e MONGO_INITDB_ROOT_PASSWORD=mongodb --name mongo-codenation kmyokoyama/mongo-codenation:latest
   #- docker-compose -f "$TRAVIS_BUILD_DIR/data/mongodb/docker-compose.yml" up
   
 script:

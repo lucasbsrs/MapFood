@@ -4,6 +4,7 @@ import com.devwarriors.mapfood.model.enums.ModoCalculoRota;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -25,4 +26,33 @@ public class ProblemaRota {
         this.pedido = pedido;
         this.entregador = entregador;
     }
+
+    public GeoJsonPoint getLocalizacaoEntregador() {
+
+        if (entregador == null)
+            return null;
+
+        return entregador.getLocalizacao();
+    }
+
+    public GeoJsonPoint getLocalizaoCliente() {
+        if (pedido == null)
+            return null;
+
+        if (pedido.getCliente() == null)
+            return null;
+
+        return pedido.getCliente().getLocalizacao();
+    }
+
+    public GeoJsonPoint getLocalizaoEstabelecimento() {
+        if (pedido == null)
+            return null;
+
+        if (pedido.getEstabelecimento() == null)
+            return null;
+
+        return pedido.getEstabelecimento().getLocalizacao();
+    }
+
 }

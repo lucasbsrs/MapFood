@@ -21,7 +21,7 @@ addons:
 before_install:
   - chmod +x mvnw
   - docker login -u "$DOCKER_LOGIN" --password-stdin < "$TRAVIS_BUILD_DIR/data/mongodb/password.txt"
-  - docker-compose -f "$TRAVIS_BUILD_DIR/data/mongodb/docker-compose.yml" up
+  - docker run -ti -p 27017:27017 -v mongo-data:$TRAVIS_BUILD_DIR/data/db \ -e MONGO_INITDB_ROOT_USERNAME=devwarrior \ -e MONGO_INITDB_ROOT_PASSWORD=mongodb \ --name mongo-codenation kmyokoyama/mongo-codenation:latest
   
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis

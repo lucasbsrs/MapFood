@@ -62,8 +62,7 @@ public class Pedido {
 		this.criadoEm = criadoEm;
 		this.atualizadoEm = atualizadoEm;
 		this.finalizadoEm = null;
-		this.valorTotal = this.itens.stream().map(item -> item.getQuantidade() * item.getProduto().getPrecoUnitario())
-				.reduce(0.0, (acc, valores) -> acc + valores);
+		this.valorTotal = this.calculaValorTotal();
 	}
 
 	@Override
@@ -75,5 +74,10 @@ public class Pedido {
 
 	public Optional<Entrega> getEntregaOptional() {
 		return Optional.ofNullable(this.entrega);
+	}
+
+	private Double calculaValorTotal() {
+		return this.itens.stream().map(item -> item.getQuantidade() * item.getProduto().getPrecoUnitario()).reduce(0.0,
+				(acc, valores) -> acc + valores);
 	}
 }

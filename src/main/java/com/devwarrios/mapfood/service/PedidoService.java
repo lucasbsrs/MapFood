@@ -128,10 +128,8 @@ public class PedidoService {
 		case EM_PREPARO:
 			pedidoRepository.save(pedido);
 			break;
+
 		case PRONTO:
-			pedidoRepository.save(pedido);
-			break;
-		case EM_TRANSITO:
 			Estabelecimento estabelecimento;
 			String estabelecimentoId = pedido.getEstabelecimentoId();
 
@@ -161,11 +159,17 @@ public class PedidoService {
 			pedido.setEntrega(entrega);
 
 			break;
+
+		case EM_TRANSITO:
+			pedidoRepository.save(pedido);
+			break;
+
 		case ENTREGUE:
 			pedido.getEntrega().setEta(0.0);
 			pedido.setFinalizadoEm(GerenciadorTempo.agora());
 
 			break;
+
 		default:
 			throw new StatusPedidoInvalidoException(novoStatus);
 		}
@@ -195,14 +199,14 @@ public class PedidoService {
 		}
 
 		Pedido pedido = pedidoRepository.findByPedidoId(pedidoId);
-		
+
 		LocalDateTime agora = GerenciadorTempo.agora();
-		
+
 		pedido.setStatus(PedidoStatus.CANCELADO);
 		pedido.setValorTotal(0.0);
 		pedido.setAtualizadoEm(agora);
 		pedido.setFinalizadoEm(agora);
-		
+
 		return PedidoDtoFactory.criaPedidoCanceladoResponseDto(pedido);
 	}
 }

@@ -33,7 +33,7 @@ public class PedidoDtoFactory {
 		String pedidoId = pedido.getPedidoId();
 		String pedidoStatus = pedido.getStatus().toString();
 		Double valorTotal = pedido.getValorTotal();
-		
+
 		return new PedidoResponseDto(pedidoId, pedidoStatus, valorTotal, GerenciadorTempo.agora());
 	}
 }

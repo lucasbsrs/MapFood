@@ -53,7 +53,7 @@ public class PedidoController {
 					.body(new RequisicaoInvalidaResponseDto(e.getMensagem()));
 		}
 	}
-	
+
 	@DeleteMapping("/marketplace/pedido/{id}")
 	@ResponseBody
 	public ResponseEntity<?> cancelaPedido(@PathVariable("id") String id) {

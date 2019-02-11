@@ -39,10 +39,4 @@ public class Produto {
 		this.precoUnitario = precoUnitario;
 		this.cidade = cidade;
 	}
-
-	@Override
-	public String toString() {
-		return "Produto [id=" + id + ", produtoId=" + produtoId + ", descricao=" + descricao + ", classificacao="
-				+ classificacao + ", precoUnitario=" + precoUnitario + ", cidade=" + cidade + "]";
-	}
 }

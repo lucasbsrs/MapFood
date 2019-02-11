@@ -1,12 +1,14 @@
-package com.devwarrios.mapfood;
+package com.devwarriors.mapfood;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.devwarriors.mapfood.MapFoodApplication;
+
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes=MapFoodApplication.class)
 public class MapFoodApplicationTests {
 
 	@Test

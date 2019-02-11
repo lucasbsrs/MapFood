@@ -7,6 +7,5 @@ import com.devwarriors.mapfood.model.Pedido;
 public interface PedidoRepository extends MongoRepository<Pedido, String> {
 
 	Pedido findByPedidoId(String pedidoId);
-
 	boolean existsByPedidoId(String pedidoId);
 }

@@ -1,0 +1,37 @@
+language: java
+
+services:
+  - mongodb
+  - docker
+
+before_script:
+  #- mongo mydb_test --eval 'db.createUser({user:"devwarrior",pwd:"mongodb",roles:["readWrite"]});'
+
+branches:
+  only:
+  - desenvolvimento
+
+sudo: false
+dist: trusty
+addons:
+  sonarcloud:
+    organization: "lucasbsrs-github"
+    token:
+      secure: e07dd6bad16dcb4c8a73696efaa06e1680182f36 # encrypted value of your token
+before_install:
+  - chmod +x mvnw
+  - docker login -u "$DOCKER_LOGIN" --password-stdin < "$TRAVIS_BUILD_DIR/data/mongodb/password.txt"
+  - docker ps
+  - docker volume rm $(docker volume ls -q)
+  #- docker kill $(docker ps -q)
+  #- docker run -ti -p 27017:27017 -v mongo-data:"$TRAVIS_BUILD_DIR/data/mongodb" -e MONGO_INITDB_ROOT_USERNAME=devwarrior -e MONGO_INITDB_ROOT_PASSWORD=mongodb --name mongo-codenation kmyokoyama/mongo-codenation:latest
+  - docker-compose -f "$TRAVIS_BUILD_DIR/data/mongodb/docker-compose.yml" up
+  
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+install:
+  #- docker run -ti -p 27017:27017 -v mongo-data:$TRAVIS_BUILD_DIR/data/db \ -e MONGO_INITDB_ROOT_USERNAME=devwarrior \ -e MONGO_INITDB_ROOT_PASSWORD=mongodb \ --name mongo-codenation kmyokoyama/mongo-codenation:latest
+  #- docker-compose -f "$TRAVIS_BUILD_DIR/data/mongodb/docker-compose.yml" up
+ # - mvn -N io.takari:maven:wrapper
+ # - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V

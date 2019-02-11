@@ -30,10 +30,4 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 		this.observacao = observacao;
 	}
-
-	@Override
-	public String toString() {
-		return "ItemPedido [id=" + id + ", produto=" + produto + ", observacao=" + observacao + ", quantidade="
-				+ quantidade + "]";
-	}
 }

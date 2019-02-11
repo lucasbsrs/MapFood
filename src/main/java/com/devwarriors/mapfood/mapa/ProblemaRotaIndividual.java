@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @Document
-public class ProblemaRota {
+public class ProblemaRotaIndividual {
 
     @Id
     private String id;
@@ -21,10 +21,10 @@ public class ProblemaRota {
     private ModoCalculoRota modoCalculoRota;
     private String problemaId;
 
-    public ProblemaRota() {
+    public ProblemaRotaIndividual() {
     }
 
-    public ProblemaRota(Pedido pedido, Entregador entregador) {
+    public ProblemaRotaIndividual(Pedido pedido, Entregador entregador) {
         this.pedido = pedido;
         this.entregador = entregador;
     }

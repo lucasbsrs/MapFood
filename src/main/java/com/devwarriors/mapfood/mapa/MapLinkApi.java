@@ -68,7 +68,7 @@ public class MapLinkApi {
         return solucaoRota;
     }
 
-    public String criaProblemaDeRota(ProblemaRotaDto problemaRota) {
+    public String criaProblemaDeRota(ProblemaRotaIndividualDto problemaRota) {
 
         Response response = ClientBuilder.newClient()
                 .target(URL_API)

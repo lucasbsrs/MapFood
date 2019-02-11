@@ -23,10 +23,9 @@ before_install:
   - docker login -u "$DOCKER_LOGIN" --password-stdin < "$TRAVIS_BUILD_DIR/data/mongodb/password.txt"
   - docker ps
   - docker volume ls
-  - docker volume rm $(docker volume ls -aq)
   #- docker kill $(docker ps -q)
-  #- docker run -ti -p 27017:27017 -v mongo-data:"$TRAVIS_BUILD_DIR/data/mongodb" -e MONGO_INITDB_ROOT_USERNAME=devwarrior -e MONGO_INITDB_ROOT_PASSWORD=mongodb --name mongo-codenation kmyokoyama/mongo-codenation:latest
-  - docker-compose -f "$TRAVIS_BUILD_DIR/data/mongodb/docker-compose.yml" up
+  - docker run -ti -p 27018:27018 -v mongo-data:"$TRAVIS_BUILD_DIR/data/mongodb" -e MONGO_INITDB_ROOT_USERNAME=devwarrior -e MONGO_INITDB_ROOT_PASSWORD=mongodb --name mongo-codenation kmyokoyama/mongo-codenation:latest
+  #- docker-compose -f "$TRAVIS_BUILD_DIR/data/mongodb/docker-compose.yml" up
   
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis

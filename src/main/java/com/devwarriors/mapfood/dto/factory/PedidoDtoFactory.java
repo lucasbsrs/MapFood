@@ -19,7 +19,7 @@ public class PedidoDtoFactory {
 
 		if (entrega.isPresent()) {
 			String entregadorId = entrega.get().getEntregadorId();
-			Double distancia = entrega.get().getDistancia_destino();
+			Double distancia = entrega.get().getDistanciaDestino();
 			Double eta = entrega.get().getEta();
 
 			return new PedidoStatusResponseDto(pedidoId, pedidoStatus, valorTotal, GerenciadorTempo.agora(),

@@ -17,7 +17,6 @@ public class RelatorioService {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
-
 	public Relatorio geraRelatorio(String id, LocalDate dataInicial, LocalDate dataFinal) {
 
 		Long totalEntregaEfetivada = buscaTotalEntregaEfetivada(id, dataInicial, dataFinal);
@@ -27,25 +26,22 @@ public class RelatorioService {
 		return new Relatorio(totalEntregaEfetivada, totalQuilometragem, totalDuracaoEntrega);
 	}
 
-    private Double buscaTotalDuracaoEntrega(String id, LocalDate dataInicial, LocalDate dataFinal) {
-        List<Pedido> pedidos = pedidoRepository.findAllByEstabelecimentoIdAndDataBetween(id, dataInicial, dataFinal);
+	private Double buscaTotalDuracaoEntrega(String id, LocalDate dataInicial, LocalDate dataFinal) {
+		List<Pedido> pedidos = pedidoRepository.findAllByEstabelecimentoIdAndCriadoEmBetween(id, dataInicial, dataFinal);
 
-        return pedidos.stream()
-                .mapToDouble(p -> p.getEntrega().getDuracaoEmHoras())
-                .sum();
-    }
+		return pedidos.stream().mapToDouble(p -> p.getEntrega().getDuracaoEmHoras()).sum();
+	}
 
-    private Double buscaTotalQuilometragemPercorrida(String id, LocalDate dataInicial, LocalDate dataFinal) {
+	private Double buscaTotalQuilometragemPercorrida(String id, LocalDate dataInicial, LocalDate dataFinal) {
 
-        List<Pedido> pedidos = pedidoRepository.findAllByEstabelecimentoIdAndDataBetween(id, dataInicial, dataFinal);
+		List<Pedido> pedidos = pedidoRepository.findAllByEstabelecimentoIdAndCriadoEmBetween(id, dataInicial, dataFinal);
 
-        return pedidos.stream()
-                .mapToDouble(p -> p.getEntrega().getDistanciaPercorrida())
-                .sum();
-    }
+		return pedidos.stream().mapToDouble(p -> p.getEntrega().getDistanciaPercorrida()).sum();
+	}
 
-    private Long buscaTotalEntregaEfetivada(String id, LocalDate dataInicial, LocalDate dataFinal) {
-		return pedidoRepository.countByEstabelecimentoIdAndDataBetweenAndStatus(id, dataInicial, dataFinal, PedidoStatus.ENTREGUE);
+	private Long buscaTotalEntregaEfetivada(String id, LocalDate dataInicial, LocalDate dataFinal) {
+		return pedidoRepository.countByEstabelecimentoIdAndCriadoEmBetweenAndStatus(id, dataInicial, dataFinal,
+				PedidoStatus.ENTREGUE);
 	}
 
 }

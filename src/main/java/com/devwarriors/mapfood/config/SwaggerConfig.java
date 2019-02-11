@@ -19,39 +19,34 @@ import java.util.Collections;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
- 	private final ResponseMessage m201 = simpleMessage (201, "Recurso criado");
- 	private final ResponseMessage m204put = simpleMessage (204, "Atualizado com sucesso");
- 	private final ResponseMessage m204del = simpleMessage (204, "Excluído com sucesso");
- 	private final ResponseMessage m403 = simpleMessage (403, "Não autorizado");
- 	private final ResponseMessage m404 = simpleMessage (404, "Não encontrado");
- 	private final ResponseMessage m422 = simpleMessage (422, "Erro de validação");
- 	private final ResponseMessage m500 = simpleMessage (500, "Erro inesperado");
+	private final ResponseMessage m201 = simpleMessage(201, "Recurso criado");
+	private final ResponseMessage m204put = simpleMessage(204, "Atualizado com sucesso");
+	private final ResponseMessage m204del = simpleMessage(204, "Excluído com sucesso");
+	private final ResponseMessage m403 = simpleMessage(403, "Não autorizado");
+	private final ResponseMessage m404 = simpleMessage(404, "Não encontrado");
+	private final ResponseMessage m422 = simpleMessage(422, "Erro de validação");
+	private final ResponseMessage m500 = simpleMessage(500, "Erro inesperado");
 
 	@Bean
 	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.useDefaultResponseMessages(false)
+		return new Docket(DocumentationType.SWAGGER_2).useDefaultResponseMessages(false)
 				.globalResponseMessage(RequestMethod.GET, Arrays.asList(m403, m404, m500))
 				.globalResponseMessage(RequestMethod.POST, Arrays.asList(m201, m403, m422, m500))
 				.globalResponseMessage(RequestMethod.PUT, Arrays.asList(m204put, m403, m404, m422, m500))
 				.globalResponseMessage(RequestMethod.DELETE, Arrays.asList(m204del, m403, m404, m500))
-				
-				
-				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.devwarriors.mapfood.controller"))
-				.paths(PathSelectors.any())
-				.build()
-				.apiInfo(apiInfo());
+
+				.select().apis(RequestHandlerSelectors.basePackage("com.devwarriors.mapfood.controller"))
+				.paths(PathSelectors.any()).build().apiInfo(apiInfo());
 	}
-	
+
 	private ResponseMessage simpleMessage(int code, String msg) {
 		return new ResponseMessageBuilder().code(code).message(msg).build();
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfo("Api MapFood", "Projeto de uma API para organizar os pedidos e gerar os melhores trajetos de entrega do iFood.",
-				"Versão 1.0", "", new Contact("Squad 4 - DevWarriors","",""),
-				"", "", Collections.emptyList());
+		return new ApiInfo("Api MapFood",
+				"Projeto de uma API para organizar os pedidos e gerar os melhores trajetos de entrega do iFood.",
+				"Versão 1.0", "", new Contact("Squad 4 - DevWarriors", "", ""), "", "", Collections.emptyList());
 	}
-	
+
 }

@@ -18,10 +18,10 @@ public class Entrega {
 	private String entregadorId;
 
 	@Field("distancia_destino")
-	private Double distancia_destino;
+	private Double distanciaDestino;
 
 	@Field("distancia_percorrida")
-	private Double distancia_percorrida;
+	private Double distanciaPercorrida;
 
 	@Field("eta")
 	private Double eta;

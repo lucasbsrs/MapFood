@@ -13,7 +13,6 @@ public class ItemPedidoDto {
 	private Integer quantidade;
 	private String observacao;
 
-
 	public String getProdutoId() {
 		return produtoId;
 	}

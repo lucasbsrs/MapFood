@@ -28,7 +28,7 @@ public class EstabelecimentoService {
 	private RelatorioService relatorioService;
 
 	@Autowired
-    private ClienteRepository clienteRepository;
+	private ClienteRepository clienteRepository;
 
 	public Estabelecimento buscaEstabelecimentoPorId(String id) throws EstabelecimentoException {
 
@@ -46,25 +46,24 @@ public class EstabelecimentoService {
 	}
 
 	public List<Estabelecimento> getEstabelecimentos() {
-        return estabelecimentoRepository.findAll();
-    }
+		return estabelecimentoRepository.findAll();
+	}
 
-    public List<Estabelecimento> getEstabelecimentosPorLocalizacao(String clienteId, Double raio) {
+	public List<Estabelecimento> getEstabelecimentosPorLocalizacao(String clienteId, Double raio) {
 
-        try {
-            Cliente cliente = clienteRepository.findByClienteId(Integer.valueOf(clienteId));
-            Distance distance = new Distance(raio * 1000);
-            GeoJsonPoint point = new GeoJsonPoint(
-                    new Point(
-                            cliente.getLocalizacao().getCoordinates().get(0),
-                            cliente.getLocalizacao().getCoordinates().get(1)
-                    ));
+		try {
+			Cliente cliente = clienteRepository.findByClienteId(clienteId);
+			Distance distance = new Distance(raio * 1000);
+			GeoJsonPoint point = new GeoJsonPoint(new Point(cliente.getLocalizacao().getCoordinates().get(0),
+					cliente.getLocalizacao().getCoordinates().get(1)));
 
-            return estabelecimentoRepository.findAllByLocalizacaoNear(point, distance);
+			return estabelecimentoRepository.findAllByLocalizacaoNear(point, distance);
 
-        } catch (Exception e) { e.printStackTrace(); }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-        return Collections.emptyList();
-    }
+		return Collections.emptyList();
+	}
 
 }

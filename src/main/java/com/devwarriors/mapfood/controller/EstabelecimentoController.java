@@ -18,29 +18,30 @@ import java.util.List;
 @RestController
 public class EstabelecimentoController {
 
-    @Autowired
-    private EstabelecimentoService estabelecimentoService;
+	@Autowired
+	private EstabelecimentoService estabelecimentoService;
 
-    @GetMapping("estabelecimentos/{id}/relatorio")
-    public ResponseEntity<Relatorio> geraRelatorio(@PathVariable("id") String id,
-            @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicial,
-            @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFinal) {
+	@GetMapping("estabelecimentos/{id}/relatorio")
+	public ResponseEntity<Relatorio> geraRelatorio(@PathVariable("id") String id,
+			@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicial,
+			@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFinal) {
 
-            Estabelecimento estabelecimento = estabelecimentoService.buscaEstabelecimentoPorId(id);
-            Relatorio relatorio = estabelecimentoService.geraRelatorio(id, dataInicial, dataFinal);
+		Estabelecimento estabelecimento = estabelecimentoService.buscaEstabelecimentoPorId(id);
+		Relatorio relatorio = estabelecimentoService.geraRelatorio(id, dataInicial, dataFinal);
 
-            return ResponseEntity.ok(relatorio);
+		return ResponseEntity.ok(relatorio);
 
-    }
-@GetMapping("/estabelecimentos")
-    public ResponseEntity<List<Estabelecimento>>getEstabelecimentos(){
-        return ResponseEntity.ok((estabelecimentoService.getEstabelecimentos()));
-    }
+	}
 
-    //Postman: localhost:8080/estabelecimentos/proximidade/por-cliente/1?raio=5000
-    @GetMapping("/estabelecimentos/proximidade/por-cliente/{clienteId}")
-    public ResponseEntity<List<Estabelecimento>>getEstabelecimentosPorLocalizacao
-            (@PathVariable String clienteId, @RequestParam Double raio){
-        return ResponseEntity.ok((estabelecimentoService.getEstabelecimentosPorLocalizacao(clienteId, raio)));
-    }
+	@GetMapping("/estabelecimentos")
+	public ResponseEntity<List<Estabelecimento>> getEstabelecimentos() {
+		return ResponseEntity.ok((estabelecimentoService.getEstabelecimentos()));
+	}
+
+	// Postman: localhost:8080/estabelecimentos/proximidade/por-cliente/1?raio=5000
+	@GetMapping("/estabelecimentos/proximidade/por-cliente/{clienteId}")
+	public ResponseEntity<List<Estabelecimento>> getEstabelecimentosPorLocalizacao(@PathVariable String clienteId,
+			@RequestParam Double raio) {
+		return ResponseEntity.ok((estabelecimentoService.getEstabelecimentosPorLocalizacao(clienteId, raio)));
+	}
 }

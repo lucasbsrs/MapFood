@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.devwarriors.mapfood.MapFoodApplication;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=MapFoodApplication.class)
+@SpringBootTest(classes = MapFoodApplication.class)
 public class MapFoodApplicationTests {
 
 	@Test

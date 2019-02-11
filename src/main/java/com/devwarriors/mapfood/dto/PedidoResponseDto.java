@@ -17,6 +17,6 @@ public class PedidoResponseDto {
 	private double eta;
 	private LocalDate timestamp;
 
-    public PedidoResponseDto(String s, String entregador, int i, int i1, LocalDate now) {
-    }
+	public PedidoResponseDto(String s, String entregador, int i, int i1, LocalDate now) {
+	}
 }

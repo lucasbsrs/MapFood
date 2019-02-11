@@ -20,7 +20,7 @@ addons:
       secure: e07dd6bad16dcb4c8a73696efaa06e1680182f36 # encrypted value of your token
 before_install:
   - chmod +x mvnw
-  - docker login -u "$DOCKER_LOGIN" -p "DOCKER_PASSWORD"
+  - docker login -u "$DOCKER_LOGIN" --password-stdin
   - docker run -ti -p 27017:27017 -v mongo-data:/data/db \ -e MONGO_INITDB_ROOT_USERNAME=devwarrior \ -e MONGO_INITDB_ROOT_PASSWORD=mongodb \ --name mongo-codenation kmyokoyama/mongo-codenation:latest
   
 script:

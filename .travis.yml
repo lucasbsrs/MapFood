@@ -4,7 +4,7 @@ services:
   - mongodb
 
 before_script:
-  - mongo mydb_test --eval 'db.createUser({user:"devwarrior",pwd:"mongodb",roles:["readWrite"]});'
+  #- mongo mydb_test --eval 'db.createUser({user:"devwarrior",pwd:"mongodb",roles:["readWrite"]});'
 
 branches:
   only:

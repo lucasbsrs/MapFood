@@ -13,18 +13,16 @@ public class ProblemaRota {
 
     @Id
     private String id;
-    private Cliente cliente;
-    private Estabelecimento estabelecimento;
+    private Pedido pedido;
     private Entregador entregador;
     private ModoCalculoRota modoCalculoRota;
     private String problemaId;
 
-
     public ProblemaRota() {
     }
 
-    public ProblemaRota(Cliente cliente, Estabelecimento estabelecimento) {
-        this.cliente = cliente;
-        this.estabelecimento = estabelecimento;
+    public ProblemaRota(Pedido pedido, Entregador entregador) {
+        this.pedido = pedido;
+        this.entregador = entregador;
     }
 }

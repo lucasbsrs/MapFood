@@ -49,8 +49,8 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfo("Api MapFood", "A maior lista de restaurantes online em sua cidade",
-				"Versão 1.0", "", new Contact("DevWarriors","",""),
+		return new ApiInfo("Api MapFood", "Projeto de uma API para organizar os pedidos e gerar os melhores trajetos de entrega do iFood.",
+				"Versão 1.0", "", new Contact("Squad 4 - DevWarriors","",""),
 				"", "", Collections.emptyList());
 	}
 	

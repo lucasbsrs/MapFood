@@ -13,6 +13,7 @@ public class ProblemaRotaService {
 	private MapLinkApi mapLinkApi;
 
 	public ProblemaRotaService() {
+		mapLinkApi = new MapLinkApi();
 	}
 
 	public ProblemaRotaService(MapLinkApi mapLinkApi) {

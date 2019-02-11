@@ -2,22 +2,36 @@ package com.devwarriors.mapfood.dto;
 
 import com.devwarriors.mapfood.model.ProblemaRota;
 import com.devwarriors.mapfood.model.enums.ModoCalculoRota;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+//@Setter
 public class ProblemaRotaDto implements Serializable {
 
 	private ModoCalculoRota modoCalculoRota;
+
+	@JsonSetter("calculationMode")
+	public void setModoCalculoRota(ModoCalculoRota modoCalculoRota) {
+		this.modoCalculoRota = modoCalculoRota;
+	}
+
+	@JsonProperty("points")
 	private List<Coordenada> coordenadas = new ArrayList<>();
+
+	@JsonProperty("profileName")
 	private String profileName = "BRAZIL";
+
+	@JsonProperty("startDate")
+	private LocalDateTime data;
 
 	public void preencheRotas(ProblemaRota problemaRota) {
 

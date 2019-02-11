@@ -29,6 +29,9 @@ public class GerenciadorRotaService {
 
 	public void enviaProblemaRotaParaCalcular() {
 
+		//apagar
+		ProblemaRotaService problemaRotaService = new ProblemaRotaService();
+
 		for (Entregador entregador : gerenciadorRota.getEntregadores()) {
 			ProblemaRota problemaRota = new ProblemaRota(gerenciadorRota.getPedido(), entregador);
 			ProblemaRotaDto problemaRotaDto = problemaRotaService.converteParaDto(problemaRota);

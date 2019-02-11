@@ -27,6 +27,6 @@ script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 install:
-  - docker-compose up
+  - docker-compose up -f $TRAVIS_BUILD_DIR/data/mongodb/
  # - mvn -N io.takari:maven:wrapper
  # - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V

@@ -1,9 +1,6 @@
-package com.devwarriors.mapfood.service;
+package com.devwarriors.mapfood.mapa;
 
-import com.devwarriors.mapfood.dto.ProblemaRotaDto;
-import com.devwarriors.mapfood.mapa.MapLinkApi;
-import com.devwarriors.mapfood.model.ProblemaRota;
-import com.devwarriors.mapfood.model.enums.ModoCalculoRota;
+import com.devwarriors.mapfood.mapa.enums.ModoCalculoRota;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,22 +20,19 @@ public class ProblemaRotaService {
 	public ProblemaRotaDto converteParaDto(ProblemaRota problemaRota) {
 
 		ProblemaRotaDto problemaRotaDto = new ProblemaRotaDto();
-		problemaRotaDto.setModoCalculoRota(ModoCalculoRota.THE_FASTEST);
+		problemaRotaDto.setCalculationMode(ModoCalculoRota.THE_FASTEST);
 		problemaRotaDto.preencheRotas(problemaRota);
 
 		return problemaRotaDto;
 	}
 
 	public String enviaProblemaRota(ProblemaRotaDto problemaRotaDto) {
-
-		String problemaId = mapLinkApi.postaProblema(problemaRotaDto);
-
-		return problemaId;
+		return mapLinkApi.criaProblemaDeRota(problemaRotaDto);
 	}
 
 	public SolucaoRota obterSolucao(String problemaId) {
 
-		return mapLinkApi.obterSolucao(problemaId);
+		return mapLinkApi.retornaSolucaoDeRotaPorId(problemaId);
 
 	}
 }

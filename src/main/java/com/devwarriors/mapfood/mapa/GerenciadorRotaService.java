@@ -1,9 +1,6 @@
-package com.devwarriors.mapfood.service;
+package com.devwarriors.mapfood.mapa;
 
-import com.devwarriors.mapfood.dto.ProblemaRotaDto;
 import com.devwarriors.mapfood.model.Entregador;
-import com.devwarriors.mapfood.model.GerenciadorRota;
-import com.devwarriors.mapfood.model.ProblemaRota;
 import com.devwarriors.mapfood.repository.GerenciadorRotaRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +24,7 @@ public class GerenciadorRotaService {
 		this.gerenciadorRota = gerenciadorRota;
 	}
 
-	public void enviaProblemaRotaParaCalcular() {
+	public void enviaProblemaDeRotaParaCalcular() {
 
 		//apagar
 		ProblemaRotaService problemaRotaService = new ProblemaRotaService();
@@ -39,13 +36,15 @@ public class GerenciadorRotaService {
 			System.out.println(new Gson().toJson(problemaRotaDto));
 
 			String problemaId = problemaRotaService.enviaProblemaRota(problemaRotaDto);
-			gerenciadorRota.getProblemas().add(problemaId);
+
+			if (problemaId != null)
+			    gerenciadorRota.getProblemas().add(problemaId);
 		}
 
 		gerenciadorRotaRepository.save(gerenciadorRota);
 	}
 
-	public void obterSolucoes() {
+	public void retornaSolucaoDeRota() {
 
 		for (String problemaId : gerenciadorRota.getProblemas()) {
 			SolucaoRota solucaoRota = problemaRotaService.obterSolucao(problemaId);

@@ -1,7 +1,7 @@
 package com.devwarrios.mapfood.mapa;
 
 import com.devwarriors.mapfood.mapa.MapLinkApi;
-import com.devwarriors.mapfood.service.SolucaoRota;
+import com.devwarriors.mapfood.mapa.SolucaoRota;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertNotNull;
@@ -23,7 +23,7 @@ public class MapLinkApiTest {
 
         MapLinkApi mapLinkApi = new MapLinkApi();
 
-      //  Response response = mapLinkApi.postaProblema(new ProblemaRota());
+      //  Response response = mapLinkApi.criaProblemaDeRota(new ProblemaRota());
 
         //assertEquals(200, response.getStatus());
     }
@@ -31,7 +31,7 @@ public class MapLinkApiTest {
     @Test
     public void buscarSolucaoDoProblemaPorId(){
         MapLinkApi mapLinkApi = new MapLinkApi();
-        SolucaoRota solucaoRota = mapLinkApi.obterSolucao("5c603306c079cd0006a1492e");
+        SolucaoRota solucaoRota = mapLinkApi.retornaSolucaoDeRotaPorId("5c603306c079cd0006a1492e");
         System.out.println(solucaoRota.toString());
     }
 

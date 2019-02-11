@@ -1,7 +1,5 @@
 package com.devwarriors.mapfood.mapa;
 
-import com.devwarriors.mapfood.dto.ProblemaRotaDto;
-import com.devwarriors.mapfood.service.SolucaoRota;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -23,29 +21,40 @@ public class MapLinkApi {
     private static final String CLIENT_KEY = "8oCbEMp87iAdjmN0JlE5rFUSrs9w6MLa";
     private static final String CLIENT_SECRET = "5isHfSYHH8X4aA30";
 
+    private static String token;
+
     public MapLinkApi() {
     }
 
     public String obterToken() {
 
+        if (token != null)
+            return token;
+
         HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic(CLIENT_KEY, CLIENT_SECRET);
 
         Response response = ClientBuilder.newClient()
                 .register(feature)
-                .target(PATH_AUTENTICACAO + "?grant_type=client_credentials")
+                .target(PATH_AUTENTICACAO)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(new Form(), MediaType.APPLICATION_JSON));
+
+        if (response.getStatus() == 401) {
+            token = null;
+            return obterToken();
+        }
 
         if (response.getStatus() == 200) {
             String msg = response.readEntity(String.class);
             JsonObject jsonObject = new Gson().fromJson(msg, JsonObject.class);
             JsonElement element = jsonObject.get("access_token");
-            return element.getAsString();
+            token = element.getAsString();
+            return token;
         }
         return null;
     }
 
-    public SolucaoRota obterSolucao(String problemaId) {
+    public SolucaoRota retornaSolucaoDeRotaPorId(String problemaId) {
 
         Response response = ClientBuilder.newClient()
                 .target(URL_API)
@@ -59,16 +68,16 @@ public class MapLinkApi {
         return solucaoRota;
     }
 
-    public String postaProblema(ProblemaRotaDto problemaRota) {
+    public String criaProblemaDeRota(ProblemaRotaDto problemaRota) {
 
         Response response = ClientBuilder.newClient()
                 .target(URL_API)
                 .path(PATH_POST_PROBLEMA)
                 .request(MediaType.APPLICATION_JSON)
                 .header("Authorization", "Bearer " + obterToken())
-                .post(Entity.entity(problemaRota, MediaType.APPLICATION_JSON));
+                .post(Entity.json(new Gson().toJson(problemaRota)));
 
-        if (response.getStatus() == 200) {
+        if (response.getStatus() == 201) {
             String msg = response.readEntity(String.class);
             JsonObject jsonObject = new Gson().fromJson(msg, JsonObject.class);
             JsonElement element = jsonObject.get("id");

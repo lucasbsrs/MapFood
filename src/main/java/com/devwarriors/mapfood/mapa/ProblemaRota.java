@@ -1,6 +1,8 @@
-package com.devwarriors.mapfood.model;
+package com.devwarriors.mapfood.mapa;
 
-import com.devwarriors.mapfood.model.enums.ModoCalculoRota;
+import com.devwarriors.mapfood.mapa.enums.ModoCalculoRota;
+import com.devwarriors.mapfood.model.Entregador;
+import com.devwarriors.mapfood.model.Pedido;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;

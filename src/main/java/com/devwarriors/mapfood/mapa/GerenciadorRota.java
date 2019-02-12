@@ -40,12 +40,7 @@ public class GerenciadorRota {
         processamentoRotaRepository.save(processamentoRota);
     }
 
-    public SolucaoRota getMelhorSolucao() {
-        return new SolucaoRota();
-    }
-
-    public SolucaoRota retornaSolucaoDeRota(Pedido pedido) {
-
+    private List<SolucaoRota> retornaListaDeSolucoes(Pedido pedido) {
         List<SolucaoRota> solucoes = new ArrayList<>();
 
         Optional<ProcessamentoRota> processamentoRota = processamentoRotaRepository
@@ -59,8 +54,18 @@ public class GerenciadorRota {
             solucoes.add(solucaoRota);
         }
 
-        return solucoes.stream()
+        return solucoes;
+    }
+
+    public SolucaoRota retornaSolucaoDeRotaMenorTempo(Pedido pedido) {
+        return retornaListaDeSolucoes(pedido).stream()
                 .min(Comparator.comparingLong(SolucaoRota::getTotalTempoSegundos))
+                .get();
+    }
+
+    public SolucaoRota retornaSolucaoDeRotaMenorDistancia(Pedido pedido) {
+        return retornaListaDeSolucoes(pedido).stream()
+                .min(Comparator.comparingDouble(SolucaoRota::getTotalDistanciaMetros))
                 .get();
 
     }

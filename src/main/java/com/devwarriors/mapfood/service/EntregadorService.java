@@ -1,5 +1,8 @@
 package com.devwarriors.mapfood.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
@@ -39,10 +42,23 @@ public class EntregadorService {
 				capacidadeNecessaria);
 	}
 
+	public List<Entregador> buscaEntregadoresDisponiveisMaisProximos(GeoJsonPoint p, int capacidadeNecessaria,
+			int max) {
+		return this.buscaEntregadoresDisponiveisMaisProximosComDistanciaMaxima(p, this.distanciaMaxima,
+				capacidadeNecessaria, max);
+	}
+
 	public Entregador buscaEntregadorDisponivelMaisProximoComDistanciaMaxima(GeoJsonPoint p, Distance distanciaMaxima,
 			int capacidadeNecessaria) {
 		return entregadorRepository
 				.findByLocalizacaoNearAndCapacidadeDisponivelGreaterThanEqual(p, distanciaMaxima, capacidadeNecessaria)
 				.get(0);
+	}
+
+	public List<Entregador> buscaEntregadoresDisponiveisMaisProximosComDistanciaMaxima(GeoJsonPoint p,
+			Distance distanciaMaxima, int capacidadeNecessaria, int max) {
+		return entregadorRepository
+				.findByLocalizacaoNearAndCapacidadeDisponivelGreaterThanEqual(p, distanciaMaxima, capacidadeNecessaria)
+				.stream().limit(max).collect(Collectors.toList());
 	}
 }

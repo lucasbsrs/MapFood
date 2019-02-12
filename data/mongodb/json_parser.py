@@ -2,6 +2,7 @@
 
 import csv
 import json
+import random
 
 from collections import defaultdict
 
@@ -17,10 +18,13 @@ ENTREGADORES_JSON = "entregadores.json"
 PRODUTOS_JSON = "produtos.json"
 
 
+random.seed(42)
+
+
 def cliente_dict(fields):
     return (
         {
-            "cliente_id": int(fields[0]),
+            "cliente_id": fields[0],
             "localizacao": {
                 "type": "Point",
                 "coordinates": [float(fields[1]), float(fields[2])]
@@ -52,7 +56,8 @@ def entregador_dict(fields):
             "localizacao": {
                 "type": "Point",
                 "coordinates": [float(fields[1]), float(fields[2])]
-            }
+            },
+            "capacidade_disponivel": random.randint(3, 5)
         }
     )
 

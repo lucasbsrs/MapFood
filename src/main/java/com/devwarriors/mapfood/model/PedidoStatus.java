@@ -1,5 +1,5 @@
 package com.devwarriors.mapfood.model;
 
 public enum PedidoStatus {
-	EM_PREPARO, EM_TRANSITO, ENTREGUE
+	RECEBIDO, EM_PREPARO, PRONTO, EM_TRANSITO, ENTREGUE, CANCELADO
 }

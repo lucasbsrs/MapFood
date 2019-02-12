@@ -1,13 +1,15 @@
 package com.devwarriors.mapfood.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.time.LocalDate;
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 @Document(collection = "pedidos")
 @Getter
@@ -16,69 +18,66 @@ public class Pedido {
 
 	@Id
 	private String id;
-	
+
 	@Field("pedido_id")
 	private String pedidoId;
-	
-	@Field("cliente")
-	private Cliente cliente;
-	
-	@Field("estabelecimento")
-	private Estabelecimento estabelecimento;
-	
+
+	@Field("clienteId")
+	private String clienteId;
+
+	@Field("estabelecimentoId")
+	private String estabelecimentoId;
+
 	@Field("itens")
 	private List<ItemPedido> itens;
-	
-	@Field("data")
-	private LocalDate data;
-	
+
 	@Field("status")
 	private PedidoStatus status;
 
 	@Field("entrega")
 	private Entrega entrega;
 
+	@Field("valorTotal")
+	private Double valorTotal;
+
+	@Field("criado_em")
+	private LocalDateTime criadoEm;
+
+	@Field("atualizado_em")
+	private LocalDateTime atualizadoEm;
+
+	@Field("finalizado_em")
+	private LocalDateTime finalizadoEm;
+
 	public Pedido() {
 	}
 
-	public Pedido(Cliente cliente, Estabelecimento estabelecimento, List<ItemPedido> itens, LocalDate data,
-			PedidoStatus status) {
-		this.cliente = cliente;
-		this.estabelecimento = estabelecimento;
+	public Pedido(String pedidoId, String clienteId, String estabelecimentoId, List<ItemPedido> itens,
+			LocalDateTime criadoEm, LocalDateTime atualizadoEm, PedidoStatus status) {
+		this.pedidoId = pedidoId;
+		this.clienteId = clienteId;
+		this.estabelecimentoId = estabelecimentoId;
 		this.itens = itens;
-		this.data = data;
 		this.status = status;
+		this.criadoEm = criadoEm;
+		this.atualizadoEm = atualizadoEm;
+		this.finalizadoEm = null;
+		this.valorTotal = this.calculaValorTotal();
 	}
 
-	public String getId() {
-		return id;
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", pedidoId=" + pedidoId + ", clienteId=" + clienteId + ", estabelecimentoId="
+				+ estabelecimentoId + ", itens=" + itens + ", status=" + status + ", entrega=" + entrega + ", criadoEm="
+				+ criadoEm + ", atualizadoEm=" + atualizadoEm + ", finalizadoEm=" + finalizadoEm + "]";
 	}
 
-	public String getPedidoId() {
-		return pedidoId;
+	public Optional<Entrega> getEntregaOptional() {
+		return Optional.ofNullable(this.entrega);
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public Estabelecimento getEstabelecimento() {
-		return estabelecimento;
-	}
-
-	public List<ItemPedido> getItens() {
-		return itens;
-	}
-
-	public LocalDate getData() {
-		return data;
-	}
-
-	public PedidoStatus getStatus() {
-		return status;
-	}
-
-	public Entrega getEntrega() {
-		return entrega;
+	private Double calculaValorTotal() {
+		return this.itens.stream().map(item -> item.getQuantidade() * item.getProduto().getPrecoUnitario()).reduce(0.0,
+				(acc, valores) -> acc + valores);
 	}
 }

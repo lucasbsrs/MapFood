@@ -7,16 +7,16 @@ import lombok.Setter;
 @Setter
 public class Relatorio {
 
-    private Long quantidadeDeEntregas;
-    private Double totalQuilometragemPercorrida;
-    private Double totalTempoDecorrido;
+	private Long quantidadeDeEntregas;
+	private Double totalQuilometragemPercorrida;
+	private Double totalTempoDecorrido;
 
-    public Relatorio() {
-    }
+	public Relatorio() {
+	}
 
-    public Relatorio(Long quantidadeDeEntregas, Double totalQuilometragemPercorrida, Double totalTempoDecorrido) {
-        this.quantidadeDeEntregas = quantidadeDeEntregas;
-        this.totalQuilometragemPercorrida = totalQuilometragemPercorrida;
-        this.totalTempoDecorrido = totalTempoDecorrido;
-    }
+	public Relatorio(Long quantidadeDeEntregas, Double totalQuilometragemPercorrida, Double totalTempoDecorrido) {
+		this.quantidadeDeEntregas = quantidadeDeEntregas;
+		this.totalQuilometragemPercorrida = totalQuilometragemPercorrida;
+		this.totalTempoDecorrido = totalTempoDecorrido;
+	}
 }

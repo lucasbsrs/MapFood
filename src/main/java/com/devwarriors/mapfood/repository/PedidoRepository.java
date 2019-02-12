@@ -1,14 +1,21 @@
 package com.devwarriors.mapfood.repository;
 
-import com.devwarriors.mapfood.model.Pedido;
-import com.devwarriors.mapfood.model.PedidoStatus;
-import org.springframework.data.mongodb.repository.MongoRepository;
-
 import java.time.LocalDate;
 import java.util.List;
 
-public interface PedidoRepository extends MongoRepository<Pedido, String> {
-    List<Pedido> findAllByEstabelecimentoIdAndDataBetween(String id, LocalDate dataInicial, LocalDate dataFinal);
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-    Long countByEstabelecimentoIdAndDataBetweenAndStatus(String id, LocalDate dataInicial, LocalDate dataFinal, PedidoStatus entregue);
+import com.devwarriors.mapfood.model.Pedido;
+import com.devwarriors.mapfood.model.PedidoStatus;
+
+public interface PedidoRepository extends MongoRepository<Pedido, String> {
+
+	Pedido findByPedidoId(String pedidoId);
+
+	boolean existsByPedidoId(String pedidoId);
+
+	List<Pedido> findAllByEstabelecimentoIdAndCriadoEmBetween(String id, LocalDate dataInicial, LocalDate dataFinal);
+
+	Long countByEstabelecimentoIdAndCriadoEmBetweenAndStatus(String id, LocalDate dataInicial, LocalDate dataFinal,
+			PedidoStatus entregue);
 }

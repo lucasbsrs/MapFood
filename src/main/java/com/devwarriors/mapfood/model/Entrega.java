@@ -1,47 +1,44 @@
 package com.devwarriors.mapfood.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-@Setter
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@AllArgsConstructor
 @Getter
+@Setter
 public class Entrega {
 
-	private Entregador entregador;
-	private Double distanciaPercorrida;
-	private LocalDateTime horaInicial;
-	private LocalDateTime horaFinal;
+	@Field("entregador_id")
+	private String entregadorId;
 
-	public Entrega() {
-	}
+	@Field("distancia_destino")
+	private Double distanciaDestino;
+
+	@Field("distancia_percorrida")
+	private Double distanciaPercorrida;
+
+	@Field("eta")
+	private Double eta;
+
+	@Field("criado_em")
+	private LocalDateTime criadoEm;
+
+	@Field("finalizado_em")
+	private LocalDateTime finalizadoEm;
+
+	@Field("atualizado_em")
+	private LocalDateTime atualizadoEm;
 
 	public Double getDuracaoEmHoras() {
-    	double duracaoEmHoras = 0.0;
-    	
-	    if (horaInicial == null || horaFinal == null)
-	        return duracaoEmHoras;
+		if (criadoEm == null || finalizadoEm == null)
+			return 0.0;
 
-	    duracaoEmHoras = (Duration.between(horaInicial, horaFinal).getSeconds()) / 3600.0;
-	    
-	    return duracaoEmHoras;
-    }
-
-	public Entregador getEntregador() {
-		return entregador;
-	}
-
-	public Double getDistanciaPercorrida() {
-		return distanciaPercorrida;
-	}
-
-	public LocalDateTime getHoraInicial() {
-		return horaInicial;
-	}
-
-	public LocalDateTime getHoraFinal() {
-		return horaFinal;
+		return (double) (Duration.between(criadoEm, finalizadoEm).getSeconds() / 3600);
 	}
 }

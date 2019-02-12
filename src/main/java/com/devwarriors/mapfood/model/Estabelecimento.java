@@ -1,7 +1,7 @@
 package com.devwarriors.mapfood.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
@@ -9,7 +9,8 @@ import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 @Document(collection = "estabelecimentos")
 @Getter
@@ -28,9 +29,10 @@ public class Estabelecimento {
 	@Field("cidade")
 	private String cidade;
 
-	@Field("culinaria")
-	private String culinaria;
+	@Field("descricao")
+	private String descricaoPrato;
 
+	@Field("localizacao")
 	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private GeoJsonPoint localizacao;
 
@@ -41,11 +43,11 @@ public class Estabelecimento {
 	}
 
 	public Estabelecimento(String estabelecimentoId, String estabelecimento, String cidade, GeoJsonPoint localizacao,
-			String culinaria) {
+			String descricaoPrato) {
 		this.estabelecimentoId = estabelecimentoId;
 		this.estabelecimento = estabelecimento;
 		this.cidade = cidade;
 		this.localizacao = localizacao;
-		this.culinaria = culinaria;
+		this.descricaoPrato = descricaoPrato;
 	}
 }

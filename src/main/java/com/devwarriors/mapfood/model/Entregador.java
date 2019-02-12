@@ -9,10 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "entregadores")
 @Getter
@@ -25,13 +21,19 @@ public class Entregador {
 	@Field("entregador_id")
 	private String entregadorId;
 
+	@Field("localizacao")
 	@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
 	private GeoJsonPoint localizacao;
 
-	public Entregador() {}
+	@Field("capacidade_disponivel")
+	private Integer capacidadeDisponivel;
 
-	public Entregador(String entregadorId, GeoJsonPoint localizacao) {
+	public Entregador() {
+	}
+
+	public Entregador(String entregadorId, GeoJsonPoint localizacao, int capacidadeDisponivel) {
 		this.entregadorId = entregadorId;
 		this.localizacao = localizacao;
+		this.capacidadeDisponivel = capacidadeDisponivel;
 	}
 }

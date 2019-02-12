@@ -1,0 +1,533 @@
+{
+	"info": {
+		"_postman_id": "31916f1f-3e0e-4b97-b22e-2910563867aa",
+		"name": "MapFood",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Busca Cliente por Id - Cliente existente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "650134b9-ecf3-467b-aa8e-66dd68a02377",
+								"exec": [
+									"tests['Valida se o response code retornado é OK.'] = responseCode.code === 200;\r",
+									"\r",
+									"tests[\"Valida se Content-Type está presente\"] = postman.getResponseHeader(\"Content-Type\");\r",
+									"tests[\"Valida se o tempo de resposta é menor que 200ms\"] = responseTime < 500;\r",
+									"tests[\"Valida se ClienteId está presente\"] = responseBody.has(\"clienteId\");\r",
+									"tests[\"Valida se ID está presente\"] = responseBody.has(\"id\");\r",
+									"tests[\"Valida se Localizacao está presente\"] = responseBody.has(\"localizacao\");\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"tests[\"Valida se ClienteId retornado é igual ao esperado: \"+jsonData.clienteId] = jsonData.clienteId === \"4\";\r",
+									"console.log(\"O ClienteID retornado é \"+jsonData.clienteId);\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/clientes/5c5a264d1433bab522164969",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"5c5a264d1433bab522164969"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Cliente por Id - Cliente inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "650134b9-ecf3-467b-aa8e-66dd68a02377",
+								"exec": [
+									"tests['Valida se o response code retornado é No Content'] = responseCode.code === 204;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/clientes/2000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"2000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Todos os Clientes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f250910e-dc88-4304-a1a1-623a17c6dea4",
+								"exec": [
+									"tests['Valida se o response code retornado é OK.'] = responseCode.code === 200;",
+									"tests[\"Valida se Tempo de resposta é menor que 200ms\"] = responseTime < 500;",
+									"tests[\"Valida se ClienteId está presente\"] = responseBody.has(\"clienteId\");",
+									"tests[\"Valida se ID está presente\"] = responseBody.has(\"id\");",
+									"tests[\"Valida se Localizacao está presente\"] = responseBody.has(\"localizacao\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estabelecimento",
+			"item": [
+				{
+					"name": "Busca Estabelecimentos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4cddbac0-da46-402e-a350-266b0bf89d69",
+								"exec": [
+									"tests['Valida se o response code retornado é OK.'] = responseCode.code === 200;",
+									"",
+									"tests[\"Valida se Content-Type está presente\"] = postman.getResponseHeader(\"Content-Type\");",
+									"tests[\"Valida se Tempo de resposta é menor que 200ms\"] = responseTime < 500;",
+									"tests[\"Valida se EstabelecimentoId está presente\"] = responseBody.has(\"estabelecimentoId\");",
+									"tests[\"Valida se Estabelecimento está presente\"] = responseBody.has(\"estabelecimento\");",
+									"tests[\"Valida se Localizacao está presente\"] = responseBody.has(\"localizacao\");",
+									"",
+									"pm.test(\"Valida se ResponseBody contém string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Lanchonete Dona Vina\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/estabelecimentos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estabelecimentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Estabelecimentos por Localização",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ef53a84a-fe6e-414e-83d1-5668a0dccdbe",
+								"exec": [
+									"tests['Valida se o response code retornado é OK.'] = responseCode.code === 200;",
+									"",
+									"tests[\"Valida se Content-Type está presente\"] = postman.getResponseHeader(\"Content-Type\");",
+									"tests[\"Valida se Tempo de resposta é menor que 200ms\"] = responseTime < 500;",
+									"tests[\"Valida se EstabelecimentoId está presente\"] = responseBody.has(\"estabelecimentoId\");",
+									"tests[\"Valida se Estabelecimento está presente\"] = responseBody.has(\"estabelecimento\");",
+									"tests[\"Valida se Localizacao está presente\"] = responseBody.has(\"localizacao\");",
+									"",
+									"pm.test(\"Valida se ResponseBody contém string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Packfit Marmitas Saudáveis\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/estabelecimentos/proximidade/por-cliente/4?raio=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estabelecimentos",
+								"proximidade",
+								"por-cliente",
+								"4"
+							],
+							"query": [
+								{
+									"key": "raio",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "Cria Pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a4d6767-8336-4d6e-91cf-135886b2c1b1",
+								"exec": [
+									"tests['Valida se o response code retornado é OK.'] = responseCode.code === 200;\r",
+									"\r",
+									"tests[\"Valida se Tempo de resposta é menor que 200ms\"] = responseTime < 500;\r",
+									"tests[\"Valida se Entregador está presente\"] = responseBody.has(\"entregador\");\r",
+									"tests[\"Valida se PedidoId está presente\"] = responseBody.has(\"pedidoId\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{      \r\n\t\"clienteId\": \"5\",\r\n    \"estabelecimentoId\": \"c87b23fb9ddf4f910a8e8bfb3047767c089e5a52a12ecc384b939df7be94ba9e\" ,\r\n    \"itens\":\r\n        [\r\n            {\r\n                \"produtoId\":\"00e2c609b4339c40455281ce1793c5e2158dd90d163ff4d64bc0795b715b6393\",\r\n                \"quantidade\":\"2\",\r\n                \"observacao\":\"Enviar queijo ralado\"\r\n            },\r\n            {\r\n               \"produtoId\":\"00e2c609b4339c40455281ce1793c5e2158dd90d163ff4d64bc0795b715b6393\",\r\n               \"quantidade\":\"1\",\r\n               \"observacao\":\"Sem molho\"\r\n            }\r\n        ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/marketplace/pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"marketplace",
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cria Pedido - Id Cliente inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a4d6767-8336-4d6e-91cf-135886b2c1b1",
+								"exec": [
+									"tests['Valida se o response code retornado é No Content.'] = responseCode.code === 204;\r",
+									"\r",
+									"pm.test(\"Valida se ResponseBody contém string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"inexistente\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{      \r\n\t\"clienteId\": \"30000\",\r\n    \"estabelecimentoId\": \"c87b23fb9ddf4f910a8e8bfb3047767c089e5a52a12ecc384b939df7be94ba9e\" ,\r\n    \"itens\":\r\n        [\r\n            {\r\n                \"produtoId\":\"00e2c609b4339c40455281ce1793c5e2158dd90d163ff4d64bc0795b715b6393\",\r\n                \"quantidade\":\"2\",\r\n                \"observacao\":\"Enviar queijo ralado\"\r\n            },\r\n            {\r\n               \"produtoId\":\"00e2c609b4339c40455281ce1793c5e2158dd90d163ff4d64bc0795b715b6393\",\r\n               \"quantidade\":\"1\",\r\n               \"observacao\":\"Sem molho\"\r\n            }\r\n        ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/marketplace/pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"marketplace",
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca pedido por Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "012ffd83-1c2d-48c3-a770-051928260beb",
+								"exec": [
+									"tests['Valida se o response code retornado é OK.'] = responseCode.code === 200;\r",
+									"\r",
+									"tests[\"Valida se Tempo de resposta é menor que 200ms\"] = responseTime < 500;\r",
+									"tests[\"Valida se Entregador está presente\"] = responseBody.has(\"entregador\");\r",
+									"tests[\"Valida se PedidoId está presente\"] = responseBody.has(\"pedidoId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/marketplace/pedido/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"marketplace",
+								"pedido",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancela pedido por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/marketplace/pedido/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"marketplace",
+								"pedido",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera pedido - Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "21699b64-214f-4729-b4dd-cbdb3a96e453",
+								"exec": [
+									"tests['Valida se o response code retornado é OK.'] = responseCode.code === 200;\r",
+									"\r",
+									"tests[\"Valida se Tempo de resposta é menor que 200ms\"] = responseTime < 500;\r",
+									"tests[\"Valida se status está presente\"] = responseBody.has(\"status\");\r",
+									"tests[\"Valida se PedidoId está presente\"] = responseBody.has(\"pedidoId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"pedidoId\": \"1\",\n\t\"status\":\"\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/management/pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"management",
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Relatório",
+			"item": [
+				{
+					"name": "Gera Relatorio por Período",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7e60c028-a2a4-42ff-8c63-da959e966f23",
+								"exec": [
+									"tests['Valida se o response code retornado é OK.'] = responseCode.code === 200;",
+									"",
+									"tests[\"Valida se Content-Type está presente\"] = postman.getResponseHeader(\"Content-Type\");",
+									"tests[\"Valida se Tempo de resposta é menor que 200ms\"] = responseTime < 500;",
+									"tests[\"Valida se quantidadeDeEntregas está presente\"] = responseBody.has(\"quantidadeDeEntregas\");",
+									"tests[\"Valida se totalQuilometragemPercorrida está presente\"] = responseBody.has(\"totalQuilometragemPercorrida\");",
+									"tests[\"Valida se totalTempoDecorrido está presente\"] = responseBody.has(\"totalTempoDecorrido\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"dataInicial\": \"01-02-2019\",\n\t\"dataFinal\": \"12/02/2019\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/estabelecimentos/5c5a264d1433bab522164d63/relatorio?dataInicial=01/01/2019&dataFinal=10/02/2019",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estabelecimentos",
+								"5c5a264d1433bab522164d63",
+								"relatorio"
+							],
+							"query": [
+								{
+									"key": "dataInicial",
+									"value": "01/01/2019"
+								},
+								{
+									"key": "dataFinal",
+									"value": "10/02/2019"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

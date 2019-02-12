@@ -299,7 +299,71 @@
 					"response": []
 				},
 				{
+					"name": "Cria Pedido - Id Cliente inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a4d6767-8336-4d6e-91cf-135886b2c1b1",
+								"exec": [
+									"tests['Valida se o response code retornado é No Content.'] = responseCode.code === 204;\r",
+									"\r",
+									"pm.test(\"Valida se ResponseBody contém string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"inexistente\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{      \r\n\t\"clienteId\": \"30000\",\r\n    \"estabelecimentoId\": \"c87b23fb9ddf4f910a8e8bfb3047767c089e5a52a12ecc384b939df7be94ba9e\" ,\r\n    \"itens\":\r\n        [\r\n            {\r\n                \"produtoId\":\"00e2c609b4339c40455281ce1793c5e2158dd90d163ff4d64bc0795b715b6393\",\r\n                \"quantidade\":\"2\",\r\n                \"observacao\":\"Enviar queijo ralado\"\r\n            },\r\n            {\r\n               \"produtoId\":\"00e2c609b4339c40455281ce1793c5e2158dd90d163ff4d64bc0795b715b6393\",\r\n               \"quantidade\":\"1\",\r\n               \"observacao\":\"Sem molho\"\r\n            }\r\n        ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/marketplace/pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"marketplace",
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Busca pedido por Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "012ffd83-1c2d-48c3-a770-051928260beb",
+								"exec": [
+									"tests['Valida se o response code retornado é OK.'] = responseCode.code === 200;\r",
+									"\r",
+									"tests[\"Valida se Tempo de resposta é menor que 200ms\"] = responseTime < 500;\r",
+									"tests[\"Valida se Entregador está presente\"] = responseBody.has(\"entregador\");\r",
+									"tests[\"Valida se PedidoId está presente\"] = responseBody.has(\"pedidoId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -350,6 +414,22 @@
 				},
 				{
 					"name": "Altera pedido - Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "21699b64-214f-4729-b4dd-cbdb3a96e453",
+								"exec": [
+									"tests['Valida se o response code retornado é OK.'] = responseCode.code === 200;\r",
+									"\r",
+									"tests[\"Valida se Tempo de resposta é menor que 200ms\"] = responseTime < 500;\r",
+									"tests[\"Valida se status está presente\"] = responseBody.has(\"status\");\r",
+									"tests[\"Valida se PedidoId está presente\"] = responseBody.has(\"pedidoId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [

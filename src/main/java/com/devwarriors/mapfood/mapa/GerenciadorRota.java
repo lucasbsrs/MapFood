@@ -1,18 +1,19 @@
 package com.devwarriors.mapfood.mapa;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.devwarriors.mapfood.model.Cliente;
 import com.devwarriors.mapfood.model.Entregador;
 import com.devwarriors.mapfood.model.Estabelecimento;
 import com.devwarriors.mapfood.model.Pedido;
 import com.devwarriors.mapfood.repository.ProcessamentoRotaRepository;
 import com.devwarriors.mapfood.repository.RotaIndividualRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
 
 @Component
 public class GerenciadorRota {
@@ -36,6 +37,7 @@ public class GerenciadorRota {
 
 		for (Entregador entregador : entregadores) {
 			RotaIndividual rotaIndividual = new RotaIndividual(pedido, estabelecimento, entregador, cliente);
+
 			RotaIndividualDto rotaIndividualDto = rotaIndividualService.converteParaDto(rotaIndividual);
 
 			String problemaId = rotaIndividualService.enviaProblemaRota(rotaIndividualDto);

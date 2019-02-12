@@ -30,34 +30,32 @@ public class RotaIndividual {
 
 	public RotaIndividual(Pedido pedido, Estabelecimento estabelecimento, Entregador entregador, Cliente cliente) {
 		this.pedido = pedido;
+		this.estabelecimento = estabelecimento;
 		this.entregador = entregador;
 		this.cliente = cliente;
 	}
 
 	public GeoJsonPoint getLocalizacaoEntregador() {
-
-		if (entregador == null)
+		if (entregador == null) {
 			return null;
+		}
 
 		return entregador.getLocalizacao();
 	}
 
-	public GeoJsonPoint getLocalizaoCliente() {
-		if (pedido == null)
+	public GeoJsonPoint getLocalizacaoCliente() {
+		if (this.cliente == null) {
 			return null;
-
-		if (this.cliente == null)
-			return null;
+		}
 
 		return cliente.getLocalizacao();
 	}
 
-	public GeoJsonPoint getLocalizaoEstabelecimento() {
-		if (pedido == null)
-			return null;
-
+	public GeoJsonPoint getLocalizacaoEstabelecimento() {
 		if (this.estabelecimento == null)
+		{
 			return null;
+		}
 
 		return estabelecimento.getLocalizacao();
 	}

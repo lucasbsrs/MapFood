@@ -24,11 +24,11 @@ public class RotaIndividualDto implements Serializable {
 
 	public void preencheRotas(RotaIndividual problemaRota) {
 		points.add(new Coordenada(problemaRota.getLocalizacaoEntregador().getX(),
-				problemaRota.getLocalizaoCliente().getY(), problemaRota.getEntregador().getEntregadorId()));
-		points.add(new Coordenada(problemaRota.getLocalizaoEstabelecimento().getX(),
-				problemaRota.getLocalizaoEstabelecimento().getY(),
+				problemaRota.getLocalizacaoCliente().getY(), problemaRota.getEntregador().getEntregadorId()));
+		points.add(new Coordenada(problemaRota.getLocalizacaoEstabelecimento().getX(),
+				problemaRota.getLocalizacaoEstabelecimento().getY(),
 				problemaRota.getEstabelecimento().getEstabelecimentoId()));
-		points.add(new Coordenada(problemaRota.getLocalizaoCliente().getX(), problemaRota.getLocalizaoCliente().getY(),
+		points.add(new Coordenada(problemaRota.getLocalizacaoCliente().getX(), problemaRota.getLocalizacaoCliente().getY(),
 				problemaRota.getCliente().getClienteId()));
 	}
 

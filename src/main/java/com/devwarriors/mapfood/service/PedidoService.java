@@ -17,6 +17,7 @@ import com.devwarriors.mapfood.dto.response.PedidoAtualizadoResponseDto;
 import com.devwarriors.mapfood.dto.response.PedidoRecebidoResponseDto;
 import com.devwarriors.mapfood.dto.response.PedidoResponseDto;
 import com.devwarriors.mapfood.mapa.GerenciadorRota;
+import com.devwarriors.mapfood.model.Cliente;
 import com.devwarriors.mapfood.model.Entrega;
 import com.devwarriors.mapfood.model.Entregador;
 import com.devwarriors.mapfood.model.Estabelecimento;
@@ -47,7 +48,7 @@ public class PedidoService {
 
 	@Autowired
 	private EntregadorService entregadorService;
-	
+
 	@Autowired
 	private GerenciadorRota gerenciadorRota;
 
@@ -146,15 +147,28 @@ public class PedidoService {
 			int quantidadeTotal = pedido.getItens().stream().map(ItemPedido::getQuantidade).reduce(0,
 					(acc, qtd) -> acc + qtd);
 
-			Entregador entregador = entregadorService
-					.buscaEntregadorDisponivelMaisProximo(estabelecimento.getLocalizacao(), quantidadeTotal);
+			Cliente cliente = clienteRepository.findByClienteId(pedido.getClienteId());
+
+			List<Entregador> entregadores = entregadorService
+					.buscaEntregadoresDisponiveisMaisProximos(estabelecimento.getLocalizacao(), quantidadeTotal, 10);
+			
+			String entregadorId = entregadores.get(0).getEntregadorId();
+
+			/*
+			gerenciadorRota.enviaProblemaDeRotaParaCalcular(pedido, estabelecimento, entregadores, cliente);
+
+			SolucaoRota rota = gerenciadorRota.retornaSolucaoDeRotaMenorTempo(pedido);
+
+			Entregador entregador = rota.getEntregador();
+			Double distancia_destino = rota.getTotalDistanciaMetros(); // Distancia em metros.
+			Double eta = rota.getTotalTempoSegundos() / 60.0; // Tempo em minutos.
+			*/
 
 			Random random = new Random();
+			Double distancia_destino = random.nextDouble() * (10 - 1) + 1; Double eta =
+			random.nextDouble() * (100 - 15) + 15;
 
-			Double distancia_destino = random.nextDouble() * (10 - 1) + 1;
-			Double eta = random.nextDouble() * (100 - 15) + 15;
-
-			Entrega entrega = EntregaFactory.criaEntrega(entregador.getEntregadorId(), distancia_destino, eta);
+			Entrega entrega = EntregaFactory.criaEntrega(entregadorId, distancia_destino, eta);
 
 			pedido.setEntrega(entrega);
 

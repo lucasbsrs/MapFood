@@ -7,12 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document
-public class ProblemaRotaIndividual {
+public class RotaIndividual {
 
     @Id
     private String id;
@@ -21,10 +19,10 @@ public class ProblemaRotaIndividual {
     private ModoCalculoRota modoCalculoRota;
     private String problemaId;
 
-    public ProblemaRotaIndividual() {
+    public RotaIndividual() {
     }
 
-    public ProblemaRotaIndividual(Pedido pedido, Entregador entregador) {
+    public RotaIndividual(Pedido pedido, Entregador entregador) {
         this.pedido = pedido;
         this.entregador = entregador;
     }

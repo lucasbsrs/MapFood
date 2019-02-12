@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ProblemaRotaIndividualDto implements Serializable {
+public class RotaIndividualDto implements Serializable {
 
     private ModoCalculoRota calculationMode;
 
@@ -25,7 +25,7 @@ public class ProblemaRotaIndividualDto implements Serializable {
     //@JsonProperty("startDate")
     private int startDate = 0;
 
-    public void preencheRotas(ProblemaRotaIndividual problemaRota) {
+    public void preencheRotas(RotaIndividual problemaRota) {
         points.add(new Coordenada(problemaRota.getLocalizacaoEntregador().getX(), problemaRota.getLocalizaoCliente().getY(), problemaRota.getEntregador().getEntregadorId()));
         points.add(new Coordenada(problemaRota.getLocalizaoEstabelecimento().getX(), problemaRota.getLocalizaoEstabelecimento().getY(), problemaRota.getPedido().getEstabelecimento().getEstabelecimentoId()));
         points.add(new Coordenada(problemaRota.getLocalizaoCliente().getX(), problemaRota.getLocalizaoCliente().getY(), problemaRota.getPedido().getCliente().getClienteId()));

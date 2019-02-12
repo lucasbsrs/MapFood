@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Document
+@Document(collection = "processamento_rota")
 public class ProcessamentoRota {
 
 	@Id

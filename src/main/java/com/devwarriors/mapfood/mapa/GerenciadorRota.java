@@ -4,18 +4,20 @@ import com.devwarriors.mapfood.model.Entregador;
 import com.devwarriors.mapfood.model.Pedido;
 import com.devwarriors.mapfood.repository.ProcessamentoRotaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class GerenciadorRota {
 
 	@Autowired
 	private ProcessamentoRotaRepository processamentoRotaRepository;
 
 	@Autowired
-	private ProblemaRotaIndividualService problemaRotaIndividualService;
+	private RotaIndividualService rotaIndividualService;
 
 	public GerenciadorRota() {}
 
@@ -23,14 +25,11 @@ public class GerenciadorRota {
 
 	    ProcessamentoRota processamentoRota = new ProcessamentoRota(pedido, entregadores);
 
-		//apagar
-		ProblemaRotaIndividualService problemaRotaIndividualService = new ProblemaRotaIndividualService();
-
 		for (Entregador entregador : entregadores) {
-			ProblemaRotaIndividual problemaRota = new ProblemaRotaIndividual(pedido, entregador);
-			ProblemaRotaIndividualDto problemaRotaIndividualDto = problemaRotaIndividualService.converteParaDto(problemaRota);
+			RotaIndividual rotaIndividual = new RotaIndividual(pedido, entregador);
+			RotaIndividualDto rotaIndividualDto = rotaIndividualService.converteParaDto(rotaIndividual);
 
-			String problemaId = problemaRotaIndividualService.enviaProblemaRota(problemaRotaIndividualDto);
+			String problemaId = rotaIndividualService.enviaProblemaRota(rotaIndividualDto);
 
 			if (problemaId != null)
 			    processamentoRota.adicionaIdProblemaEmProcessamento(problemaId);
@@ -54,7 +53,7 @@ public class GerenciadorRota {
             throw new RuntimeException("Processamento de rota não encontrada.");
 
 		for (String problemaId : processamentoRota.get().getProblemas()) {
-			SolucaoRota solucaoRota = problemaRotaIndividualService.obterSolucao(problemaId);
+			SolucaoRota solucaoRota = rotaIndividualService.obterSolucao(problemaId);
 			solucoes.add(solucaoRota);
 		}
 	}

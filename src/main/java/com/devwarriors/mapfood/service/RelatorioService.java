@@ -27,14 +27,16 @@ public class RelatorioService {
 	}
 
 	private Double buscaTotalDuracaoEntrega(String id, LocalDate dataInicial, LocalDate dataFinal) {
-		List<Pedido> pedidos = pedidoRepository.findAllByEstabelecimentoIdAndCriadoEmBetween(id, dataInicial, dataFinal);
+		List<Pedido> pedidos = pedidoRepository.findAllByEstabelecimentoIdAndCriadoEmBetween(id, dataInicial,
+				dataFinal);
 
 		return pedidos.stream().mapToDouble(p -> p.getEntrega().getDuracaoEmHoras()).sum();
 	}
 
 	private Double buscaTotalQuilometragemPercorrida(String id, LocalDate dataInicial, LocalDate dataFinal) {
 
-		List<Pedido> pedidos = pedidoRepository.findAllByEstabelecimentoIdAndCriadoEmBetween(id, dataInicial, dataFinal);
+		List<Pedido> pedidos = pedidoRepository.findAllByEstabelecimentoIdAndCriadoEmBetween(id, dataInicial,
+				dataFinal);
 
 		return pedidos.stream().mapToDouble(p -> p.getEntrega().getDistanciaPercorrida()).sum();
 	}

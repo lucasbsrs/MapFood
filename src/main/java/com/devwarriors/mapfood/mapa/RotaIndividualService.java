@@ -30,8 +30,6 @@ public class RotaIndividualService {
 	}
 
 	public SolucaoRota obterSolucao(String problemaId) {
-
 		return mapLinkApi.retornaSolucaoDeRotaPorId(problemaId);
-
 	}
 }

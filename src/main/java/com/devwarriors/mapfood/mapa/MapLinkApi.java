@@ -54,18 +54,26 @@ public class MapLinkApi {
         return null;
     }
 
-    public SolucaoRota retornaSolucaoDeRotaPorId(String problemaId) {
+    public SolucaoRota retornaSolucaoDeRotaPorId(String id) {
 
         Response response = ClientBuilder.newClient()
                 .target(URL_API)
-                .path(String.format(PATH_GET_SOLUCAO, problemaId))
+                .path(String.format(PATH_GET_SOLUCAO, id))
                 .request(MediaType.APPLICATION_JSON)
                 .header("Authorization", "Bearer " + obterToken())
                 .get();
 
-        SolucaoRota solucaoRota = response.readEntity(SolucaoRota.class);
+        if (response.getStatus() == 200) {
+            String msg = response.readEntity(String.class);
+            JsonObject jsonObject = new Gson().fromJson(msg, JsonObject.class);
+            String problemaId = jsonObject.get("id").getAsString();
+            Long totalTempo = jsonObject.get("totalNominalDuration").getAsLong();
+            Double totalDistancia = jsonObject.get("totalDistance").getAsDouble();
 
-        return solucaoRota;
+            return new SolucaoRota(problemaId, totalDistancia, totalTempo);
+        }
+
+        return null;
     }
 
     public String criaProblemaDeRota(RotaIndividualDto problemaRota) {

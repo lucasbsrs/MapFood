@@ -7,42 +7,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 @Component
 public class GerenciadorRota {
 
-	@Autowired
-	private ProcessamentoRotaRepository processamentoRotaRepository;
+    @Autowired
+    private ProcessamentoRotaRepository processamentoRotaRepository;
 
-	@Autowired
-	private RotaIndividualService rotaIndividualService;
+    @Autowired
+    private RotaIndividualService rotaIndividualService;
 
-	public GerenciadorRota() {}
+    public GerenciadorRota() {
+    }
 
-	public void enviaProblemaDeRotaParaCalcular(Pedido pedido, List<Entregador> entregadores) {
+    public void enviaProblemaDeRotaParaCalcular(Pedido pedido, List<Entregador> entregadores) {
 
-	    ProcessamentoRota processamentoRota = new ProcessamentoRota(pedido, entregadores);
+        ProcessamentoRota processamentoRota = new ProcessamentoRota(pedido, entregadores);
 
-		for (Entregador entregador : entregadores) {
-			RotaIndividual rotaIndividual = new RotaIndividual(pedido, entregador);
-			RotaIndividualDto rotaIndividualDto = rotaIndividualService.converteParaDto(rotaIndividual);
+        for (Entregador entregador : entregadores) {
+            RotaIndividual rotaIndividual = new RotaIndividual(pedido, entregador);
+            RotaIndividualDto rotaIndividualDto = rotaIndividualService.converteParaDto(rotaIndividual);
 
-			String problemaId = rotaIndividualService.enviaProblemaRota(rotaIndividualDto);
+            String problemaId = rotaIndividualService.enviaProblemaRota(rotaIndividualDto);
 
-			if (problemaId != null)
-			    processamentoRota.adicionaIdProblemaEmProcessamento(problemaId);
-		}
+            if (problemaId != null)
+                processamentoRota.adicionaIdProblemaEmProcessamento(problemaId);
+        }
 
-		processamentoRotaRepository.save(processamentoRota);
-	}
+        processamentoRotaRepository.save(processamentoRota);
+    }
 
-	public SolucaoRota getMelhorSolucao() {
+    public SolucaoRota getMelhorSolucao() {
         return new SolucaoRota();
     }
 
-	public void retornaSolucaoDeRota(Pedido pedido) {
+    public SolucaoRota retornaSolucaoDeRota(Pedido pedido) {
 
         List<SolucaoRota> solucoes = new ArrayList<>();
 
@@ -52,9 +54,14 @@ public class GerenciadorRota {
         if (!processamentoRota.isPresent())
             throw new RuntimeException("Processamento de rota não encontrada.");
 
-		for (String problemaId : processamentoRota.get().getProblemas()) {
-			SolucaoRota solucaoRota = rotaIndividualService.obterSolucao(problemaId);
-			solucoes.add(solucaoRota);
-		}
-	}
+        for (String problemaId : processamentoRota.get().getProblemas()) {
+            SolucaoRota solucaoRota = rotaIndividualService.obterSolucao(problemaId);
+            solucoes.add(solucaoRota);
+        }
+
+        return solucoes.stream()
+                .min(Comparator.comparingLong(SolucaoRota::getTotalTempoSegundos))
+                .get();
+
+    }
 }

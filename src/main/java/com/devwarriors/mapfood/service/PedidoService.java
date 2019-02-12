@@ -43,11 +43,7 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepository pedidoRepository;
-
-	/*
-	 * @Autowired private EntregadorRepository entregadorRepository;
-	 */
-
+	
 	@Autowired
 	private EntregadorService entregadorService;
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.devwarriors.mapfood.model.Estabelecimento;
 import com.devwarriors.mapfood.model.Produto;
+import com.devwarriors.mapfood.service.ProdutoInexistenteException;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,8 @@ public class GerenciadorEstabelecimento {
 		return this.estabelecimento.getProdutos().stream();
 	}
 
-	public Produto buscaProdutoPorId(String id) {
-		return this.buscarStreamProdutos().filter(p -> p.getProdutoId().equals(id)).findFirst().orElseThrow();
+	public Produto buscaProdutoPorId(String id) throws ProdutoInexistenteException {
+		return this.buscarStreamProdutos().filter(p -> p.getProdutoId().equals(id)).findFirst().orElseThrow(() -> new ProdutoInexistenteException(id));
 	}
 
 	public Stream<Produto> buscarProdutosPorId(List<String> itensIds) {

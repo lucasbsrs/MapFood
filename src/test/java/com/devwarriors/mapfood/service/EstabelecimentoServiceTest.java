@@ -1,35 +1,31 @@
 package com.devwarriors.mapfood.service;
 
-import com.devwarriors.mapfood.exception.EstabelecimentoException;
-import com.devwarriors.mapfood.model.Cliente;
-import com.devwarriors.mapfood.model.Estabelecimento;
-import com.devwarriors.mapfood.repository.ClienteRepository;
-import com.devwarriors.mapfood.repository.EstabelecimentoRepository;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.modules.junit4.PowerMockRunnerDelegate;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
-import org.springframework.test.context.junit4.SpringRunner;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.powermock.api.mockito.PowerMockito.when;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Arrays.asList;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.powermock.api.mockito.PowerMockito.when;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.modules.junit4.PowerMockRunnerDelegate;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.devwarriors.mapfood.exception.EstabelecimentoException;
+import com.devwarriors.mapfood.model.Cliente;
+import com.devwarriors.mapfood.model.Estabelecimento;
+import com.devwarriors.mapfood.repository.ClienteRepository;
+import com.devwarriors.mapfood.repository.EstabelecimentoRepository;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringRunner.class)

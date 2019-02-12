@@ -39,6 +39,6 @@ public class Entrega {
 		if (criadoEm == null || finalizadoEm == null)
 			return 0.0;
 
-		return (double) (Duration.between(criadoEm, finalizadoEm).getSeconds() / 3600);
+		return new Double((Duration.between(criadoEm, finalizadoEm).getSeconds() / 3600));
 	}
 }

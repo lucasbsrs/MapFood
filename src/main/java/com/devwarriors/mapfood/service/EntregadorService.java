@@ -14,11 +14,11 @@ public class EntregadorService {
 	@Autowired
 	private EntregadorRepository entregadorRepository;
 
-	private Distance distanciaMaxima;
+	private Distance distanciaMaxima = new Distance(5000);
 
-	{
-		this.distanciaMaxima = new Distance(5000);
-	}
+//	{
+//		this.distanciaMaxima = new Distance(5000);
+//	}
 
 	public void decrementaCapacidadeDisponivel(String entregadorId, int decremento)
 			throws CapacidadeDoEntregadorInvalidaException {

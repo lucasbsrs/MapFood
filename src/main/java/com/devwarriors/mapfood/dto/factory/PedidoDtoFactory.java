@@ -10,6 +10,10 @@ import com.devwarriors.mapfood.utils.GerenciadorTempo;
 
 public class PedidoDtoFactory {
 
+	private PedidoDtoFactory() {
+		
+	}
+	
 	public static PedidoResponseDto criaPedidoStatusResponseDto(Pedido pedido) {
 		String pedidoId = pedido.getPedidoId();
 		String pedidoStatus = pedido.getStatus().toString();

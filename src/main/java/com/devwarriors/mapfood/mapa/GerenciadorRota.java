@@ -3,6 +3,7 @@ package com.devwarriors.mapfood.mapa;
 import com.devwarriors.mapfood.model.Entregador;
 import com.devwarriors.mapfood.model.Pedido;
 import com.devwarriors.mapfood.repository.ProcessamentoRotaRepository;
+import com.devwarriors.mapfood.repository.RotaIndividualRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,9 @@ public class GerenciadorRota {
 
     @Autowired
     private ProcessamentoRotaRepository processamentoRotaRepository;
+
+    @Autowired
+    private RotaIndividualRepository rotaIndividualRepository;
 
     @Autowired
     private RotaIndividualService rotaIndividualService;
@@ -35,9 +39,11 @@ public class GerenciadorRota {
 
             if (problemaId != null)
                 processamentoRota.adicionaIdProblemaEmProcessamento(problemaId);
+
+            rotaIndividualService.salvarRotaIndividual(rotaIndividual);
         }
 
-        processamentoRotaRepository.save(processamentoRota);
+        processamentoRotaRepository.insert(processamentoRota);
     }
 
     private List<SolucaoRota> retornaListaDeSolucoes(Pedido pedido) {
@@ -58,15 +64,20 @@ public class GerenciadorRota {
     }
 
     public SolucaoRota retornaSolucaoDeRotaMenorTempo(Pedido pedido) {
-        return retornaListaDeSolucoes(pedido).stream()
+        SolucaoRota solucaoRota = retornaListaDeSolucoes(pedido).stream()
                 .min(Comparator.comparingLong(SolucaoRota::getTotalTempoSegundos))
                 .get();
+
+        RotaIndividual rotaIndividualSelecionada = rotaIndividualRepository.findRotaIndividualByProblemaId(solucaoRota.getProblemaId());
+
+        solucaoRota.setEntregador(rotaIndividualSelecionada.getEntregador());
+
+        return solucaoRota;
     }
 
     public SolucaoRota retornaSolucaoDeRotaMenorDistancia(Pedido pedido) {
         return retornaListaDeSolucoes(pedido).stream()
                 .min(Comparator.comparingDouble(SolucaoRota::getTotalDistanciaMetros))
                 .get();
-
     }
 }

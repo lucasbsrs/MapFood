@@ -70,7 +70,7 @@ public class MapLinkApi {
             Long totalTempo = jsonObject.get("totalNominalDuration").getAsLong();
             Double totalDistancia = jsonObject.get("totalDistance").getAsDouble();
 
-            return new SolucaoRota(problemaId, totalDistancia, totalTempo);
+            return new SolucaoRota(problemaId, totalDistancia, totalTempo, null);
         }
 
         return null;

@@ -1,0 +1,25 @@
+version: "3"
+services:
+  mongo-codenation:
+    image: kmyokoyama/mongo-codenation:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=devwarrior
+      - MONGO_INITDB_ROOT_PASSWORD=mongodb
+  mapfood:
+    image: kmyokoyama/mapfood-codenation:latest
+    ports:
+      - 8080:8080
+    environment:
+      - MONGO_USER=devwarrior
+      - MONGO_PASSWORD=mongodb
+      - MONGO_HOST=mongo-codenation
+      - MONGO_PORT=27017
+      - MONGO_DATABASE=codenation
+      - WAIT_HOSTS=mongo-codenation:27017
+
+volumes:
+  mongo-data:

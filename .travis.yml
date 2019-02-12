@@ -5,7 +5,8 @@ services:
   - docker
 
 before_script:
-  #- mongo mydb_test --eval 'db.createUser({user:"devwarrior",pwd:"mongodb",roles:["readWrite"]});'
+  - sleep 15
+  - mongo mydb_test --eval 'db.createUser({user:"devwarrior",pwd:"mongodb",roles:["readWrite"]});'
 
 branches:
   only:

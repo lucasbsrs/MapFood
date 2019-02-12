@@ -281,16 +281,98 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{      \r\n\t\"clienteId\": \"4\",\r\n    \"estabelecimentoId\": \"c87b23fb9ddf4f910a8e8bfb3047767c089e5a52a12ecc384b939df7be94ba9e\" ,\r\n    \"itens\":\r\n        [\r\n            {\r\n                \"produtoId\":\"00e2c609b4339c40455281ce1793c5e2158dd90d163ff4d64bc0795b715b6393\",\r\n                \"quantidade\":\"2\",\r\n                \"observacao\":\"Enviar queijo ralado\"\r\n            },\r\n            {\r\n               \"produtoId\":\"00e2c609b4339c40455281ce1793c5e2158dd90d163ff4d64bc0795b715b6393\",\r\n               \"quantidade\":\"1\",\r\n               \"observacao\":\"Sem molho\"\r\n            }\r\n        ]\r\n}"
+							"raw": "{      \r\n\t\"clienteId\": \"5\",\r\n    \"estabelecimentoId\": \"c87b23fb9ddf4f910a8e8bfb3047767c089e5a52a12ecc384b939df7be94ba9e\" ,\r\n    \"itens\":\r\n        [\r\n            {\r\n                \"produtoId\":\"00e2c609b4339c40455281ce1793c5e2158dd90d163ff4d64bc0795b715b6393\",\r\n                \"quantidade\":\"2\",\r\n                \"observacao\":\"Enviar queijo ralado\"\r\n            },\r\n            {\r\n               \"produtoId\":\"00e2c609b4339c40455281ce1793c5e2158dd90d163ff4d64bc0795b715b6393\",\r\n               \"quantidade\":\"1\",\r\n               \"observacao\":\"Sem molho\"\r\n            }\r\n        ]\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/pedido",
+							"raw": "http://localhost:8080/marketplace/pedido",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"marketplace",
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca pedido por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/marketplace/pedido/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"marketplace",
+								"pedido",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancela pedido por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/marketplace/pedido/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"marketplace",
+								"pedido",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera pedido - Admin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"pedidoId\": \"1\",\n\t\"status\":\"\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/management/pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"management",
 								"pedido"
 							]
 						}

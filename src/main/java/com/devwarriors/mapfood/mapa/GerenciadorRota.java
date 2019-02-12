@@ -40,6 +40,7 @@ public class GerenciadorRota {
             if (problemaId != null)
                 processamentoRota.adicionaIdProblemaEmProcessamento(problemaId);
 
+            rotaIndividual.setProblemaId(problemaId);
             rotaIndividualService.salvarRotaIndividual(rotaIndividual);
         }
 

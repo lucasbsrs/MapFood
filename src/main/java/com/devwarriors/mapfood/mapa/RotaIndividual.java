@@ -1,7 +1,9 @@
 package com.devwarriors.mapfood.mapa;
 
 import com.devwarriors.mapfood.mapa.enums.ModoCalculoRota;
+import com.devwarriors.mapfood.model.Cliente;
 import com.devwarriors.mapfood.model.Entregador;
+import com.devwarriors.mapfood.model.Estabelecimento;
 import com.devwarriors.mapfood.model.Pedido;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,47 +16,50 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "rota_individual")
 public class RotaIndividual {
 
-    @Id
-    private String id;
-    private Pedido pedido;
-    private Entregador entregador;
-    private ModoCalculoRota modoCalculoRota;
-    private String problemaId;
+	@Id
+	private String id;
+	private Pedido pedido;
+	private Estabelecimento estabelecimento;
+	private Entregador entregador;
+	private Cliente cliente;
+	private ModoCalculoRota modoCalculoRota;
+	private String problemaId;
 
-    public RotaIndividual() {
-    }
+	public RotaIndividual() {
+	}
 
-    public RotaIndividual(Pedido pedido, Entregador entregador) {
-        this.pedido = pedido;
-        this.entregador = entregador;
-    }
+	public RotaIndividual(Pedido pedido, Estabelecimento estabelecimento, Entregador entregador, Cliente cliente) {
+		this.pedido = pedido;
+		this.entregador = entregador;
+		this.cliente = cliente;
+	}
 
-    public GeoJsonPoint getLocalizacaoEntregador() {
+	public GeoJsonPoint getLocalizacaoEntregador() {
 
-        if (entregador == null)
-            return null;
+		if (entregador == null)
+			return null;
 
-        return entregador.getLocalizacao();
-    }
+		return entregador.getLocalizacao();
+	}
 
-    public GeoJsonPoint getLocalizaoCliente() {
-        if (pedido == null)
-            return null;
+	public GeoJsonPoint getLocalizaoCliente() {
+		if (pedido == null)
+			return null;
 
-        if (pedido.getCliente() == null)
-            return null;
+		if (this.cliente == null)
+			return null;
 
-        return pedido.getCliente().getLocalizacao();
-    }
+		return cliente.getLocalizacao();
+	}
 
-    public GeoJsonPoint getLocalizaoEstabelecimento() {
-        if (pedido == null)
-            return null;
+	public GeoJsonPoint getLocalizaoEstabelecimento() {
+		if (pedido == null)
+			return null;
 
-        if (pedido.getEstabelecimento() == null)
-            return null;
+		if (this.estabelecimento == null)
+			return null;
 
-        return pedido.getEstabelecimento().getLocalizacao();
-    }
+		return estabelecimento.getLocalizacao();
+	}
 
 }

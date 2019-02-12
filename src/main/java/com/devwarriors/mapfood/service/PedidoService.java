@@ -1,6 +1,5 @@
 package com.devwarriors.mapfood.service;
 
-<<<<<<< HEAD
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,7 @@ import com.devwarriors.mapfood.dto.request.PedidoUpdateRequestDto;
 import com.devwarriors.mapfood.dto.response.PedidoAtualizadoResponseDto;
 import com.devwarriors.mapfood.dto.response.PedidoRecebidoResponseDto;
 import com.devwarriors.mapfood.dto.response.PedidoResponseDto;
+import com.devwarriors.mapfood.mapa.GerenciadorRota;
 import com.devwarriors.mapfood.model.Entrega;
 import com.devwarriors.mapfood.model.Entregador;
 import com.devwarriors.mapfood.model.Estabelecimento;
@@ -32,26 +32,6 @@ import com.devwarriors.mapfood.repository.PedidoRepository;
 import com.devwarriors.mapfood.utils.GerenciadorEstabelecimento;
 import com.devwarriors.mapfood.utils.GerenciadorPedido;
 import com.devwarriors.mapfood.utils.GerenciadorTempo;
-=======
-import com.devwarriors.mapfood.dto.ItemPedidoDto;
-import com.devwarriors.mapfood.dto.PedidoRequestDto;
-import com.devwarriors.mapfood.dto.PedidoResponseDto;
-import com.devwarriors.mapfood.dto.factory.PedidoFactory;
-import com.devwarriors.mapfood.mapa.GerenciadorRota;
-import com.devwarriors.mapfood.model.*;
-import com.devwarriors.mapfood.repository.ClienteRepository;
-import com.devwarriors.mapfood.repository.EstabelecimentoRepository;
-import com.devwarriors.mapfood.repository.PedidoRepository;
-import com.devwarriors.mapfood.repository.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
->>>>>>> origin/mapa-tYz3bCB4
 
 @Service
 public class PedidoService {

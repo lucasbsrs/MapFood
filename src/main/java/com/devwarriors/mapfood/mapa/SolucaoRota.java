@@ -12,8 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SolucaoRota {
 
-    private String problemaId;
-    private Double totalDistanciaMetros;
-    private Long totalTempoSegundos;
-    private Entregador entregador;
+	private String problemaId;
+	private Double totalDistanciaMetros;
+	private Long totalTempoSegundos;
+	private Entregador entregador;
 }

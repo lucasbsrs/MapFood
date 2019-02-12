@@ -21,8 +21,8 @@ public class ProcessamentoRota {
 	private Pedido pedido;
 	@Transient
 	private List<Entregador> entregadores;
-    private List<String> problemas;
-    private boolean solucionado;
+	private List<String> problemas;
+	private boolean solucionado;
 
 	public ProcessamentoRota() {
 	}
@@ -34,7 +34,7 @@ public class ProcessamentoRota {
 		this.problemas = new ArrayList<>();
 	}
 
-    public void adicionaIdProblemaEmProcessamento(String problemaId) {
-	    this.problemas.add(problemaId);
-    }
+	public void adicionaIdProblemaEmProcessamento(String problemaId) {
+		this.problemas.add(problemaId);
+	}
 }

@@ -3,6 +3,7 @@ package com.devwarriors.mapfood.utils;
 import java.util.List;
 import java.util.stream.Stream;
 
+import com.devwarriors.mapfood.service.ProdutoInexistenteException;
 import org.springframework.stereotype.Component;
 
 import com.devwarriors.mapfood.model.Estabelecimento;
@@ -22,8 +23,9 @@ public class GerenciadorEstabelecimento {
 		return this.estabelecimento.getProdutos().stream();
 	}
 
-	public Produto buscaProdutoPorId(String id) {
-		return this.buscarStreamProdutos().filter(p -> p.getProdutoId().equals(id)).findFirst().orElseThrow();
+	public Produto buscaProdutoPorId(String id) throws ProdutoInexistenteException {
+		return this.buscarStreamProdutos().filter(p -> p.getProdutoId().equals(id)).findFirst()
+				.orElseThrow(()-> new ProdutoInexistenteException(id));
 	}
 
 	public Stream<Produto> buscarProdutosPorId(List<String> itensIds) {
